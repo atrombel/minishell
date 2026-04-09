@@ -15,9 +15,9 @@
               "state": {
                 "file": "minishell.canvas",
                 "viewState": {
-                  "x": -316.3304947063593,
-                  "y": 563.7938123913381,
-                  "zoom": -0.6637003163191405
+                  "x": 94.8631578947369,
+                  "y": 317.29051926208666,
+                  "zoom": -1.5545378330927258
                 }
               },
               "icon": "lucide-layout-dashboard",
@@ -172,7 +172,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
+    "width": 200,
     "collapsed": true
   },
   "left-ribbon": {
@@ -189,6 +189,8 @@
   },
   "active": "bc29f5a6f6579601",
   "lastOpenFiles": [
+    "minishell.canvas",
+    "README.md",
     "src/main.c"
   ]
 }
