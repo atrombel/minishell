@@ -1,19 +1,19 @@
 {
 	"nodes":[
 		{"id":"05f2908b4cbcccf8","type":"text","text":"# random ","x":-328,"y":-113,"width":250,"height":60},
-		{"id":"f3804414e15e2e59","x":-336,"y":-120,"width":265,"height":92,"type":"file","file":"minishell_notes/Pasted image 20260409142138.png"},
+		{"id":"f3804414e15e2e59","type":"file","file":"minishell_notes/src/pics/Pasted image 20260409142138.png","x":-336,"y":-120,"width":265,"height":92},
 		{"id":"60a0cca30b0c47c9","type":"text","text":"conseil 42&camarade","x":381,"y":660,"width":250,"height":60},
 		{"id":"be7770483dbc82cb","type":"text","text":"- minishell is based on bash and not on zsh \n\t - be carfeull 42 lausanee macs are on **zsh**","x":886,"y":660,"width":500,"height":388,"color":"2"},
-		{"id":"8d52b7fcca4cfd0b","type":"file","file":"minishell_notes/src/pics/Pasted image 20260409134153.png","x":306,"y":854,"width":400,"height":79},
-		{"id":"f2b3a99e7dd3e3e3","x":353,"y":1183,"width":250,"height":60,"type":"text","text":"path unset/relatif a chercher "},
-		{"id":"155317ef2adc344c","type":"text","text":"path unset and relative path =?","x":160,"y":1464,"width":293,"height":72},
 		{"id":"b1575372a6d3067e","type":"text","text":"# git ","x":-1966,"y":-583,"width":250,"height":60},
 		{"id":"d6b2f8a501ba77e0","type":"text","text":"# Makefile","x":-2040,"y":-53,"width":250,"height":60},
 		{"id":"ce029391395b439a","type":"text","text":"","x":-453,"y":-1240,"width":250,"height":260},
 		{"id":"633bacc78a4bb25b","type":"link","url":"https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf","x":886,"y":-781,"width":400,"height":788},
-		{"id":"baa2d9b020ae4e42","x":-1400,"y":637,"width":250,"height":60,"type":"text","text":"consigne"},
-		{"id":"30c65597baf1d1ba","x":-1520,"y":697,"width":583,"height":315,"type":"file","file":"minishell_notes/Pasted image 20260409142231.png"},
-		{"id":"0792981f7b631d5b","x":-2560,"y":834,"width":250,"height":120,"type":"text","text":"external fonction analysis "}
+		{"id":"baa2d9b020ae4e42","type":"text","text":"consigne","x":-1400,"y":637,"width":250,"height":60},
+		{"id":"30c65597baf1d1ba","type":"file","file":"minishell_notes/src/pics/Pasted image 20260409142231.png","x":-1520,"y":697,"width":583,"height":315},
+		{"id":"0792981f7b631d5b","type":"text","text":"external fonction analysis ","x":-2560,"y":834,"width":250,"height":120},
+		{"id":"f2b3a99e7dd3e3e3","type":"text","text":"path unset/relatif a chercher ","x":180,"y":1240,"width":250,"height":77},
+		{"id":"b8338d315b9bc408","x":307,"y":1008,"width":400,"height":79,"type":"file","file":"minishell_notes/src/pics/Pasted image 20260409134153.png"},
+		{"id":"155317ef2adc344c","type":"text","text":"path unset and relative path =?","x":159,"y":1317,"width":293,"height":72}
 	],
 	"edges":[
 		{"id":"a06dfc16a6323e9c","fromNode":"05f2908b4cbcccf8","fromSide":"right","toNode":"633bacc78a4bb25b","toSide":"top"},
@@ -22,9 +22,9 @@
 		{"id":"ba01dc33b01ab01a","fromNode":"05f2908b4cbcccf8","fromSide":"left","toNode":"d6b2f8a501ba77e0","toSide":"right"},
 		{"id":"ebc4639cc0b5b7da","fromNode":"05f2908b4cbcccf8","fromSide":"left","toNode":"b1575372a6d3067e","toSide":"right"},
 		{"id":"989ba2f7fc4668df","fromNode":"05f2908b4cbcccf8","fromSide":"top","toNode":"ce029391395b439a","toSide":"bottom"},
-		{"id":"5df1365d5782ab0e","fromNode":"60a0cca30b0c47c9","fromSide":"bottom","toNode":"8d52b7fcca4cfd0b","toSide":"top"},
-		{"id":"df1eb76ae5fb64c8","fromNode":"8d52b7fcca4cfd0b","fromSide":"bottom","toNode":"f2b3a99e7dd3e3e3","toSide":"top"},
 		{"id":"f9911692e87fb432","fromNode":"f3804414e15e2e59","fromSide":"bottom","toNode":"baa2d9b020ae4e42","toSide":"top"},
-		{"id":"ea7b455da73f3b02","fromNode":"30c65597baf1d1ba","fromSide":"left","toNode":"0792981f7b631d5b","toSide":"right"}
+		{"id":"ea7b455da73f3b02","fromNode":"30c65597baf1d1ba","fromSide":"left","toNode":"0792981f7b631d5b","toSide":"right"},
+		{"id":"05f7d293dcc5f908","fromNode":"60a0cca30b0c47c9","fromSide":"bottom","toNode":"b8338d315b9bc408","toSide":"top"},
+		{"id":"dadd61a55a331322","fromNode":"b8338d315b9bc408","fromSide":"bottom","toNode":"f2b3a99e7dd3e3e3","toSide":"top"}
 	]
 }
