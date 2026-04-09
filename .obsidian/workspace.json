@@ -4,19 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "8ad1bea6f2b10840",
+        "id": "7bdb36f55d994438",
         "type": "tabs",
         "children": [
           {
-            "id": "bc29f5a6f6579601",
+            "id": "26b480a7a203e3ce",
             "type": "leaf",
             "state": {
               "type": "canvas",
               "state": {
                 "file": "minishell.canvas",
                 "viewState": {
-                  "x": 94.8631578947369,
-                  "y": 317.29051926208666,
+                  "x": -240,
+                  "y": 284,
                   "zoom": -1.5545378330927258
                 }
               },
@@ -167,13 +167,23 @@
               "icon": "lucide-list",
               "title": "Outline of minishell"
             }
+          },
+          {
+            "id": "fb10117e7c9a8df5",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
           }
-        ]
+        ],
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -187,9 +197,12 @@
       "bases:Create new base": false
     }
   },
-  "active": "bc29f5a6f6579601",
+  "active": "fb10117e7c9a8df5",
   "lastOpenFiles": [
+    "Untitled 1.canvas",
+    "Untitled.canvas",
     "minishell.canvas",
+    "2026-04-09.md",
     "README.md",
     "src/main.c"
   ]
