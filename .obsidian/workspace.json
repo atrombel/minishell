@@ -15,9 +15,9 @@
               "state": {
                 "file": "minishell.canvas",
                 "viewState": {
-                  "x": 244.24982504613777,
-                  "y": 673.1081310351196,
-                  "zoom": -1.8481089881707242
+                  "x": 226.87143649021482,
+                  "y": 557.4084302300607,
+                  "zoom": -1.4481089881707243
                 }
               },
               "icon": "lucide-layout-dashboard",
@@ -56,7 +56,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "path:src  ",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -200,6 +200,10 @@
   },
   "active": "6ec22b543ae1091e",
   "lastOpenFiles": [
+    "src/pics/Pasted image 20260409134153.png",
+    "src/pics/Pasted image 20260409134135.png",
+    "src/pics/Pasted image 20260409134001.png",
+    "src/pics",
     "Untitled.base",
     "minishell.canvas"
   ]
