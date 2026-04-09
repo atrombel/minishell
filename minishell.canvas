@@ -1,13 +1,14 @@
 {
 	"nodes":[
 		{"id":"0c5371385f269db8","type":"file","file":"thing/Pasted image 20260408134726.png","x":-160,"y":394,"width":400,"height":80},
-		{"id":"05f2908b4cbcccf8","x":-328,"y":-113,"width":250,"height":60,"type":"text","text":"# random "},
-		{"id":"633bacc78a4bb25b","x":-728,"y":434,"width":400,"height":788,"type":"link","url":"https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf"},
-		{"id":"7a7c7b24846c2e4c","x":-160,"y":-680,"width":400,"height":118,"type":"file","file":"Pasted image 20260408143030.png"}
+		{"id":"05f2908b4cbcccf8","type":"text","text":"# random ","x":-328,"y":-113,"width":250,"height":60},
+		{"id":"7a7c7b24846c2e4c","type":"file","file":"Pasted image 20260408143030.png","x":-160,"y":-680,"width":400,"height":118},
+		{"id":"633bacc78a4bb25b","type":"link","url":"https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf","x":-720,"y":460,"width":400,"height":788}
 	],
 	"edges":[
 		{"id":"0e4ddebb5f69d16f","fromNode":"05f2908b4cbcccf8","fromSide":"bottom","toNode":"0c5371385f269db8","toSide":"top"},
 		{"id":"a06dfc16a6323e9c","fromNode":"05f2908b4cbcccf8","fromSide":"bottom","toNode":"633bacc78a4bb25b","toSide":"top"},
-		{"id":"175cb6872f03f7be","fromNode":"7a7c7b24846c2e4c","fromSide":"bottom","toNode":"05f2908b4cbcccf8","toSide":"top"}
+		{"id":"175cb6872f03f7be","fromNode":"7a7c7b24846c2e4c","fromSide":"bottom","toNode":"05f2908b4cbcccf8","toSide":"top"},
+		{"id":"27d8dbbf1b971f6c","fromNode":"7a7c7b24846c2e4c","fromSide":"bottom","toNode":"2e09cfccc7e42848","toSide":"top"}
 	]
 }
