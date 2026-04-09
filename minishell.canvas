@@ -8,12 +8,15 @@
 		{"id":"d6b2f8a501ba77e0","type":"text","text":"# Makefile","x":-2040,"y":-53,"width":250,"height":60},
 		{"id":"ce029391395b439a","type":"text","text":"","x":-453,"y":-1240,"width":250,"height":260},
 		{"id":"633bacc78a4bb25b","type":"link","url":"https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf","x":886,"y":-781,"width":400,"height":788},
-		{"id":"baa2d9b020ae4e42","type":"text","text":"consigne","x":-1400,"y":637,"width":250,"height":60},
-		{"id":"0792981f7b631d5b","type":"text","text":"external fonction analysis ","x":-2560,"y":834,"width":250,"height":120},
 		{"id":"f2b3a99e7dd3e3e3","type":"text","text":"path unset/relatif a chercher ","x":180,"y":1240,"width":250,"height":77},
 		{"id":"b8338d315b9bc408","type":"file","file":"minishell_notes/pics/Pasted image 20260409134153.png","x":307,"y":1008,"width":400,"height":79},
 		{"id":"155317ef2adc344c","type":"text","text":"path unset and relative path =?","x":159,"y":1317,"width":293,"height":72},
-		{"id":"30c65597baf1d1ba","type":"file","file":"minishell_notes/pics/Pasted image 20260409142231.png","x":-1566,"y":697,"width":583,"height":315}
+		{"id":"0792981f7b631d5b","type":"text","text":"external fonction analysis ","x":-3293,"y":720,"width":250,"height":120},
+		{"id":"baa2d9b020ae4e42","type":"text","text":"consigne","x":-2133,"y":523,"width":250,"height":60},
+		{"id":"30c65597baf1d1ba","type":"file","file":"minishell_notes/pics/Pasted image 20260409142231.png","x":-2299,"y":583,"width":583,"height":315},
+		{"id":"30c7fad666a06050","type":"text","text":"REPARTITION TACHES ","x":-965,"y":987,"width":250,"height":60},
+		{"id":"b191fab881227767","x":-548,"y":1374,"width":250,"height":60,"type":"text","text":"# Cyrille"},
+		{"id":"ee807c0c4085ebc3","type":"text","text":"# ADOR ","x":-1360,"y":1374,"width":250,"height":60}
 	],
 	"edges":[
 		{"id":"a06dfc16a6323e9c","fromNode":"05f2908b4cbcccf8","fromSide":"right","toNode":"633bacc78a4bb25b","toSide":"top"},
@@ -25,6 +28,9 @@
 		{"id":"f9911692e87fb432","fromNode":"f3804414e15e2e59","fromSide":"bottom","toNode":"baa2d9b020ae4e42","toSide":"top"},
 		{"id":"ea7b455da73f3b02","fromNode":"30c65597baf1d1ba","fromSide":"left","toNode":"0792981f7b631d5b","toSide":"right"},
 		{"id":"05f7d293dcc5f908","fromNode":"60a0cca30b0c47c9","fromSide":"bottom","toNode":"b8338d315b9bc408","toSide":"top"},
-		{"id":"dadd61a55a331322","fromNode":"b8338d315b9bc408","fromSide":"bottom","toNode":"f2b3a99e7dd3e3e3","toSide":"top"}
+		{"id":"dadd61a55a331322","fromNode":"b8338d315b9bc408","fromSide":"bottom","toNode":"f2b3a99e7dd3e3e3","toSide":"top"},
+		{"id":"ea2193568f55516a","fromNode":"f3804414e15e2e59","fromSide":"bottom","toNode":"30c7fad666a06050","toSide":"top"},
+		{"id":"9a1f9e569de15e81","fromNode":"30c7fad666a06050","fromSide":"bottom","toNode":"ee807c0c4085ebc3","toSide":"top"},
+		{"id":"ea1b8c630df4ca36","fromNode":"30c7fad666a06050","fromSide":"bottom","toNode":"b191fab881227767","toSide":"top"}
 	]
 }
