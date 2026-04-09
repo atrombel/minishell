@@ -15,8 +15,9 @@
 		{"id":"baa2d9b020ae4e42","type":"text","text":"consigne","x":-2133,"y":523,"width":250,"height":60},
 		{"id":"30c65597baf1d1ba","type":"file","file":"minishell_notes/pics/Pasted image 20260409142231.png","x":-2299,"y":583,"width":583,"height":315},
 		{"id":"30c7fad666a06050","type":"text","text":"REPARTITION TACHES ","x":-965,"y":987,"width":250,"height":60},
-		{"id":"b191fab881227767","x":-548,"y":1374,"width":250,"height":60,"type":"text","text":"# Cyrille"},
-		{"id":"ee807c0c4085ebc3","type":"text","text":"# ADOR ","x":-1360,"y":1374,"width":250,"height":60}
+		{"id":"b191fab881227767","type":"text","text":"# Cyrille","x":-548,"y":1374,"width":250,"height":60},
+		{"id":"ee807c0c4085ebc3","type":"text","text":"# ADOR ","x":-1360,"y":1374,"width":250,"height":60},
+		{"id":"7456a606fcb867ff","x":-600,"y":800,"width":400,"height":298,"type":"file","file":"minishell_notes/pics/Pasted image 20260409160648.png"}
 	],
 	"edges":[
 		{"id":"a06dfc16a6323e9c","fromNode":"05f2908b4cbcccf8","fromSide":"right","toNode":"633bacc78a4bb25b","toSide":"top"},
