@@ -15,8 +15,8 @@
               "state": {
                 "file": "minishell.canvas",
                 "viewState": {
-                  "x": -399,
-                  "y": 567.5,
+                  "x": 244.24982504613777,
+                  "y": 673.1081310351196,
                   "zoom": -1.8481089881707242
                 }
               },
@@ -56,7 +56,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "path:src  ",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -98,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Untitled.base",
+                "file": "minishell.canvas",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -108,7 +108,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Untitled"
+              "title": "Backlinks for minishell"
             }
           },
           {
@@ -179,8 +179,7 @@
               "title": "Source Control"
             }
           }
-        ],
-        "currentTab": 5
+        ]
       }
     ],
     "direction": "horizontal",
