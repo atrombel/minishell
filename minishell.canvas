@@ -1,14 +1,23 @@
 {
 	"nodes":[
-		{"id":"0c5371385f269db8","type":"file","file":"thing/Pasted image 20260408134726.png","x":-160,"y":394,"width":400,"height":80},
 		{"id":"05f2908b4cbcccf8","type":"text","text":"# random ","x":-328,"y":-113,"width":250,"height":60},
-		{"id":"7a7c7b24846c2e4c","type":"file","file":"Pasted image 20260408143030.png","x":-160,"y":-680,"width":400,"height":118},
-		{"id":"633bacc78a4bb25b","type":"link","url":"https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf","x":-720,"y":460,"width":400,"height":788}
+		{"id":"633bacc78a4bb25b","type":"link","url":"https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf","x":-720,"y":460,"width":400,"height":788},
+		{"id":"60a0cca30b0c47c9","type":"text","text":"conseil 42&camarade","x":155,"y":360,"width":250,"height":60},
+		{"id":"be7770483dbc82cb","type":"text","text":"- minishell is based on bash and not on zsh \n\t - be carfeull 42 lausanee macs are on **zsh**","x":660,"y":372,"width":500,"height":388,"color":"2"},
+		{"id":"da40acec7d5b54a9","type":"file","file":"minishell_notes/src/pics/Pasted image 20260409134153.png","x":80,"y":640,"width":400,"height":79},
+		{"id":"155317ef2adc344c","type":"text","text":"path unset and relative path =?","x":134,"y":860,"width":293,"height":72},
+		{"id":"d6b2f8a501ba77e0","type":"text","text":"# Makefile","x":-1358,"y":-120,"width":250,"height":60},
+		{"id":"b1575372a6d3067e","type":"text","text":"# git ","x":-1284,"y":-650,"width":250,"height":60},
+		{"id":"ce029391395b439a","type":"text","text":"","x":-329,"y":-680,"width":250,"height":60}
 	],
 	"edges":[
-		{"id":"0e4ddebb5f69d16f","fromNode":"05f2908b4cbcccf8","fromSide":"bottom","toNode":"0c5371385f269db8","toSide":"top"},
 		{"id":"a06dfc16a6323e9c","fromNode":"05f2908b4cbcccf8","fromSide":"bottom","toNode":"633bacc78a4bb25b","toSide":"top"},
-		{"id":"175cb6872f03f7be","fromNode":"7a7c7b24846c2e4c","fromSide":"bottom","toNode":"05f2908b4cbcccf8","toSide":"top"},
-		{"id":"27d8dbbf1b971f6c","fromNode":"7a7c7b24846c2e4c","fromSide":"bottom","toNode":"2e09cfccc7e42848","toSide":"top"}
+		{"id":"cd07d645c9569fb1","fromNode":"05f2908b4cbcccf8","fromSide":"right","toNode":"60a0cca30b0c47c9","toSide":"top"},
+		{"id":"50bfdbdc64f0f84b","fromNode":"60a0cca30b0c47c9","fromSide":"bottom","toNode":"da40acec7d5b54a9","toSide":"top"},
+		{"id":"d382db6dc0bfc493","fromNode":"60a0cca30b0c47c9","fromSide":"right","toNode":"be7770483dbc82cb","toSide":"left"},
+		{"id":"6c7da8c8625c6282","fromNode":"da40acec7d5b54a9","fromSide":"bottom","toNode":"155317ef2adc344c","toSide":"top"},
+		{"id":"ba01dc33b01ab01a","fromNode":"05f2908b4cbcccf8","fromSide":"left","toNode":"d6b2f8a501ba77e0","toSide":"right"},
+		{"id":"ebc4639cc0b5b7da","fromNode":"05f2908b4cbcccf8","fromSide":"left","toNode":"b1575372a6d3067e","toSide":"right"},
+		{"id":"989ba2f7fc4668df","fromNode":"05f2908b4cbcccf8","fromSide":"top","toNode":"ce029391395b439a","toSide":"bottom"}
 	]
 }
