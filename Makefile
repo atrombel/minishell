@@ -110,7 +110,7 @@ cleanatrombel:
 	rm -rf $(ATROMBEL_OBJ_DIR)
 	$(MAKE) -C $(LIBFT_DIR) clean
 
-fcleanatrombel: clean atrombel
+fcleanatrombel: cleanatrombel
 	rm -rf $(ATROMBEL_NAME)
 	$(MAKE) -C $(LIBFT_DIR) fclean
 
@@ -118,7 +118,7 @@ cleancgasser:
 	rm -rf $(CGASSER_OBJ_DIR)
 	$(MAKE) -C $(LIBFT_DIR) clean
 
-fcleancgasser: clean cgasser
+fcleancgasser: cleancgasser
 	rm -rf $(CGASSER_NAME)
 	$(MAKE) -C $(LIBFT_DIR) fclean
 
