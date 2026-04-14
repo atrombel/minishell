@@ -32,7 +32,7 @@ ATROMBEL_NAME = atrombel
 CGASSER_CFILES = ft_parse.c
 
 CGASSER_SRCS = $(addprefix $(CGASSER_SRC_DIR)/, $(CGASSER_CFILES))
-CGASSER_OBJS = $(addprefix $(GASSER_OBJ_DIR)/, $(CGASSER_CFILES:.c=.o))
+CGASSER_OBJS = $(addprefix $(CGASSER_OBJ_DIR)/, $(CGASSER_CFILES:.c=.o))
 CGASSER_NAME = cgasser
 
 
