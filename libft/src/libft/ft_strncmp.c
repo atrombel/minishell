@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atrombel <atrombel@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: cgasser <cgasser@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/09 13:12:44 by atrombel          #+#    #+#             */
-/*   Updated: 2026/04/09 13:12:52 by atrombel         ###   ###lausanne.ch    */
+/*   Created: 2025/10/06 11:01:12 by cgasser           #+#    #+#             */
+/*   Updated: 2025/10/06 11:20:36 by cgasser          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	main(int argc, char **argv, char **env)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	char	*usrinpt;
+	size_t	i;
 
-	usrinpt = NULL;
-	(void)argc;
-	(void)argv;
-	(void)env;
-	while (1)
+	i = 0;
+	while (i < n && (s1[i] != '\0' || s2[i] != '\0'))
 	{
-		usrinpt = readline("Waiting for a command...> ");
-		printf("%s\n", usrinpt);
+		if ((unsigned char) s1[i] != (unsigned char) s2[i])
+			return ((unsigned char) s1[i] - (unsigned char) s2[i]);
+		i++;
 	}
 	return (0);
-
-	//ft_parse(argc, argv);
 }

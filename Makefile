@@ -1,5 +1,6 @@
 CC = cc
 CFLAGS = -Wextra -Werror -Wall
+LDLIBS = -lreadline
 
 SRC_DIR = src
 OBJ_DIR = obj
@@ -31,7 +32,7 @@ ATROMBEL_NAME = atrombel
 CGASSER_CFILES = ft_parse.c
 
 CGASSER_SRCS = $(addprefix $(CGASSER_SRC_DIR)/, $(CGASSER_CFILES))
-OBJS = $(addprefix $(GASSER_OBJ_DIR), $(CGASSER_CFILES:.c=.o))
+CGASSER_OBJS = $(addprefix $(CGASSER_OBJ_DIR)/, $(CGASSER_CFILES:.c=.o))
 CGASSER_NAME = cgasser
 
 
@@ -49,7 +50,7 @@ all: $(NAME)
 #$(BIN_DIR)/$(NAME)
 
 $(NAME): $(OBJS) $(ATROMBEL_OBJS) $(CGASSER_OBJS) $(LIBFT_A)
-	$(CC) $(CFLAGS) $(OBJS) $(ATROMBEL_OBJS) $(CGASSER_OBJS) $(LIBFT_A) -o $@
+	$(CC) $(CFLAGS) $(OBJS) $(ATROMBEL_OBJS) $(CGASSER_OBJS) $(LIBFT_A) $(LDLIBS) -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -I $(INC_DIR) -I $(LIBFT_INC_DIR) -c $< -o $@
@@ -68,7 +69,7 @@ $(LIBFT_A):
 atrombel: $(ATROMBEL_NAME) 
 
 $(ATROMBEL_NAME): $(ATROMBEL_OBJS) $(LIBFT_A)
-	$(CC) $(CFLAGS) $(ATROMBEL_OBJS) $(LIBFT_A) -o $@
+	$(CC) $(CFLAGS) $(ATROMBEL_OBJS) $(LIBFT_A) $(LDLIBS) -o $@
 
 $(ATROMBEL_OBJ_DIR)/%.o: $(ATROMBEL_SRC_DIR)/%.c | $(ATROMBEL_OBJ_DIR)
 	$(CC) $(CFLAGS) -I $(INC_DIR) -I $(LIBFT_INC_DIR) -c $< -o $@
@@ -81,7 +82,7 @@ $(ATROMBEL_OBJ_DIR): $(OBJ_DIR)
 cgasser: $(CGASSER_NAME) 
 
 $(CGASSER_NAME): $(CGASSER_OBJS) $(LIBFT_A)
-	$(CC) $(CFLAGS) $(CGASSER_OBJS) $(LIBFT_A) -o $@
+	$(CC) $(CFLAGS) $(CGASSER_OBJS) $(LIBFT_A) $(LDLIBS) -o $@
 
 $(CGASSER_OBJ_DIR)/%.o: $(CGASSER_SRC_DIR)/%.c | $(CGASSER_OBJ_DIR)
 	$(CC) $(CFLAGS) -I $(INC_DIR) -I $(LIBFT_INC_DIR) -c $< -o $@
