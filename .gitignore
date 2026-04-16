@@ -1,0 +1,7 @@
+# build files
+*.o
+*.a
+minishell
+obj/
+libft/obj/
+libft/lib/
