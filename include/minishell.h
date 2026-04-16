@@ -6,6 +6,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-# include "./cgasser.h"
-# include "./atrombel.h"
+//# include "./cgasser.h"
+//# include "./atrombel.h"
 #endif
