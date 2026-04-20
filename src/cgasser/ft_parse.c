@@ -1,11 +1,16 @@
-/*
+
+
 #include "minishell.h"
 #include "libft.h"
 
-void	ft_parse(int argc, char **argv)
+t_list	*ft_parse(char *str)
 {
+	char	**array;
 	t_list	*head;
 
-	head = NULL;
-	head = ft_make_lst(argc, argv);
-}*/
+	array = NULL;
+	array = ft_split(str, ' ');
+	free(str);
+	head = ft_list_token(array);
+	return (head);
+}
