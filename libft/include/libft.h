@@ -6,7 +6,7 @@
 /*   By: cgasser <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 18:54:58 by cgasser           #+#    #+#             */
-/*   Updated: 2025/09/30 19:13:05 by cgasser          ###   ####lausanne.ch   */
+/*   Updated: 2026/04/20 10:26:05 by cgasser          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
+int		ft_arraysize(char **array);
+char	**ft_arrayadd_back(char **array, char *str);
+void	ft_free_array(char **array);
 #endif
 
 //merci Matias
