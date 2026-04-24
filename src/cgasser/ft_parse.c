@@ -3,7 +3,7 @@
 #include "minishell.h"
 #include "libft.h"
 
-t_list	*ft_parse(char *str)
+t_list	*ft_parse(char *str, char **envp)
 {
 	char	**array;
 	t_list	*head;
@@ -11,6 +11,6 @@ t_list	*ft_parse(char *str)
 	array = NULL;
 	array = ft_split(str, ' ');
 	free(str);
-	head = ft_list_token(array);
+	head = ft_list_token(array, envp);
 	return (head);
 }

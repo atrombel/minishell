@@ -13,7 +13,7 @@
 #include "minishell.h"
 #include <stdlib.h>
 
-int	main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **envp)
 {
 	char	*usrinpt;
 	t_list	*token_head;
@@ -22,11 +22,10 @@ int	main(int argc, char **argv, char **env)
 	usrinpt = NULL;
 	(void)argc;
 	(void)argv;
-	(void)env;
 	while (1)
 	{
 		usrinpt = readline("Waiting for a command...> ");
-		token_head = ft_parse(usrinpt);
+		token_head = ft_parse(usrinpt, envp);
 		cmd_head = ft_lst_cmd(token_head);
 		ft_lstclear(&token_head, free);
 		ft_print_cmd_list(cmd_head);

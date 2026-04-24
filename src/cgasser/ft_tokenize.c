@@ -3,7 +3,7 @@
 #include "cgasser.h"
 #include "ft_printf.h"
 
-t_token	*ft_tokenize(char *str, int index)
+t_token	*ft_tokenize(char *str, int index, char **envp)
 {
 	t_token	*token;
 
@@ -11,7 +11,7 @@ t_token	*ft_tokenize(char *str, int index)
 	token->word = malloc(sizeof(char) * (ft_strlen(str) + 1));
 	ft_strlcpy(token->word, str, ft_strlen(str) + 1);
 	token->index = index;
-	if (ft_get_type(token) != 0)
+	if (ft_get_type(token, envp) != 0)
 		return (free(token), NULL);
 	return (token);
 }

@@ -29,10 +29,10 @@ ATROMBEL_OBJS = $(addprefix $(ATROMBEL_OBJ_DIR)/, $(ATROMBEL_CFILES:.c=.o))
 ATROMBEL_NAME = atrombel
 
 
-CGASSER_CFILES = ft_parse.c ft_get_type.c ft_make_lst.c ft_tokenize.c \
+CGASSER_CFILES = ft_parse.c ft_get_type.c ft_tokenize.c \
 		 ft_check_cmd.c ft_list_token.c ft_print_token_list.c \
 		 ft_fill_cmd.c ft_lst_cmd.c ft_new_cmd.c ft_free_cmd.c \
-		 ft_print_cmd_list.c 
+		 ft_print_cmd_list.c ft_cmd_cmp.c
 
 CGASSER_SRCS = $(addprefix $(CGASSER_SRC_DIR)/, $(CGASSER_CFILES))
 CGASSER_OBJS = $(addprefix $(CGASSER_OBJ_DIR)/, $(CGASSER_CFILES:.c=.o))
