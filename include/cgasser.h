@@ -29,6 +29,8 @@ t_token	*ft_tokenize(char *str, int index, char **envp);
 int		ft_get_type(t_token *token, char **envp);
 int		ft_check_cmd(t_token *token, char **envp);
 int		ft_cmd_cmp(t_token *token, char **envp);
+char	**ft_get_envpaths(char **envp);
+int	ft_cmd_cmp_envp(t_token *token, char **paths);
 
 t_list	*ft_lst_cmd(t_list *head);
 void	ft_fill_cmd(t_cmd *head, t_token *token);
