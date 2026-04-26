@@ -9,7 +9,7 @@ t_list	*ft_parse(char *str, char **envp)
 	t_list	*head;
 
 	array = NULL;
-	array = ft_split(str, ' ');
+	array = ft_split_quoted(str, ' ');
 	free(str);
 	head = ft_list_token(array, envp);
 	return (head);

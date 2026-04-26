@@ -29,7 +29,7 @@ void	ft_print_cmd(t_cmd *cmd)
 	{
 		while (cmd->flag[i] != NULL)
 		{
-			ft_printf(" %s", cmd->flag[i]);
+			ft_printf(" %s,", cmd->flag[i]);
 			i++;
 		}
 	}
@@ -39,7 +39,7 @@ void	ft_print_cmd(t_cmd *cmd)
 	{
 		while (cmd->args[i] != NULL)
 		{
-			ft_printf(" %s", cmd->args[i]);
+			ft_printf(" %s,", cmd->args[i]);
 			i++;
 		}
 	}

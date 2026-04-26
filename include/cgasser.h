@@ -23,6 +23,7 @@ typedef struct s_cmd //token
 	char	**args; //arguments
 }	t_cmd;
 
+char	**ft_split_quoted(char const *s, char c);
 t_list	*ft_parse(char *str, char **envp);
 t_list	*ft_list_token(char **array, char **envp);
 t_token	*ft_tokenize(char *str, int index, char **envp);
