@@ -11,7 +11,7 @@ char	**ft_get_envpaths(char **envp)
 	while (envp[i] != NULL)
 	{
 		if (ft_strncmp("PATH=", envp[i], 5) == 0)
-			return (ft_split(envp[i], ':'));
+			return (ft_split(envp[i] + 5, ':'));
 		i++;
 	}
 	return (NULL);

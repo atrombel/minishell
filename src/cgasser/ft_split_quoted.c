@@ -88,7 +88,7 @@ int	ft_count_word_quoted(char const *s, char c)
 		i = ft_find_next_word(s, c, i);
 		if (s[i] != '\0')
 			count++;
-		i += ft_strlen_word_quoted(s, c, i) + 1;
+		i += ft_strlen_word_quoted(s, c, i);
 	}
 	return (count);
 }
