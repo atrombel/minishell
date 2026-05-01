@@ -17,7 +17,7 @@ char	*ft_expand_var(char *str, char **envp)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == '$' && str[i + 1] != ' ' && str[i + 1] != '\0')
+		if (str[i] == '$' && str[i + 1] != ' ' && str[i + 1] != '"')
 			str = ft_put_var(str, envp, i);
 		else
 			i++;
