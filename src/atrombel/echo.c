@@ -14,6 +14,7 @@ void	print_echo(char *arg, t_data *data, int mode)
 	}
 }
 
+// data last command error number "echo $?"" to implement also echo should display env  ? if yes to implement as well expl echo $PWD/home/atrombel/42/3/minishell
 // echo - display a line of text
 void	ft_echo(t_cmd *cmd, t_data *data)
 {

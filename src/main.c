@@ -32,7 +32,7 @@ int	main(int argc, char **argv, char **envp)
 		cmd_head = ft_lst_cmd(token_head);
 		ft_lstclear(&token_head, free);
 		ft_print_cmd_list(cmd_head);
-		ft_exe_main(cmd_head, &data, env);
+		ft_exe_main(cmd_head, &data, env);// data last command error number "echo $?"" to implement
 		ft_lstclear(&cmd_head, ft_free_cmd);
 	}
 	return (0);

@@ -38,3 +38,16 @@ void	ft_change_value_env(t_env *env, char *key, char *str)
 			return ;
 	}
 }
+
+void	ft_env(t_data *data , t_env *env)
+{
+	while(env->next)
+	{
+		if (printf("%s=%s\n", env->key, env->value) == -1)
+		{
+			data->last_exit_status = 1;
+			return ;
+		}
+		env = env->next;
+	}
+}
