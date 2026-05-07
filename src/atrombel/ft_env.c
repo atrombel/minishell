@@ -39,6 +39,24 @@ void	ft_change_value_env(t_env *env, char *key, char *str)
 	}
 }
 
+// function that free env
+void	ft_env_clean(t_env *env)
+{
+	t_env *tmp;
+
+	tmp = NULL;
+	while(env != NULL)
+	{
+		if (env->value)
+			free (env->value);
+		if (env->key)
+			free (env->key);
+		tmp = env;
+		env = env->next;
+		free(tmp);
+	}
+}
+
 void	ft_env(t_data *data , t_env *env)
 {
 	while(env->next)

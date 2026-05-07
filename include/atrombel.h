@@ -18,7 +18,7 @@ typedef struct s_env
 	struct s_env	*next;
 } t_env;
 
-void	ft_exe_main(t_list *head, t_data *data,t_env *env);
+int		ft_exe_main(t_list *head, t_data *data, t_env *env);
 void	ft_echo(t_cmd *cmd, t_data *data);
 void	ft_cd(t_cmd *content,  t_data *data, t_env *env);
 t_env	*init_env(char **envp);
@@ -26,6 +26,8 @@ char	*ft_get_value_env(t_env *env, char *str);
 void	ft_change_value_env(t_env *env, char *key, char *str);
 void	ft_pwd(t_data *data, t_env *env);
 void	ft_env(t_data *data , t_env *env);
+void	ft_env_clean(t_env *env);
+void	ft_exit(t_cmd *content, t_env *env, t_list *head);
 
 
 #endif
