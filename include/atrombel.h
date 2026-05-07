@@ -24,7 +24,7 @@ void	ft_cd(t_cmd *content,  t_data *data, t_env *env);
 t_env	*init_env(char **envp);
 char	*ft_get_value_env(t_env *env, char *str);
 void	ft_change_value_env(t_env *env, char *key, char *str);
-
+void	ft_pwd(t_data *data, t_env *env);
 
 
 #endif

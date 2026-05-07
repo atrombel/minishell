@@ -17,7 +17,7 @@ char	*ft_get_value_env(t_env *env, char *str)
 		if (!dest)
 			return (NULL);
 	}
-	printf("ft_get_value dest me retourne %s\n", dest);
+	//printf("ft_get_value dest me retourne %s\n", dest);
 	return (dest);
 }
 
@@ -33,7 +33,7 @@ void	ft_change_value_env(t_env *env, char *key, char *str)
 	{
 		free (env->value);
 		env->value = ft_strdup(str); //MALLOC TO FREE
-		printf("ft_change_value  me retourne  env->value = %s\n", env->value);
+		//printf("ft_change_value  me retourne  env->value = %s\n", env->value);
 		if (env->value)
 			return ;
 	}

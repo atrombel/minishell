@@ -7,6 +7,9 @@ void ft_builtin_verif(t_cmd *content, t_data *data, t_env *env)
 		ft_echo(content, data);
 	if (ft_strncmp("cd", content->cmd, 3) == 0)
 		ft_cd(content, data, env);
+	if (ft_strncmp("pwd", content->cmd, 4) == 0)
+		ft_pwd(data, env);
+
 
 }
 

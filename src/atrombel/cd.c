@@ -2,7 +2,6 @@
 
 int	cd_success(t_env *env, char *old_pwd)
 {
-	printf("yo\n");
 	char	new_wd[PATH_MAX];
 
 	ft_change_value_env(env, "OLDPWD", old_pwd);
@@ -16,20 +15,11 @@ int	cd_success(t_env *env, char *old_pwd)
 	return (0);
 }
 
-//cd args change the working directory
-void	ft_cd(t_cmd *content,  t_data *data, t_env *env)
+// function that actually changes current working wirectory and update pwd and oldpwd fomr env
+void	ft_chdir(char	*path, t_data *data, t_env *env)
 {
-	char	*path;
 	char	*old_pwd;
 
-	if (content->args[0] && content->args[1])
-	{
-		data->last_exit_status = 1;
-		return ;
-	}
-	path = content->args[0];
-	if (!path)
-		path = getenv("HOME");
 	if (chdir(path) == -1)
 	{
 		ft_putstr_fd("minishell: cd: ", 2);
@@ -37,12 +27,36 @@ void	ft_cd(t_cmd *content,  t_data *data, t_env *env)
 		data->last_exit_status = 1;
 		return ;
 	}
-	old_pwd = ft_get_value_env(env,"PWD"); //to free
-	if (cd_success(env, old_pwd) == 1)
+	else
 	{
-		data->last_exit_status = 1;
+		old_pwd = ft_get_value_env(env,"PWD");
+		if (cd_success(env, old_pwd) == 1)
+			data->last_exit_status = 1;
+		else
+			data->last_exit_status = 0;
+	}
+}
+
+//cd args change the working directory
+void	ft_cd(t_cmd *content, t_data *data, t_env *env)
+{
+	char	*path;
+
+	if (content->args == NULL || content->args[0] == NULL || content->args[0][0] == '\0')
+	{
+		path = ft_get_value_env(env,"HOME");
+		ft_chdir(path, data, env);
 		return ;
 	}
-	data->last_exit_status = 0;
+	else
+		path = content->args[0];
+	if (content->args[0] && content->args[1])
+	{
+		data->last_exit_status = 1;
+
+		ft_putstr_fd("minishell: cd: too many arguments", 2);
+		return ;
+	}
+	ft_chdir(path, data, env);
 }
 
