@@ -1,23 +1,48 @@
-// #include "minishell.h"
+#include "minishell.h"
 
-// //cd args change the working directory
-// void	ft_cd(t_cmd *cmd)
-// {
-// 	char	*path;
-// 	char	*old_pwd;
+int	cd_success(t_env *env, char *old_pwd)
+{
+	printf("yo\n");
+	char	new_wd[PATH_MAX];
 
-// 	if (cmd->args[0] && cmd->args[1])
-// 		return (1);
-// 	path = cmd->args[0];
-// 	old_pwd = getenv("PWD");
-// 	if (!path)
-// 		path = getenv("HOME"); // pas check si env existe
-// 	if (chdir(path) == -1)
-// 	{
-// 		ft_putstr_fd("minishell: cd: ", 2);
-// 		perror(path);
-// 		return (1)
-// 	}
-// 	return (0);
-// }
+	ft_change_value_env(env, "OLDPWD", old_pwd);
+	free(old_pwd);
+	if (getcwd(new_wd, PATH_MAX) == NULL)
+	{
+		perror("minishell:cd:");
+		return (1);
+	}
+	ft_change_value_env(env, "PWD", new_wd);
+	return (0);
+}
+
+//cd args change the working directory
+void	ft_cd(t_cmd *content,  t_data *data, t_env *env)
+{
+	char	*path;
+	char	*old_pwd;
+
+	if (content->args[0] && content->args[1])
+	{
+		data->last_exit_status = 1;
+		return ;
+	}
+	path = content->args[0];
+	if (!path)
+		path = getenv("HOME");
+	if (chdir(path) == -1)
+	{
+		ft_putstr_fd("minishell: cd: ", 2);
+		perror(path);
+		data->last_exit_status = 1;
+		return ;
+	}
+	old_pwd = ft_get_value_env(env,"PWD"); //to free
+	if (cd_success(env, old_pwd) == 1)
+	{
+		data->last_exit_status = 1;
+		return ;
+	}
+	data->last_exit_status = 0;
+}
 

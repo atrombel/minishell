@@ -22,7 +22,7 @@ SRCS = $(addprefix $(SRC_DIR)/, $(CFILES))
 OBJS = $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
 
 
-ATROMBEL_CFILES = ft_exe_main.c echo.c cd.c env_set_or_copy.c
+ATROMBEL_CFILES = ft_exe_main.c echo.c cd.c env_set_or_copy.c ft_env.c
 
 ATROMBEL_SRCS = $(addprefix $(ATROMBEL_SRC_DIR)/, $(ATROMBEL_CFILES))
 ATROMBEL_OBJS = $(addprefix $(ATROMBEL_OBJ_DIR)/, $(ATROMBEL_CFILES:.c=.o))

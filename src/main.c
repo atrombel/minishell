@@ -24,11 +24,11 @@ int	main(int argc, char **argv, char **envp)
 	usrinpt = NULL;
 	(void)argc;
 	(void)argv;
-	env = init_env(envp); //TESTER QUE CA A BIEN MARCHE FAIR UN WHILE ET PRINTF TOUT LE NEW ENV
+	env = init_env(envp); //FAIRE UN builtin de la commande ENV a partir de ca / path de secour a definir sur pc ecole creer un ft_env_clear_aussi
 	while (1)
 	{
 		usrinpt = readline("Waiting for a command...> ");
-		token_head = ft_parse(usrinpt, envp);
+		token_head = ft_parse(usrinpt, envp);// change for env maybe for security
 		cmd_head = ft_lst_cmd(token_head);
 		ft_lstclear(&token_head, free);
 		ft_print_cmd_list(cmd_head);
