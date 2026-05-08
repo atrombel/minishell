@@ -26,3 +26,9 @@ https://www.tutorialspoint.com/c_standard_library/c_function_getenv.htm
 https://stackoverflow.com/questions/298510/how-to-get-the-current-directory-in-a-c-program
 https://askubuntu.com/questions/859945/what-is-the-maximum-length-of-a-file-path-in-ubuntu
 https://eklitzke.org/path-max-is-tricky
+https://man7.org/linux/man-pages/man3/exit.3.html
+https://stackoverflow.com/questions/13795237/what-does-the-export-command-do
+https://www.networkworld.com/video/663128/how-to-use-the-export-command-2-minute-linux-tips.html
+https://www.digitalocean.com/community/tutorials/export-command-linux
+https://bash.cyberciti.biz/guide/Exit_command
+https://www.youtube.com/watch?v=1z6EUUl11qI

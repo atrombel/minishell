@@ -24,6 +24,7 @@ void	ft_chdir(char	*path, t_data *data, t_env *env)
 	{
 		ft_putstr_fd("minishell: cd: ", 2);
 		perror(path);
+		write(2, "\n", 1);
 		data->last_exit_status = 1;
 		return ;
 	}
@@ -54,7 +55,7 @@ void	ft_cd(t_cmd *content, t_data *data, t_env *env)
 	{
 		data->last_exit_status = 1;
 
-		ft_putstr_fd("minishell: cd: too many arguments", 2);
+		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
 		return ;
 	}
 	ft_chdir(path, data, env);

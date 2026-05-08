@@ -2,15 +2,15 @@
 # define ATROMBEL_H
 # include <limits.h> //verifier si jai le droit dutiliser
 
-// struct that contain usefull data
+// struct that contain usefull data to see if really that usefull long term
 typedef struct s_data
 {
 	int last_exit_status;
-
 } t_data;
 
 // I need this struct t_env just for cd and others to work properly,
 // if this wasnt there i wouldnt be able to update the PWD of my working directoy resulting desyncronasation when I call pwd
+// Lors de la conversion de la liste en char envp pour fork, extraire que les variables de $type == 0$.
 typedef struct s_env
 {
 	char			*key;	// "PWD"
@@ -28,6 +28,11 @@ void	ft_pwd(t_data *data, t_env *env);
 void	ft_env(t_data *data , t_env *env);
 void	ft_env_clean(t_env *env);
 void	ft_exit(t_cmd *content, t_env *env, t_list *head);
-
+t_env	*node_env_creation();
+int		new_value_storing(char *envp_i, t_env *new);
+int		env_key_copy_check(char *new_key, t_env	*tmp_env);
+void	ft_export(t_cmd *content, t_env *env);
+void 	export_key_value(char *arg, int i , t_env *env);
+int		ft_addnew_key_and_value(t_env *env, char *str);
 
 #endif
