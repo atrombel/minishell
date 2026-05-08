@@ -18,7 +18,7 @@ typedef struct s_env
 	struct s_env	*next;
 } t_env;
 
-int		ft_exe_main(t_list *head, t_data *data, t_env *env);
+int		ft_exe_main(t_list *head, t_data *data, t_env **env);
 void	ft_echo(t_cmd *cmd, t_data *data);
 void	ft_cd(t_cmd *content,  t_data *data, t_env *env);
 t_env	*init_env(char **envp);
@@ -40,5 +40,6 @@ void	export_without_args(t_env *env);
 void	export_printf(t_env *env_tmp);
 int		export_new_value_storing(t_env *env, t_env *new);
 void	add_back_env(t_env **head, t_env *new);
+void	ft_unset(t_cmd *content, t_env **env);
 
 #endif

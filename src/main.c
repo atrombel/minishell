@@ -20,7 +20,7 @@ int	main(int argc, char **argv, char **envp)
 		cmd_head = ft_lst_cmd(token_head);
 		ft_lstclear(&token_head, free);
 		ft_print_cmd_list(cmd_head);
-		ft_exe_main(cmd_head, &data, env);// faire une fonction apres celle ci qui netooye bien tout mes trucs
+		ft_exe_main(cmd_head, &data, &env);// faire une fonction apres celle ci qui netooye bien tout mes trucs
 		ft_lstclear(&cmd_head, ft_free_cmd);//token_head clearing function to do
 	}
 	ft_env_clean(env);

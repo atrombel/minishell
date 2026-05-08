@@ -31,7 +31,10 @@ void	export_with_args(char *arg, t_env *env)
 	// printf("arg = %s\n", arg);
 	if (ft_isalpha(arg[0]) == 0 && arg[0] != '_')// check du premier char
 	{
-		printf("-minishell: export: '%s': not a valid identifier\n", arg);
+		if (arg[0] == '\0')
+			printf("-minishell: export: '': not a valid identifier\n");
+		else
+			printf("-minishell: export: '%s': not a valid identifier\n", arg);
 		return ;
 	}
 	while(arg[i] != '=' && arg[i])//check if key is valid
