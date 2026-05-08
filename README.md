@@ -3,15 +3,16 @@
 
 Description
 ------------------
-This project is about creating a simple shell.
-Yes, your very own little Bash.
-You will gain extensive knowledge about processes and file descriptors.
-
+Minishell is a 42 School project that involves creating a simplified version of a real shell (like Bash).
+This project is a deep dive into the inner workings of an operating system,
+focusing on process management, file descriptors, and memory handling.
+The goal is to provide a functional command-line interface capable of executing commands,
+managing environment variables, and handling complex redirections and pipes.
 
 
 Instructions
 ------------------
-run make
+to compile run make
 lauch minishell with ./minishell
 
 
@@ -32,3 +33,5 @@ https://www.networkworld.com/video/663128/how-to-use-the-export-command-2-minute
 https://www.digitalocean.com/community/tutorials/export-command-linux
 https://bash.cyberciti.biz/guide/Exit_command
 https://www.youtube.com/watch?v=1z6EUUl11qI
+https://man7.org/linux/man-pages/man3/exit.3.html
+https://man7.org/linux/man-pages/man1/unset.1p.html
