@@ -41,14 +41,19 @@ void	ft_change_value_env(t_env *env, char *key, char *str)
 // commentary : ft_strdup not secured if it fail you should clear everything including minishell
 int	ft_addnew_key_and_value(t_env *env, char *str)
 {
+	printf("\033[0;32m ft_addnew_key_and_value \033[0m\n");
 	t_env *new_node;
-
+\
 	if (!env || !str)
+	{
+		write(1, "non\n", 4);
 		return (1);
+	}
 	while (env->next)
 		env = env->next;
-	new_node = node_env_creation();
+	new_node = node_env_creation();// to secure
 	new_value_storing(str, new_node);//
+	env->next = new_node;
 	return (0);
 }
 
@@ -77,7 +82,7 @@ void	ft_env_clean(t_env *env)
 // security still to implement on printf
 void	ft_env(t_data *data , t_env *env)
 {
-	while(env->next)
+	while(env)
 	{
 		if (env->key && env->value)
 		{

@@ -34,5 +34,11 @@ int		env_key_copy_check(char *new_key, t_env	*tmp_env);
 void	ft_export(t_cmd *content, t_env *env);
 void 	export_key_value(char *arg, int i , t_env *env);
 int		ft_addnew_key_and_value(t_env *env, char *str);
+void	export_key_only(char *arg, t_env *env);
+void	add_back_env(t_env **head, t_env *new);
+void	export_without_args(t_env *env);
+void	export_printf(t_env *env_tmp);
+int		export_new_value_storing(t_env *env, t_env *new);
+void	add_back_env(t_env **head, t_env *new);
 
 #endif

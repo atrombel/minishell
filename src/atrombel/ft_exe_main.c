@@ -25,8 +25,9 @@ int	ft_exe_main(t_list *head, t_data *data, t_env *env)
 {
 	if (head)
 	{
-		if (ft_builtin_verif((t_cmd *)head->content, data, env, head) == -1)
+		if (ft_builtin_verif((t_cmd *)head->content, data, env, head) == 1)
 			return (-1);
 	}
 	return (0);
+
 }
