@@ -1,6 +1,7 @@
 
 #include "minishell.h"
 
+// ft_strlen of 2 distinct string but return the longest one only
 static int	strlen_max(char *s1, char *s2)
 {
 	int	i;
@@ -18,6 +19,7 @@ static int	strlen_max(char *s1, char *s2)
 		return (i);
 }
 
+// swapp 2 node if a->b then it will become b->a
 static void	ft_swap_env(t_env *a, t_env *b)
 {
 	char	*tmp_key;
@@ -32,6 +34,7 @@ static void	ft_swap_env(t_env *a, t_env *b)
 	b->value = tmp_value;
 }
 
+// sorting of a t_env chained list, herer used for the command export without args
 void	export_only_sorting(t_env *env_tmp)
 {
 	int		swapped;
@@ -54,6 +57,7 @@ void	export_only_sorting(t_env *env_tmp)
 	}
 }
 
+// copy a chained list of struct t_env and return the head of it
 t_env	*export_only_env_copy(t_env *env)
 {
 	t_env *head;
@@ -78,6 +82,7 @@ t_env	*export_only_env_copy(t_env *env)
 
 }
 
+// function that manage operation process when export doesnt have args
 void	export_without_args(t_env *env)
 {
 	t_env *env_tmp;
