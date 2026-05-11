@@ -1,32 +1,28 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: atrombel <atrombel@student.42lausanne.ch>  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/09 13:12:44 by atrombel          #+#    #+#             */
-/*   Updated: 2026/04/09 13:12:52 by atrombel         ###   ###lausanne.ch    */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
+#include "atrombel.h"
+#include "cgasser.h"
 #include <stdlib.h>
 
 int	main(int argc, char **argv, char **envp)
 {
 	char	*user_input;
 	t_list	*cmd_head;
+	t_env	*env;
+	t_data	data;
 
 	user_input = NULL;
 	(void)argc;
 	(void)argv;
+	env = init_env(envp); // path de secour a definir sur pc ecole
 	while (1)
 	{
 		user_input = readline("Waiting for a command...> ");
-		cmd_head = ft_lex_and_parse(user_input, envp);
+		cmd_head = ft_lex_and_parse(user_input, env);
 		ft_print_cmd_list(cmd_head);
+		ft_exe_main(cmd_head, &data, &env);// faire une fonction apres celle ci qui netooye bien tout mes trucs
 		ft_clear_cmds(&cmd_head);
 	}
+	ft_env_clean(env);
 	return (0);
 }
+

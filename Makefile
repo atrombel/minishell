@@ -16,13 +16,16 @@ CGASSER_SRC_DIR = $(SRC_DIR)/$(CGASSER_DIR)
 CGASSER_OBJ_DIR = $(OBJ_DIR)/$(CGASSER_DIR)
 
 
-CFILES = main.c 
+CFILES = main.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(CFILES))
 OBJS = $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
 
 
-ATROMBEL_CFILES =
+ATROMBEL_CFILES = ft_exe_main.c ft_echo.c ft_cd.c env_set_or_copy.c ft_env.c \
+		 ft_pwd.c ft_exit.c ft_export.c ft_export_utils.c export_without_args.c\
+		 ft_unset.c
+
 
 ATROMBEL_SRCS = $(addprefix $(ATROMBEL_SRC_DIR)/, $(ATROMBEL_CFILES))
 ATROMBEL_OBJS = $(addprefix $(ATROMBEL_OBJ_DIR)/, $(ATROMBEL_CFILES:.c=.o))
@@ -61,7 +64,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(LIBFT_A): 
+$(LIBFT_A):
 	$(MAKE) -C $(LIBFT_DIR)
 
 #$(BIN_DIR):
@@ -69,7 +72,7 @@ $(LIBFT_A):
 
 
 
-atrombel: $(ATROMBEL_NAME) 
+atrombel: $(ATROMBEL_NAME)
 
 $(ATROMBEL_NAME): $(ATROMBEL_OBJS) $(LIBFT_A)
 	$(CC) $(CFLAGS) $(ATROMBEL_OBJS) $(LIBFT_A) $(LDLIBS) -o $@
@@ -82,7 +85,7 @@ $(ATROMBEL_OBJ_DIR): $(OBJ_DIR)
 
 
 
-cgasser: $(CGASSER_NAME) 
+cgasser: $(CGASSER_NAME)
 
 $(CGASSER_NAME): $(CGASSER_OBJS) $(LIBFT_A)
 	$(CC) $(CFLAGS) $(CGASSER_OBJS) $(LIBFT_A) $(LDLIBS) -o $@
