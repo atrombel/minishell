@@ -5,6 +5,7 @@
 #include "ft_printf.h"
 
 void	ft_print_cmd(t_cmd *cmd);
+void	ft_print_redir(t_cmd *cmd);
 
 void	ft_print_cmd_list(t_list *head)
 {
@@ -17,31 +18,53 @@ void	ft_print_cmd_list(t_list *head)
 		ft_print_cmd((t_cmd *)temp->content);
 		temp = temp->next;
 	}
+	ft_printf("\n");
 }
 
 void	ft_print_cmd(t_cmd *cmd)
 {
-	int	i;
+	t_list	*temp;
 
-	ft_printf("cmd: %s\tflag:", cmd->cmd);
-	i = 0;
-	if (cmd->flag)
+	temp = NULL;
+	if (cmd->cmd)
+		ft_printf("\ncmd: %s", cmd->cmd);
+	if (cmd->path)
+		ft_printf("\tpath: %s", cmd->path);
+	temp = cmd->flags;
+	if (cmd->flags)
 	{
-		while (cmd->flag[i] != NULL)
+		ft_printf("\tflags:");
+		while (temp != NULL)
 		{
-			ft_printf(" %s,", cmd->flag[i]);
-			i++;
+			ft_printf(" %s,", (char *)temp->content);
+			temp = temp->next;
 		}
 	}
-	ft_printf("\targs:");
-	i = 0;
+	temp = cmd->args;
 	if (cmd->args)
 	{
-		while (cmd->args[i] != NULL)
+		ft_printf("\targs:");
+		while (temp != NULL)
 		{
-			ft_printf(" %s,", cmd->args[i]);
-			i++;
+			ft_printf(" %s,", (char *)temp->content);
+			temp = temp->next;
 		}
 	}
+	if (cmd->redirs)
+		ft_print_redir(cmd);
 	ft_printf("\n");
+}
+
+void	ft_print_redir(t_cmd *cmd)
+{
+	t_list	*temp;
+
+	temp = NULL;
+	temp = cmd->redirs;
+	ft_printf("\nredirections:");
+	while (temp != NULL)
+	{
+		ft_printf("\ntype: %d, filename: %s", ((t_redir *)temp->content)->type, ((t_redir *)temp->content)->arg);
+		temp = temp->next;
+	}
 }

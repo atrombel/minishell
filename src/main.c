@@ -15,19 +15,16 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	char	*usrinpt;
-	t_list	*token_head;
+	char	*user_input;
 	t_list	*cmd_head;
 
-	usrinpt = NULL;
+	user_input = NULL;
 	(void)argc;
 	(void)argv;
 	while (1)
 	{
-		usrinpt = readline("Waiting for a command...> ");
-		token_head = ft_parse(usrinpt, envp);
-		cmd_head = ft_lst_cmd(token_head);
-		ft_lstclear(&token_head, free);
+		user_input = readline("Waiting for a command...> ");
+		cmd_head = ft_lex_and_parse(user_input, envp);
 		ft_print_cmd_list(cmd_head);
 		ft_lstclear(&cmd_head, ft_free_cmd);
 	}

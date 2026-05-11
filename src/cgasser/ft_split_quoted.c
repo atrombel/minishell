@@ -25,14 +25,14 @@ char	**ft_split_quoted(char const *s, char c)
 		return (NULL);
 	res = ft_calloc(sizeof(char *), ft_count_word_quoted(s, c) + 1);
 	if (!res)
-		return (NULL);
+		return (perror(ALLOC_ERR), NULL);
 	i = ft_find_next_word(s, c, i);
 	while (s[i] != '\0')
 	{
 		len_word = ft_strlen_word_quoted(s, c, i);
 		res[j] = ft_calloc(sizeof(char), (len_word + 1));
 		if (!res[j])
-			return (ft_free_array(res), NULL);
+			return (perror(ALLOC_ERR), ft_free_array(res), NULL);
 		ft_strlcpy(res[j], s + i, len_word + 1);
 		i += len_word;
 		i = ft_find_next_word(s, c, i);

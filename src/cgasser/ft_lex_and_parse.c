@@ -1,0 +1,64 @@
+
+#include "minishell.h"
+#include "cgasser.h"
+#include <stdlib.h>
+
+#include "ft_printf.h"
+
+t_list	*ft_lexer(char **array);
+void	ft_token_type(t_token *token);
+
+t_list	*ft_lex_and_parse(char *str, char **envp)
+{
+	char	**array;
+	t_list	*tokens;
+
+	array = NULL;
+	tokens = NULL;
+	array = ft_split_quoted(str, ' ');
+	if (!array)
+		return (NULL);
+	free(str);
+	tokens = ft_lexer(array);
+	if (!tokens)
+		return (NULL);
+	return (ft_parse(tokens, envp));
+}
+
+t_list	*ft_lexer(char **array)
+{
+	t_token	*token;
+	t_list	*tokens;
+	int		i;
+	int		size;
+
+	token = NULL;
+	tokens = NULL;
+	i = 0;
+	while (array[i] != NULL)
+	{
+		size = ft_strlen(array[i]) + 1;
+		token = ft_calloc(sizeof(t_token), 1);
+		if (!token)
+			return (ft_clear_tokens(&tokens), perror(ALLOC_ERR), NULL);
+		token->word = ft_calloc(sizeof(char), size);
+		if (!token->word)
+			return (ft_clear_tokens(&tokens), perror(ALLOC_ERR), NULL);
+		ft_strlcpy(token->word, array[i], size);
+		ft_token_type(token);
+		ft_lstadd_back(&tokens, ft_lstnew(token));
+		i++;
+	}
+	ft_free_array(array);
+	return (tokens);
+}
+
+void	ft_token_type(t_token *token)
+{
+	if (ft_is_redir(token->word))
+		token->type = REDIR;
+	else if (ft_strncmp(token->word, "|", 1) == 0)
+		token->type = PIPE;
+	else
+		token->type = WORD;
+}
