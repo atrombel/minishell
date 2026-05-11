@@ -26,7 +26,7 @@ int	main(int argc, char **argv, char **envp)
 		user_input = readline("Waiting for a command...> ");
 		cmd_head = ft_lex_and_parse(user_input, envp);
 		ft_print_cmd_list(cmd_head);
-		ft_lstclear(&cmd_head, ft_free_cmd);
+		ft_clear_cmds(&cmd_head);
 	}
 	return (0);
 }
