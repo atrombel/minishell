@@ -6,14 +6,14 @@ int	ft_is_flag(t_cmd *cmd, char *word);
 int	ft_fill_flag(t_cmd *cmd, char *word);
 int	ft_fill_arg(t_cmd *cmd, char *word);
 
-int	ft_fill_word(t_cmd *cmd, char *word, char **envp)
+int	ft_fill_word(t_cmd *cmd, char *word, t_env *env)
 {
 	int	status;
 
 	status = 0;
 	if (!cmd->cmd)
 	{
-		if(ft_fill_cmd(cmd, word, envp) != 0)
+		if(ft_fill_cmd(cmd, word, env) != 0)
 			return (1);
 	}
 	else if (ft_is_flag(cmd, word))

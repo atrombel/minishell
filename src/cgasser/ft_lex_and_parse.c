@@ -1,6 +1,7 @@
 
 #include "minishell.h"
 #include "cgasser.h"
+#include "atrombel.h"
 #include <stdlib.h>
 
 #include "ft_printf.h"
@@ -8,7 +9,7 @@
 t_list	*ft_lexer(char **array);
 void	ft_token_type(t_token *token);
 
-t_list	*ft_lex_and_parse(char *str, char **envp)
+t_list	*ft_lex_and_parse(char *str, t_env *env)
 {
 	char	**array;
 	t_list	*tokens;
@@ -22,7 +23,7 @@ t_list	*ft_lex_and_parse(char *str, char **envp)
 	tokens = ft_lexer(array);
 	if (!tokens)
 		return (NULL);
-	return (ft_parse(tokens, envp));
+	return (ft_parse(tokens, env));
 }
 
 t_list	*ft_lexer(char **array)

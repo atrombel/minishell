@@ -1,4 +1,5 @@
 #include "minishell.h"
+#include "atrombel.h"
 
 //function that will check if the function is a builtin, retour code erreur a reflechir
 //function return 0 if builtin else 1

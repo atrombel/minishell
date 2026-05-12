@@ -7,9 +7,9 @@ int	ft_check_cmd(t_cmd *cmd, char *word, char **envp);
 int	ft_check_env(t_cmd *cmd, char *word, char **paths);
 char	**ft_get_envpaths(char **envp);
 
-int	ft_fill_cmd(t_cmd *cmd, char *word, char **envp)
+int	ft_fill_cmd(t_cmd *cmd, char *word, t_env *env)
 {
-	if (ft_check_cmd(cmd, word, envp) == 0)
+	if (ft_check_cmd(cmd, word, env) == 0)
 	{
 		cmd->cmd = ft_calloc(sizeof(char *), (ft_strlen(word) + 1));
 		if (!cmd->cmd)
@@ -21,7 +21,7 @@ int	ft_fill_cmd(t_cmd *cmd, char *word, char **envp)
 	return (1);
 }
 
-int	ft_check_cmd(t_cmd *cmd, char *word, char **envp)
+int	ft_check_cmd(t_cmd *cmd, char *word, t_env *env)
 {
 	if (ft_strncmp(word, "echo", 5) == 0)
 		return (0);
@@ -37,7 +37,7 @@ int	ft_check_cmd(t_cmd *cmd, char *word, char **envp)
 		return (0);
 	else if (ft_strncmp(word, "exit", 5) == 0)
 		return (0);
-	else if (ft_check_env(cmd, word, ft_get_envpaths(envp)) == 0)
+	else if (ft_check_env(cmd, word, ft_get_envpaths(env)) == 0)
 		return (0);
 	return (1);
 }
@@ -69,16 +69,16 @@ int	ft_check_env(t_cmd *cmd, char *word, char **paths)
 	return (1);
 }
 
-char	**ft_get_envpaths(char **envp)
+char	**ft_get_envpaths(t_env *env)
 {
-	int	i;
+	t_env	temp;
 
-	i = 0;
-	while (envp[i] != NULL)
+	temp = env;
+	while (temp != NULL)
 	{
-		if (ft_strncmp("PATH=", envp[i], 5) == 0)
-			return (ft_split(envp[i] + 5, ':'));
-		i++;
+		if (ft_strncmp("PATH=", temp->key, 5) == 0)
+			return (ft_split(temp->value, ':'));
+		temp = temp->next;
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 int	ft_make_and_fill_cmd(t_list *cmd_head, t_list **temp, char **envp);
 t_cmd	*ft_new_cmd();
 
-t_list	*ft_parse(t_list *tokens, char **envp)
+t_list	*ft_parse(t_list *tokens, t_env *env)
 {
 	t_list	*cmds;
 	t_list	*temp;
@@ -19,7 +19,7 @@ t_list	*ft_parse(t_list *tokens, char **envp)
 	temp = tokens;
 	while (temp != NULL)
 	{
-		status = ft_make_and_fill_cmd(cmds, &temp, envp);
+		status = ft_make_and_fill_cmd(cmds, &temp, env);
 		if (status != 0)
 			return (ft_clear_tokens(&tokens), ft_clear_cmds(&cmds), NULL);
 		temp = temp->next;
@@ -28,7 +28,7 @@ t_list	*ft_parse(t_list *tokens, char **envp)
 	return (cmds);
 }
 
-int	ft_make_and_fill_cmd(t_list *cmds, t_list **temp, char **envp)
+int	ft_make_and_fill_cmd(t_list *cmds, t_list **temp, t_env *env)
 {
 	t_cmd	*cmd;
 	t_token	*token;
@@ -48,7 +48,7 @@ int	ft_make_and_fill_cmd(t_list *cmds, t_list **temp, char **envp)
 		ft_lstadd_back(&cmds, ft_lstnew(cmd));
 	}
 	else if (token->type == WORD)
-		status = ft_fill_word(cmd, token->word, envp);
+		status = ft_fill_word(cmd, token->word, env);
 	if (status == 0)
 		return (0);
 	return (1);
