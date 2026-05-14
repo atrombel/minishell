@@ -30,7 +30,7 @@
 
 //	exit - cause normal process termination
 // a voir si rajouter data et code erreur
-void	ft_exit(t_cmd *content, t_env *env)
+void	ft_exit(t_cmd *content, t_env *env, t_list *head)
 {
 	int	nbr;
 	t_list	*args;
@@ -62,6 +62,6 @@ void	ft_exit(t_cmd *content, t_env *env)
 		}
 	}
 	ft_env_clean(env);
-	//ft_clear_cmds(content);  A DEMANDER CYRILLE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	ft_clear_cmds(&head);// A DEMANDER CYRILLE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	exit(nbr);
 }
