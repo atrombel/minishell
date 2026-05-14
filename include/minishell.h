@@ -6,16 +6,16 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-#include "libft.h"
+# include "libft.h"
 
 //redirection types
-#define IN 4
-#define OUT 5
-#define IN_DELIM 6
-#define OUT_APPN 7
+# define IN 4
+# define OUT 5
+# define IN_DELIM 6
+# define OUT_APPN 7
 
 //error types
-#define ALLOC_ERR "Error\nMemory allocation failed\n" 
+# define ALLOC_ERR "Error\nMemory allocation failed\n" 
 
 // I need this struct t_env just for cd and others to work properly,
 // if this wasnt there i wouldnt be able to update the PWD of my working directoy resulting desyncronasation when I call pwd

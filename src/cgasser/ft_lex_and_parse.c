@@ -1,10 +1,6 @@
 
-#include "minishell.h"
 #include "cgasser.h"
-#include "atrombel.h"
 #include <stdlib.h>
-
-#include "ft_printf.h"
 
 t_list	*ft_lexer(char **array);
 void	ft_token_type(t_token *token);

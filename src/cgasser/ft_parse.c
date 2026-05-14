@@ -1,9 +1,8 @@
 
-#include "minishell.h"
-#include "libft.h"
+#include "cgasser.h"
 #include <stdlib.h>
 
-int	ft_make_and_fill_cmd(t_list *cmd_head, t_list **temp, char **envp);
+int	ft_make_and_fill_cmd(t_list *cmd_head, t_list **temp, char **env);
 t_cmd	*ft_new_cmd();
 
 t_list	*ft_parse(t_list *tokens, t_env *env)

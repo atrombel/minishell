@@ -1,5 +1,4 @@
 
-#include "minishell.h"
 #include "cgasser.h"
 
 int	ft_is_flag(t_cmd *cmd, char *word);
