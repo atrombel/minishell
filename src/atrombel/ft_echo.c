@@ -24,6 +24,7 @@ void	ft_echo(t_cmd *cmd, t_data *data)
 	{
 		if (!(cmd->flags && ft_strncmp("-n", ((char *)cmd->flags->content), 3) == 0))// et si on a un turc comme echo -en BEN ECHO CAPTE LES 2 FLAG MAIS SURTOUT LE N DONC FT_STRNCMP NE MARCHERA
 			write(1, "\n", 1);
+		data->last_exit_status = 1;
 		return;
 	}
 	while (cmd->args->next)
