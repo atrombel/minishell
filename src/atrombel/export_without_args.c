@@ -1,5 +1,6 @@
 
 #include "minishell.h"
+#include "atrombel.h"
 
 // ft_strlen of 2 distinct string but return the longest one only
 static int	strlen_max(char *s1, char *s2)

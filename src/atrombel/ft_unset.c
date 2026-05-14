@@ -35,13 +35,15 @@ void	ft_unset(t_cmd *content, t_env **env)
 	int		i;
 	t_env	*prev_node;
 	t_env	*current_node;
+	t_list	*args;
 
+	args = content->args;
 	i = 0;
-	if (!(content->args && content->args[0] && content->args[0][0]))
+	if (args == NULL || (args->content) == NULL || ((char *)args->content)[0] == '\0')
 		return;
-	while (content->args[i])
+	while (args->next)
 	{
-		prev_node = find_prev_node(*env, content->args[i]);
+		prev_node = find_prev_node(*env, ((char *)args->content));
 		if (prev_node == NULL)
 			return ;
 		else if (prev_node->key == (*env)->key)// alors on doit changer head

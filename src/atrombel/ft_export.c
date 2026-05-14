@@ -1,4 +1,5 @@
 #include "minishell.h"
+#include "atrombel.h"
 
 int	export_new_value_storing(t_env *env, t_env *new)
 {
@@ -59,16 +60,18 @@ void	export_with_args(char *arg, t_env *env)
 void	ft_export(t_cmd *content, t_env *env)
 {
 	int		i;
+	t_list	*args;
 
+	args = content->args;
 	i = 0;
-	if (!(content->args && content->args[0] && content->args[0][0]))
+	if (!(args || args->content || !((char *)args->content)[0]))
 	{
 		export_without_args(env);//TO DO
 		return ;
 	}
-	while(content->args[i])
+	while(args->next)
 	{
-		export_with_args(content->args[i], env);
+		export_with_args((char *)args->content, env);
 		i++;
 	}
 }

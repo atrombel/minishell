@@ -17,7 +17,7 @@ void	ft_change_value_env(t_env *env, char *key, char *str);
 void	ft_pwd(t_data *data, t_env *env);
 void	ft_env(t_data *data , t_env *env);
 void	ft_env_clean(t_env *env);
-void	ft_exit(t_cmd *content, t_env *env, t_list *head);
+void	ft_exit(t_cmd *content, t_env *env);
 t_env	*node_env_creation();
 int		new_value_storing(char *envp_i, t_env *new);
 int		env_key_copy_check(char *new_key, t_env	*tmp_env);

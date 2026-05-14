@@ -1,4 +1,5 @@
 #include "minishell.h"
+#include "atrombel.h"
 
 // function that get the value of a key expl PWD is the key and /home/usr/minishell is the value -> warning malloc used
 // maybe adding some error management to this too

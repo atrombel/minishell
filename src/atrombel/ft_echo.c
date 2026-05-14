@@ -23,19 +23,19 @@ void	ft_echo(t_cmd *cmd, t_data *data)
 
 	i = 0;
 	data->last_exit_status = 0;
-	if (!cmd->args || !cmd->args[0])
+	if (!cmd->args || !((char *)cmd->args->content)[0])
 	{
-		if (!(cmd->flag && ft_strncmp("-n", cmd->flag[0], 3) == 0))
+		if (!(cmd->flags && ft_strncmp("-n", ((char *)cmd->flags->content), 3) == 0))// et si on a un turc comme echo -en BEN ECHO CAPTE LES 2 FLAG MAIS SURTOUT LE N DONC FT_STRNCMP NE MARCHERA
 			write(1, "\n", 1);
 		return;
 	}
-	while (cmd->args[i + 1])
+	while (((char *)cmd->args->content)[i + 1])
 	{
-		print_echo(cmd->args[i], data, 0);
+		print_echo(((char *)cmd->args->content), data, 0);
 		i++;
 	}
-	if (cmd->flag && (ft_strncmp("-n", cmd->flag[0], 3) == 0))
-		print_echo(cmd->args[i], data, 1);
+	if (cmd->flags && (ft_strncmp("-n",  ((char *)cmd->flags->content), 3) == 0))
+		print_echo(((char *)cmd->args->content), data, 1);
 	else
-		print_echo(cmd->args[i], data, 2);
+		print_echo(((char *)cmd->args->content), data, 2);
 }

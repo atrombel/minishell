@@ -16,7 +16,7 @@ to compile run make
 lauch minishell with ./minishell
 
 
-
+s
 
 Resources
 ------------------

@@ -1,4 +1,5 @@
 #include "minishell.h"
+#include "atrombel.h"
 
 int	cd_success(t_env *env, char *old_pwd)
 {
@@ -42,16 +43,18 @@ void	ft_chdir(char	*path, t_data *data, t_env *env)
 void	ft_cd(t_cmd *content, t_data *data, t_env *env)
 {
 	char	*path;
+	t_list	*args;
 
-	if (content->args == NULL || content->args[0] == NULL || content->args[0][0] == '\0')
+	args = content->args;
+	if (args == NULL || (args->content) == NULL || ((char *)args->content)[0] == '\0')
 	{
 		path = ft_get_value_env(env,"HOME");
 		ft_chdir(path, data, env);
 		return ;
 	}
 	else
-		path = content->args[0];
-	if (content->args[0] && content->args[1])
+		path = ((char *)args->content);
+	if (((char *)args->content)[0] && ((char *)args->content)[1])
 	{
 		data->last_exit_status = 1;
 
