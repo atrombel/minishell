@@ -19,9 +19,6 @@ void	print_echo(char *arg, t_data *data, int mode)
 // echo - display a line of text
 void	ft_echo(t_cmd *cmd, t_data *data)
 {
-	int	i;
-
-	i = 0;
 	data->last_exit_status = 0;
 	if (!cmd->args || !((char *)cmd->args->content)[0])
 	{
@@ -29,10 +26,10 @@ void	ft_echo(t_cmd *cmd, t_data *data)
 			write(1, "\n", 1);
 		return;
 	}
-	while (((char *)cmd->args->content)[i + 1])
+	while (cmd->args->next)
 	{
 		print_echo(((char *)cmd->args->content), data, 0);
-		i++;
+		cmd->args = cmd->args->next;
 	}
 	if (cmd->flags && (ft_strncmp("-n",  ((char *)cmd->flags->content), 3) == 0))
 		print_echo(((char *)cmd->args->content), data, 1);
