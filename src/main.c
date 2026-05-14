@@ -9,10 +9,16 @@ int	main(int argc, char **argv, char **envp)
 	t_list	*cmd_head;
 	t_env	*env;
 	t_data	data;
+	struct sigaction	sa;
 
+	sa.sa_sigaction = ft_signals;
+	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGQUIT, &sa, NULL);
+	sigaction(SIGINT, &sa, NULL);
 	user_input = NULL;
 	(void)argc;
 	(void)argv;
+	ft_signals();
 	env = init_env(envp); // path de secour a definir sur pc ecole
 	while (1)
 	{

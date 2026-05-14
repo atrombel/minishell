@@ -8,6 +8,10 @@
 
 # include "libft.h"
 
+//global variable to store signal
+volatile sig_atomic_t g_sig = 0;
+
+
 //redirection types
 # define IN 4
 # define OUT 5
