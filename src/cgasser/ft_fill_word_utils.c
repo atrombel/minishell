@@ -2,9 +2,9 @@
 #include "cgasser.h"
 #include "ft_printf.h"
 
-int	ft_check_cmd(t_cmd *cmd, char *word, char **envp);
+int	ft_check_cmd(t_cmd *cmd, char *word, t_env *env);
 int	ft_check_env(t_cmd *cmd, char *word, char **paths);
-char	**ft_get_envpaths(char **envp);
+char	**ft_get_envpaths(t_env *env);
 
 int	ft_fill_cmd(t_cmd *cmd, char *word, t_env *env)
 {
@@ -16,7 +16,7 @@ int	ft_fill_cmd(t_cmd *cmd, char *word, t_env *env)
 		ft_strlcpy(cmd->cmd, word, ft_strlen(word) + 1);
 		return (0);
 	}
-	ft_printr(WRG_CMD, word);
+	ft_printr("Error\nUnvalid command: %s\n", word);
 	return (1);
 }
 
@@ -70,7 +70,7 @@ int	ft_check_env(t_cmd *cmd, char *word, char **paths)
 
 char	**ft_get_envpaths(t_env *env)
 {
-	t_env	temp;
+	t_env	*temp;
 
 	temp = env;
 	while (temp != NULL)

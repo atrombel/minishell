@@ -67,10 +67,9 @@ int	ft_var_name_len(char *str, int i)
 //copy the value from the node returned by ft_get_value
 char	*ft_cpy_value(char *str, t_env *env, int i, int var_name_len)
 {
-	t_env	temp;
+	t_env	*temp;
 	char	*value;
 	int		value_len;
-	int		j;
 
 	temp = NULL;
 	temp = ft_get_value(str, env, i, var_name_len);
@@ -86,7 +85,7 @@ char	*ft_cpy_value(char *str, t_env *env, int i, int var_name_len)
 //return a pointer to the node, NULL otherwise
 t_env	*ft_get_value(char *str, t_env *env, int i, int var_name_len)
 {
-	t_env	temp;
+	t_env	*temp;
 	char	*var_name;
 
 	temp = NULL;
