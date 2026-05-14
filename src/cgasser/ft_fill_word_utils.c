@@ -75,7 +75,7 @@ char	**ft_get_envpaths(t_env *env)
 	temp = env;
 	while (temp != NULL)
 	{
-		if (ft_strncmp("PATH=", temp->key, 5) == 0)
+		if (ft_strncmp("PATH", temp->key, 5) == 0)
 			return (ft_split(temp->value, ':'));
 		temp = temp->next;
 	}
