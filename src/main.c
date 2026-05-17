@@ -2,6 +2,10 @@
 #include "atrombel.h"
 #include "cgasser.h"
 #include <stdlib.h>
+#include "ft_printf.h"
+
+//global variable to store signal
+volatile sig_atomic_t g_sig = 0;
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -11,24 +15,34 @@ int	main(int argc, char **argv, char **envp)
 	t_data	data;
 	struct sigaction	sa;
 
-	sa.sa_sigaction = ft_signals;
-	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGQUIT, &sa, NULL);
-	sigaction(SIGINT, &sa, NULL);
-	user_input = NULL;
 	(void)argc;
 	(void)argv;
-	ft_signals();
-	env = init_env(envp); // path de secour a definir sur pc ecole
+	user_input = NULL;
+	rl_catch_signals = 0;
+	sa.sa_handler = ft_handler;
+	sa.sa_flags = 0;
+	if (sigemptyset(&sa.sa_mask) < 0)
+		return (perror("sigset error\n"), 1);
+	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGQUIT, &sa, NULL);
+	env = init_env(envp);
 	while (1)
 	{
 		user_input = readline("Waiting for a command...> ");
+		if (user_input == NULL)
+			return (rl_clear_history(), 0);
+		if (user_input[0] != '\0')
+			add_history(user_input);
 		cmd_head = ft_lex_and_parse(user_input, env);
 		ft_print_cmd_list(cmd_head);
-		ft_exe_main(cmd_head, &data, &env);// faire une fonction apres celle ci qui netooye bien tout mes trucs
+		ft_exe_main(cmd_head, &data, &env);
 		ft_clear_cmds(&cmd_head);
 	}
-	ft_env_clean(env);
+	ft_env_clean(env); //ligne non executée
 	return (0);
 }
+
+
+// à mettre dans ft_exit: rl_clear_history()
+// last exit status: g_sig?
 

@@ -3,6 +3,10 @@
 # define CGASSER_H
 
 # include "minishell.h"
+# include <signal.h>
+
+//global variable to store signals
+extern volatile sig_atomic_t g_sig;
 
 //token types
 #define WORD 1
@@ -32,5 +36,7 @@ void	ft_clear_cmds(t_list **cmds);
 void	ft_clear_tokens(t_list **tokens);
 
 char	*ft_expand_var(char *str, t_env *env);
+
+void	ft_handler(int sig);
 
 #endif
