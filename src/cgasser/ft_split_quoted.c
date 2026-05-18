@@ -21,7 +21,7 @@ char	**ft_split_quoted(char const *s, char c)
 
 	j = 0;
 	i = 0;
-	if (!s)
+	if (!s || *s == '\0')
 		return (NULL);
 	res = ft_calloc(sizeof(char *), ft_count_word_quoted(s, c) + 1);
 	if (!res)

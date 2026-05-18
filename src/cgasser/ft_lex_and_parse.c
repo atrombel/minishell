@@ -14,9 +14,9 @@ t_list	*ft_lex_and_parse(char *str, t_env *env)
 	array = NULL;
 	tokens = NULL;
 	array = ft_split_quoted(str, ' ');
+	free(str);
 	if (!array)
 		return (NULL);
-	free(str);
 	if (ft_strncmp(array[0], "|", 1) == 0)
 		return (ft_printr("syntax error near unexpected token `|'\n"),\
 		ft_free_array(array), NULL);

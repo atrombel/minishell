@@ -19,6 +19,9 @@ typedef struct s_token //token
 	char	*word; //word
 }	t_token;
 
+void	ft_history(char *user_input);
+int	ft_signals(void);
+
 char	**ft_split_quoted(char const *s, char c);
 
 t_list	*ft_lex_and_parse(char *str, t_env *env);
@@ -37,6 +40,5 @@ void	ft_clear_tokens(t_list **tokens);
 
 char	*ft_expand_var(char *str, t_env *env);
 
-void	ft_handler(int sig);
 
 #endif
