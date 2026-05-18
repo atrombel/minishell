@@ -9,7 +9,7 @@ void	export_printf(t_env *env_tmp)
 		if (env_tmp->key )
 		{
 			if (!env_tmp->value)
-				printf("declare -x %s\n", env_tmp->key); // securiser le printf ?
+				printf("declare -x %s=\"\"\n", env_tmp->key); // securiser le printf ?
 			else
 				printf("declare -x %s=\"%s\"\n", env_tmp->key, env_tmp->value); // securiser le printf
 		}

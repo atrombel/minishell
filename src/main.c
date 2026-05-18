@@ -21,16 +21,17 @@ int	main(int argc, char **argv, char **envp)
 	env = init_env(envp);
 	while (1)
 	{
-		user_input = readline("Waiting for a command...> ");
-		if (!user_input)
-			return (rl_clear_history(), 0);
+		user_input = ft_readline(env);
+		if (user_input == NULL)
+			break;
 		ft_history(user_input);
 		cmd_head = ft_lex_and_parse(user_input, env);
 		ft_print_cmd_list(cmd_head);
 		ft_exe_main(cmd_head, &data, &env);
 		ft_clear_cmds(&cmd_head);
 	}
-	ft_env_clean(env); //ligne non executée
+	rl_clear_history();
+	ft_env_clean(env);
 	return (0);
 }
 
