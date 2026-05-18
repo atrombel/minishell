@@ -5,7 +5,6 @@
 //function return 0 if builtin else 1
 int ft_builtin_verif(t_cmd *content, t_data *data, t_env **env, t_list *head)
 {
-
 	if (ft_strncmp("echo", content->cmd, 5) == 0)
 		return (ft_echo(content, data), 0);
 	if (ft_strncmp("cd", content->cmd, 3) == 0)
@@ -24,13 +23,12 @@ int ft_builtin_verif(t_cmd *content, t_data *data, t_env **env, t_list *head)
 }
 
 // main function that will sort and  organise the operation between the execution processes
-int	ft_exe_main(t_list *head, t_data *data, t_env **env)
+int	ft_exe_main(t_list *cmd_head, t_data *data, t_env **env)
 {
-	if (head)
+	if (cmd_head)
 	{
-		if (ft_builtin_verif((t_cmd *)head->content, data, env, head) == 1)
+		if (ft_builtin_verif((t_cmd *)cmd_head->content, data, env, cmd_head) == 1)
 			return (-1);
 	}
 	return (0);
-
 }

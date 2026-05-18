@@ -1,7 +1,7 @@
 #ifndef ATROMBEL_H
 # define ATROMBEL_H
 # include <limits.h> //verifier si jai le droit dutiliser
-
+# include <errno.h> // for errno uses
 // struct that contain usefull data to see if really that usefull long term
 typedef struct s_data
 {
@@ -31,5 +31,6 @@ void	export_printf(t_env *env_tmp);
 int		export_new_value_storing(t_env *env, t_env *new);
 void	add_back_env(t_env **head, t_env *new);
 void	ft_unset(t_cmd *content, t_env **env);
+char	*ft_readline(t_env *env);
 
 #endif

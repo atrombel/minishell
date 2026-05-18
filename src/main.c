@@ -22,7 +22,9 @@ int	main(int argc, char **argv, char **envp)
 	env = init_env(envp); // path de secour a definir sur pc ecole
 	while (1)
 	{
-		user_input = readline("Waiting for a command...> ");
+		user_input = ft_readline(env);
+		if (user_input == NULL)
+			break ;
 		cmd_head = ft_lex_and_parse(user_input, env);
 		ft_print_cmd_list(cmd_head);
 		ft_exe_main(cmd_head, &data, &env);// faire une fonction apres celle ci qui netooye bien tout mes trucs
