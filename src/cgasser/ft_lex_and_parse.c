@@ -1,6 +1,7 @@
 
 #include "cgasser.h"
 #include <stdlib.h>
+#include "ft_printf.h"
 
 t_list	*ft_lexer(char **array);
 void	ft_token_type(t_token *token);
@@ -16,6 +17,9 @@ t_list	*ft_lex_and_parse(char *str, t_env *env)
 	if (!array)
 		return (NULL);
 	free(str);
+	if (ft_strncmp(array[0], "|", 1) == 0)
+		return (ft_printr("syntax error near unexpected token `|'\n"),\
+		ft_free_array(array), NULL);
 	tokens = ft_lexer(array);
 	if (!tokens)
 		return (NULL);
