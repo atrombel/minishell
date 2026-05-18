@@ -29,7 +29,9 @@ void	export_with_args(char *arg, t_env *env)
 	int		i;
 
 	i = 0;
-	// printf("arg = %s\n", arg);
+
+	//write(1, "1\n", 2);
+	//printf("arg = %s\n", arg);
 	if (ft_isalpha(arg[0]) == 0 && arg[0] != '_')// check du premier char
 	{
 		if (arg[0] == '\0')
@@ -64,14 +66,17 @@ void	ft_export(t_cmd *content, t_env *env)
 
 	args = content->args;
 	i = 0;
-	if (!(args || args->content || !((char *)args->content)[0]))
+	if (!(args && args->content && ((char *)args->content)[0]))
 	{
 		export_without_args(env);//TO DO
 		return ;
 	}
-	while(args->next)
+	//write(1, "0.2\n", 4);
+	while(args)
 	{
 		export_with_args((char *)args->content, env);
 		i++;
+		args = args->next;
 	}
+	//write(1, "F\n", 2);
 }

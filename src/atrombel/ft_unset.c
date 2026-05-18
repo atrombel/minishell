@@ -39,9 +39,9 @@ void	ft_unset(t_cmd *content, t_env **env)
 
 	args = content->args;
 	i = 0;
-	if (args == NULL || (args->content) == NULL || ((char *)args->content)[0] == '\0')
+	if (!(args && args->content && ((char *)args->content)[0]))
 		return;
-	while (args->next)
+	while (args)
 	{
 		prev_node = find_prev_node(*env, ((char *)args->content));
 		if (prev_node == NULL)
@@ -58,5 +58,6 @@ void	ft_unset(t_cmd *content, t_env **env)
 			free_node_env(current_node);
 		}
 		i++;
+		args = args->next;
 	}
 }
