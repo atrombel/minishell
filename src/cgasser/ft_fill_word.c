@@ -10,7 +10,7 @@ int	ft_fill_word(t_cmd *cmd, char *word, t_env *env)
 	int	status;
 
 	status = 0;
-	if (!cmd->cmd)
+	if (!cmd->cmd && !cmd->path)
 	{
 		if(ft_fill_cmd(cmd, word, env) != 0)
 			return (1);

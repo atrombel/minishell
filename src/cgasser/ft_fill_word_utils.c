@@ -5,6 +5,7 @@
 int	ft_check_cmd(t_cmd *cmd, char *word, t_env *env);
 int	ft_check_env(t_cmd *cmd, char *word, char **paths);
 char	**ft_get_envpaths(t_env *env);
+int	ft_is_word_path(t_cmd *cmd, char *word);
 
 int	ft_fill_cmd(t_cmd *cmd, char *word, t_env *env)
 {
@@ -16,6 +17,8 @@ int	ft_fill_cmd(t_cmd *cmd, char *word, t_env *env)
 		ft_strlcpy(cmd->cmd, word, ft_strlen(word) + 1);
 		return (0);
 	}
+	if (ft_is_word_path(cmd, word) == 1)
+		return (0);
 	ft_printr("Error\nUnvalid command: %s\n", word);
 	return (1);
 }
@@ -80,4 +83,19 @@ char	**ft_get_envpaths(t_env *env)
 		temp = temp->next;
 	}
 	return (NULL);
+}
+
+int	ft_is_word_path(t_cmd *cmd, char *word)
+{
+	char	*path;
+
+	path = NULL;
+	if (access(word, X_OK) == 0)
+	{
+		path = ft_calloc(sizeof(char), ft_strlen(word) + 1);
+		ft_strlcpy(path, word, ft_strlen(word) + 1);
+		cmd->path = path;
+		return (1);
+	}
+	return (0);
 }
