@@ -88,13 +88,25 @@ char	**ft_get_envpaths(t_env *env)
 int	ft_is_word_path(t_cmd *cmd, char *word)
 {
 	char	*path;
+	char	*cmd_name;
+	char	*cmd_ptr;
+	int		size;
 
 	path = NULL;
+	cmd_name = NULL;
+	size = ft_strlen(word);
+	cmd_ptr = word + size;
 	if (access(word, X_OK) == 0)
 	{
-		path = ft_calloc(sizeof(char), ft_strlen(word) + 1);
-		ft_strlcpy(path, word, ft_strlen(word) + 1);
+		path = ft_calloc(sizeof(char), size + 1);
+		ft_strlcpy(path, word, size + 1);
 		cmd->path = path;
+		while (*cmd_ptr != '/')
+			cmd_ptr--;
+		cmd_ptr++;
+		cmd_name = ft_calloc(sizeof(char), ft_strlen(cmd_ptr) + 1);
+		ft_strlcpy(cmd_name, cmd_ptr, ft_strlen(cmd_ptr) + 1);
+		cmd->cmd = cmd_name;
 		return (1);
 	}
 	return (0);
