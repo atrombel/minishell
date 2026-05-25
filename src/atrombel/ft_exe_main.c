@@ -3,7 +3,28 @@
 
 //function that will check if the function is a builtin, retour code erreur a reflechir
 //function return 0 if builtin else 1
-int ft_builtin_verif(t_cmd *content, t_data *data, t_env **env, t_list *head)
+int ft_builtin_verif(t_cmd *content)
+{
+	if (!content || !content->cmd)
+		return (0);
+	if (ft_strncmp("echo", content->cmd, 5) == 0)
+		return (0);
+	if (ft_strncmp("cd", content->cmd, 3) == 0)
+		return (0);
+	if (ft_strncmp("pwd", content->cmd, 4) == 0)
+		return (0);
+	if (ft_strncmp("env", content->cmd, 4) == 0)
+		return (0);
+	if (ft_strncmp("exit", content->cmd, 5) == 0)
+		return (0);
+	if (ft_strncmp("export", content->cmd, 7) == 0)
+		return (0);
+	if (ft_strncmp("unset", content->cmd, 6) == 0)
+		return (0);
+	return (1);
+}
+
+int	ft_execute_builtin(t_cmd *content, t_data *data, t_env **env, t_list *head)
 {
 	if (!content || !content->cmd)
 		return (0);
@@ -29,9 +50,12 @@ int	ft_exe_main(t_list *cmd_head, t_data *data, t_env **env)
 {
 	if (cmd_head)
 	{
-		if (ft_builtin_verif((t_cmd *)cmd_head->content, data, env, cmd_head) == 1)
+		(void)data;
+		(void)env;
+		if (ft_builtin_verif((t_cmd *)cmd_head->content) == 1)
 			return(1);
-			//general_cmd(cmd_head, data, env);
+		// else
+		// 	general_cmd(cmd_head, data, env);
 	}
 	return (0);
 }

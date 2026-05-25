@@ -31,5 +31,6 @@ void	ft_exit(t_cmd *content, t_env *env, t_list *head)
 	}
 	ft_env_clean(env);
 	ft_clear_cmds(&head);// A DEMANDER CYRILLE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	rl_clear_history();
 	exit(nbr);
 }
