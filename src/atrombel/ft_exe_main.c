@@ -1,61 +1,43 @@
+
 #include "minishell.h"
 #include "atrombel.h"
 
-//function that will check if the function is a builtin, retour code erreur a reflechir
-//function return 0 if builtin else 1
-int ft_builtin_verif(t_cmd *content)
+void	multiple_cmd(t_list *cmd_head, t_data *data, t_env **env)
 {
-	if (!content || !content->cmd)
-		return (0);
-	if (ft_strncmp("echo", content->cmd, 5) == 0)
-		return (0);
-	if (ft_strncmp("cd", content->cmd, 3) == 0)
-		return (0);
-	if (ft_strncmp("pwd", content->cmd, 4) == 0)
-		return (0);
-	if (ft_strncmp("env", content->cmd, 4) == 0)
-		return (0);
-	if (ft_strncmp("exit", content->cmd, 5) == 0)
-		return (0);
-	if (ft_strncmp("export", content->cmd, 7) == 0)
-		return (0);
-	if (ft_strncmp("unset", content->cmd, 6) == 0)
-		return (0);
-	return (1);
+	while(cmd_head)
+	{
+
+
+
+
+		cmd_head = cmd_head->next;
+	}
 }
 
-int	ft_execute_builtin(t_cmd *content, t_data *data, t_env **env, t_list *head)
+
+void	solo_cmd(t_list *cmd_head, t_data *data, t_env **env)
 {
-	if (!content || !content->cmd)
-		return (0);
-	if (ft_strncmp("echo", content->cmd, 5) == 0)
-		return (ft_echo(content, data), 0);
-	if (ft_strncmp("cd", content->cmd, 3) == 0)
-		return (ft_cd(content, data, *env), 0);
-	if (ft_strncmp("pwd", content->cmd, 4) == 0)
-		return (ft_pwd(data, *env), 0);
-	if (ft_strncmp("env", content->cmd, 4) == 0)
-		return (ft_env(data, *env), 0);
-	if (ft_strncmp("exit", content->cmd, 5) == 0)
-		return (ft_exit(content, *env, head), 0);
-	if (ft_strncmp("export", content->cmd, 7) == 0)
-		return (ft_export(content, *env), 0);
-	if (ft_strncmp("unset", content->cmd, 6) == 0)
-		return (ft_unset(content, env), 0);
-	return (1);
+	if (ft_builtin_verif((t_cmd *)cmd_head->content) == 0)// is builting if 0
+	{
+		if (redir_check)
+		{
+			ft_redir_apply(t_list *cmd_head);
+			ft_execute_builtin((t_cmd *)cmd_head->content, data, env, head);
+			fd_table_restoration(t_list *cmd_head);
+		}
+		else
+			ft_execute_builtin((t_cmd *)cmd_head->content, data, env, head);
+	}
+	else
+		solo_cmd_not_builtin()
 }
 
 // main function that will sort and  organise the operation between the execution processes
-int	ft_exe_main(t_list *cmd_head, t_data *data, t_env **env)
+void	ft_exe_main(t_list *cmd_head, t_data *data, t_env **env)
 {
-	if (cmd_head)
-	{
-		(void)data;
-		(void)env;
-		if (ft_builtin_verif((t_cmd *)cmd_head->content) == 1)
-			return(1);
-		// else
-		// 	general_cmd(cmd_head, data, env);
-	}
-	return (0);
+	heredoc_check_init(cmd_head, data);
+	if(cmd_head->next)
+		multiple_cmd(cmd_head, data, env);
+	else
+		solo_cmd(cmd_head, data, env);
 }
