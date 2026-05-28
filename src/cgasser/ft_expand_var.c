@@ -15,9 +15,14 @@ char	*ft_expand_var(char *str, t_env *env)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (NULL);
+	if (str[0] == 39 || str[ft_strlen(str) - 1] == 39)
+		return (str);
 	while (str[i] != '\0')
 	{
-		if (str[i] == '$' && str[i + 1] != ' ' && str[i + 1] != '"')
+		if (str[i] == '$' && str[i + 1] != ' ' && !ft_isquote(str[i + 1]) \
+			&& str[i + 1] != '?' && str[i + 1] != '\0')
 			str = ft_put_var(str, env, i);
 		else
 			i++;
@@ -56,7 +61,7 @@ int	ft_var_name_len(char *str, int i)
 	int	len;
 
 	len = 0;
-	while (str[i] != '"' && str[i] != ' ')
+	while (!ft_isquote(str[i]) && str[i] != ' ' && str[i] != '\0')
 	{
 		len++;
 		i++;

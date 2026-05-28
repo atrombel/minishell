@@ -38,6 +38,7 @@ void	ft_print_cmd_list(t_list *head);
 void	ft_clear_cmds(t_list **cmds);
 void	ft_clear_tokens(t_list **tokens);
 
+char	*ft_trim_quotes(char *str);
 char	*ft_expand_var(char *str, t_env *env);
 
 
