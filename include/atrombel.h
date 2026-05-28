@@ -3,10 +3,6 @@
 # include <limits.h> //verifier si jai le droit dutiliser
 # include <errno.h> // for errno uses
 // struct that contain usefull data to see if really that usefull long term
-typedef struct s_data
-{
-	int last_exit_status;
-} t_data;
 
 int		ft_exe_main(t_list *head, t_data *data, t_env **env);
 void	ft_echo(t_cmd *cmd, t_data *data);
@@ -32,5 +28,19 @@ int		export_new_value_storing(t_env *env, t_env *new);
 void	add_back_env(t_env **head, t_env *new);
 void	ft_unset(t_cmd *content, t_env **env);
 char	*ft_readline(t_env *env);
+int		ft_builtin_verif(t_cmd *content);
+int		ft_execute_builtin(t_cmd *content, t_data *data, t_env **env, t_list *head);
+void	error_print(char *str);
+
+//data init
+void	data_init(	t_data	data);
+
+// heredocs functions
+
+//redirection function
+void	stdin_redir(t_redir	*redir,  t_data *data, int *error);
+void	stdin_redir(t_redir	*redir,  t_data *data, int *error);
+void	stdout_appnd(t_redir	*redir,  t_data *data, int *error);
+void	heredoc_reddir_apply(t_redir	*redir,  t_data *data, int *error);
 
 #endif

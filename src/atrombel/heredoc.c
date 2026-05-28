@@ -5,12 +5,12 @@
 //fonctio qui cree le heredoc
 void	heredoc_tmp_init(t_cmd	cmd, t_list *redir, t_data *data)
 {
-		str = ft_strjoin("heredoc_tmp", ft_itoa(data->last_hdtmp_nbr));
-		//if (!str)
-		redir->hd_tmp_fd = open(str, O_CREAT | O_WRONLY, 0644);// a secriser le retour
-		// if (redirs->hd_tmp_fd == -1)
-		redir->hd_filename = str;
-		free(str);
+	str = ft_strjoin("heredoc_tmp", ft_itoa(data->last_hdtmp_nbr));
+	//if (!str)
+	redir->hd_tmp_fd = open(str, O_CREAT | O_WRONLY, 0644);// a secriser le retour
+	//if (redirs->hd_tmp_fd == -1)
+	redir->hd_filename = str;
+	free(str);
 }
 
 // fonction qui rempli le heredoc
@@ -31,6 +31,7 @@ void	open_heredoc(t_cmd	cmd, t_redir *redir, t_data *data, t_list *cmd_head)
 			heredoc_deletion(cmd_head, data);
 			return ;
 		}
+		// checker lhistorique.
 		if (ft_strncmp(input, redir->arg, len + 1)); //limiteur par inclu dans le resultat final expl  cat << xd > lslssl
 			return ;
 		ft_putstr_fd(input, redir->hd_filename);

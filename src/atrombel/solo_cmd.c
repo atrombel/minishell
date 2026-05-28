@@ -3,14 +3,14 @@
 #include "atrombel.h"
 
 
-void	solo_cmd_not_builtin();
-{
+// void	solo_cmd_not_builtin();
+// {
 
 
 
 
 
-}
+// }
 
 
 

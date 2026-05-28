@@ -20,6 +20,18 @@
 // I need this struct t_env just for cd and others to work properly,
 // if this wasnt there i wouldnt be able to update the PWD of my working directoy resulting desyncronasation when I call pwd
 // Lors de la conversion de la liste en char envp pour fork, extraire que les variables de $type == 0$.
+
+typedef struct s_data// prblmt que je vais devoir le mettre en init pour chaque argument donc data sera seuelemt pour last exist status'
+{
+	int last_exit_status;
+	int	pipe_fd[2];
+	int	infile;
+	int	outfile;
+	int	stdin_save;
+	int stdout_save;
+	int	tmp_fd;
+} t_data;
+
 typedef struct s_env
 {
 	char			*key;	// "PWD"
@@ -41,7 +53,7 @@ typedef struct s_redir //redirection
 	int		type; //type of redirection (cf macro above)
 	char	*arg; //filename or delimitor
 	char	*hd_filename; //heredoc temporary file created to store the input of the user associated to a command
+	int		hd_tmp_fd; // le fd du heredoc associe
 }	t_redir;
-
 
 #endif
