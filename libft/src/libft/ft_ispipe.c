@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isquote.c                                       :+:      :+:    :+:   */
+/*   ft_ispipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgasser <cgasser@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/28 12:25:24 by cgasser           #+#    #+#             */
-/*   Updated: 2026/05/28 16:42:20 by cgasser          ###   ####lausanne.ch   */
+/*   Created: 2026/05/28 16:38:23 by cgasser           #+#    #+#             */
+/*   Updated: 2026/05/28 16:41:42 by cgasser          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isquote(int c)
+int	ft_ispipe(int c)
 {
-	if (c != 39 && c != 34)
+	if (c != 124)
 		return (0);
 	return (1);
 }
