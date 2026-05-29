@@ -3,10 +3,6 @@
 # define CGASSER_H
 
 # include "minishell.h"
-# include <signal.h>
-
-//global variable to store signals
-extern volatile sig_atomic_t g_sig;
 
 //token types
 #define WORD 1

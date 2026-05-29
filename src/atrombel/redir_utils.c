@@ -5,11 +5,10 @@
 
 // A SECURISER TOUT LES DUP2
 
-
-
 //expl cat < po.c
 void	stdin_redir(t_redir *redir, t_data *data, int *error)
 {
+	 // a implemetner le retour erreur data
 	data->infile = open(redir->arg, O_RDONLY);
 	if (data->infile < 0)
 	{
@@ -22,8 +21,9 @@ void	stdin_redir(t_redir *redir, t_data *data, int *error)
 	close(data->infile);
 }
 
-void	stdout_redir(t_redir	*redir, t_data *data, int *error)
+void	stdout_redir(t_redir *redir, t_data *data, int *error)
 {
+	// a implemetner le retour erreur data
 	data->outfile = open(redir->arg, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (data->outfile < 0)
 	{
@@ -38,6 +38,7 @@ void	stdout_redir(t_redir	*redir, t_data *data, int *error)
 
 void	stdout_appnd(t_redir *redir, t_data *data, int *error)
 {
+	// a implemetner le retour erreur data
 	data->outfile = open(redir->arg, O_CREAT | O_RDWR | O_APPEND, 0644);
 	if (data->outfile < 0)
 	{
@@ -52,6 +53,8 @@ void	stdout_appnd(t_redir *redir, t_data *data, int *error)
 
 void	heredoc_reddir_apply(t_redir *redir, t_data *data, int *error)
 {
+	(void)error; //  a voir  si je limplemente par apres
+	(void)data;// a implementr retour erreur data
 	dup2(redir->hd_tmp_fd, 1);// heredoc deja open. // a securiser
 	close(redir->hd_tmp_fd); // faudra delete a la fin les heredocs !!!!!!!!!!!!!!!!
 }

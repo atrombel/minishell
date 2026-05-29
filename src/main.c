@@ -1,7 +1,6 @@
 #include "minishell.h"
 #include "atrombel.h"
 #include "cgasser.h"
-#include <stdlib.h> // a mettre dans minishel.h
 
 //global variable to store signal
 volatile sig_atomic_t g_sig = 0;
@@ -19,7 +18,7 @@ int	main(int argc, char **argv, char **envp)
 	if (ft_signals() != 0)
 		return (1);
 	env = init_env(envp);
-	data_init(data);
+	data_init(&data);
 	while (1)
 	{
 		user_input = ft_readline(env);

@@ -17,30 +17,30 @@ void	charstar_env_clean(char **dest)
 }
 
 // create a char ** taht is a conversion of t_env in env  for exceve
-int	nbr_of_env_element(t_env *env_tmp)
+int	nbr_of_env_element(t_env *env)
 {
 	int	nbr;
 
 	nbr = 0;
-	while(env_tmp)
+	while(env)
 	{
-		if (env_tmp->key && env_tmp->value)
+		if (env->key && env->value)
 			nbr++;
-		env_tmp = env_tmp->next;
+		env = env->next;
 	}
 	return (nbr);
 }
 
 ///// Malloc, do not forget to free
-char	*join_key_value(t_env *env_tmp)
+char	*join_key_value(t_env *env)
 {
 	char *dest;
 	char *tmp;
 
-	tmp = ft_strjoin(env_tmp->key, "=");
+	tmp = ft_strjoin(env->key, "=");
 	if (!tmp)
 		return NULL;
-	dest = ft_strjoin(tmp, env_tmp->value);
+	dest = ft_strjoin(tmp, env->value);
 	free(tmp);
 	if (!dest)
 		return NULL;
@@ -48,16 +48,16 @@ char	*join_key_value(t_env *env_tmp)
 }
 
 
-int	ft_env_storing(int nbr, char **dest, t_env *env_tmp)
+int	ft_env_storing(int nbr, char **dest, t_env *env)
 {
 	int	i;
 
 	i = 0;
-	while (env_tmp && (i < nbr))
+	while (env && (i < nbr))
 	{
-		if (env_tmp->key && env_tmp->value)
+		if (env->key && env->value)
 		{
-			dest[i] = join_key_value(env_tmp);
+			dest[i] = join_key_value(env);
 			if (!dest[i])
 			{
 				charstar_env_clean(dest);
@@ -65,7 +65,7 @@ int	ft_env_storing(int nbr, char **dest, t_env *env_tmp)
 			}
 			i++;
 		}
-		env_tmp = env_tmp->next;
+		env = env->next;
 
 	}
 	dest[i] = NULL;
@@ -73,21 +73,19 @@ int	ft_env_storing(int nbr, char **dest, t_env *env_tmp)
 }
 
 
-char	**env_to_charstar_reconversion(t_env *env)
+char **env_to_charstar_reconversion(t_env *env)
 {
 	int		nbr;
 	char	**dest;
-	t_env	*env_tmp;
 
-	env_tmp = env;
-	nbr = nbr_of_env_element(env_tmp);
-	dest = malloc(sizeof(char *) * (nbr + 1));// a secu
+	nbr = nbr_of_env_element(env);
+	dest = malloc(sizeof(char *) * (nbr + 1));
 	if (!dest)
 	{
-		error_print("ERROR");
+	error_print("ERROR");
 		return (NULL);
 	}
-	if (ft_env_storing(nbr, dest, env_tmp) == 1)
+	if (ft_env_storing(nbr, dest, env) == 1)
 		return (NULL);
 	return (dest);
 }

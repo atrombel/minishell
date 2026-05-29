@@ -2,9 +2,9 @@
 # define ATROMBEL_H
 # include <limits.h> //verifier si jai le droit dutiliser
 # include <errno.h> // for errno uses
-// struct that contain usefull data to see if really that usefull long term
 
-int		ft_exe_main(t_list *head, t_data *data, t_env **env);
+
+void	ft_exe_main(t_list *cmd_head, t_data *data, t_env **env);
 void	ft_echo(t_cmd *cmd, t_data *data);
 void	ft_cd(t_cmd *content,  t_data *data, t_env *env);
 t_env	*init_env(char **envp);
@@ -25,7 +25,6 @@ void	add_back_env(t_env **head, t_env *new);
 void	export_without_args(t_env *env);
 void	export_printf(t_env *env_tmp);
 int		export_new_value_storing(t_env *env, t_env *new);
-void	add_back_env(t_env **head, t_env *new);
 void	ft_unset(t_cmd *content, t_env **env);
 char	*ft_readline(t_env *env);
 int		ft_builtin_verif(t_cmd *content);
@@ -33,14 +32,33 @@ int		ft_execute_builtin(t_cmd *content, t_data *data, t_env **env, t_list *head)
 void	error_print(char *str);
 
 //data init
-void	data_init(	t_data	data);
+void	data_init(t_data	*data);
 
 // heredocs functions
+void	heredoc_check_init(t_list *cmd_head, t_data *data);
+void	heredoc_close(t_redir *redir);
+void	herdoc_finder( t_list *cmd_head);
+void	heredoc_tmp_deletion(t_list *cmd_head);
 
 //redirection function
 void	stdin_redir(t_redir	*redir,  t_data *data, int *error);
 void	stdin_redir(t_redir	*redir,  t_data *data, int *error);
 void	stdout_appnd(t_redir	*redir,  t_data *data, int *error);
 void	heredoc_reddir_apply(t_redir	*redir,  t_data *data, int *error);
+
+//cmd with no pipe functions
+void	solo_cmd(t_list *cmd_head, t_data *data, t_env **env);
+void	stdin_redir(t_redir *redir, t_data *data, int *error);
+void	stdout_redir(t_redir *redir, t_data *data, int *error);
+void	stdout_appnd(t_redir *redir, t_data *data, int *error);
+void	heredoc_reddir_apply(t_redir *redir, t_data *data, int *error);
+void	fd_redir_restoration_close(t_data *data);
+void	solo_builtin(t_list *cmd_head, t_data *data, t_env **env);
+void	solo_cmd_not_builtin(t_list *cmd_head, t_data *data, t_env **env);
+
+// function that reconvert env to his original char ** form
+char	**env_to_charstar_reconversion(t_env *env);
+
+
 
 #endif

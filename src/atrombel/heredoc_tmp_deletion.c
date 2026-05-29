@@ -2,11 +2,9 @@
 #include "minishell.h"
 #include "atrombel.h"
 
-void	heredoc_close(t_list *cmd_head, t_list *redirs;)
+void	heredoc_close(t_redir *redir)
 {
-	t_redir *redir;
 
-	redir = redirs->content;
 	if (redir->type == IN_DELIM)
 	{
 		if (redir->hd_filename)
@@ -19,16 +17,20 @@ void	heredoc_close(t_list *cmd_head, t_list *redirs;)
 	}
 }
 
-// function that find
-char	*herdoc_finder( t_list *cmd_head)
+// function that find if there is a heredoc associated to the function
+void	heredoc_close_cmd ( t_list *cmd_head)
 {
+	if (!cmd_head || !(t_cmd)cmd_head->content)
+		return;
 	t_list *redirs;
+	t_redir *redir;
 
-	redirs = cmd_head->content->redirs;
+	redirs = ((t_cmd *)cmd_head->content)->redirs;
 	while(redirs)
 	{
-		if (redirs->content->type == IN_DELIM)
-			heredoc_close(cmd_head, redirs);
+		redir = (t_redir *)redirs->content;
+		if (redir->type == IN_DELIM)
+			heredoc_close(redir);
 		redirs = redirs->next;
 	}
 }
@@ -38,7 +40,7 @@ void	heredoc_tmp_deletion(t_list *cmd_head)
 {
 	while(cmd_head)
 	{
-		heredoc_finder(cmd_head);
+		heredoc_close_cmd(cmd_head);
 		cmd_head = cmd_head->next;
 	}
 
