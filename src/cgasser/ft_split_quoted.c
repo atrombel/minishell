@@ -3,9 +3,7 @@
 #include "ft_printf.h"
 
 int	ft_find_next_word(char const *s, char c, int index);
-int	ft_strlen_word_quoted(char const *s, char c, int index);
 int	ft_count_word_quoted(char const *s, char c);
-char	*ft_strchr_quoted(const char *s, int c);
 
 //regular split from the libft, that jump the quoted "" or '' sequences
 //allocate memory (using malloc(3)) and returns an array of strings obtained by
@@ -29,7 +27,7 @@ char	**ft_split_quoted(char const *s, char c)
 	i = ft_find_next_word(s, c, i);
 	while (s[i] != '\0')
 	{
-		len_word = ft_strlen_word_quoted(s, c, i);
+		len_word = ft_len_word_quoted(s, c, i);
 		res[j] = ft_calloc(sizeof(char), (len_word + 1));
 		if (!res[j])
 			return (perror(ALLOC_ERR), ft_free_array(res), NULL);
@@ -48,32 +46,6 @@ int	ft_find_next_word(char const *s, char c, int index)
 	return (index);
 }
 
-int	ft_strlen_word_quoted(char const *s, char c, int index)
-{
-	char const	*start;
-	char		*end;
-
-	start = s + index;
-	end = NULL;
-	if (*start == 34)
-	{
-		end = ft_strchr(start + 1, 34);
-		if (end)
-			end++;
-	}
-	else if (*start == 39)
-	{
-		end = ft_strchr(start + 1, 39);
-		if (end)
-			end++;
-	}
-	else
-		end = ft_strchr_quoted(start, c);
-	if (!end)
-		return (ft_strlen(start));
-	return (end - start);
-}
-
 int	ft_count_word_quoted(char const *s, char c)
 {
 	int	count;
@@ -88,28 +60,9 @@ int	ft_count_word_quoted(char const *s, char c)
 		i = ft_find_next_word(s, c, i);
 		if (s[i] != '\0')
 			count++;
-		i += ft_strlen_word_quoted(s, c, i);
+		i += ft_len_word_quoted(s, c, i);
 	}
 	return (count);
-}
-
-char	*ft_strchr_quoted(const char *s, int c)
-{
-	int		i;
-	char	*res;
-	char	cc;
-
-	cc = (char) c;
-	i = 0;
-	while (s[i] != '\0' && s[i] != cc && s[i] != 39 && s[i] != 34 )
-		i++;
-	if (s[i] == cc || s[i] == 39 || s[i] == 34)
-	{
-		res = (char *)&s[i];
-		return (res);
-	}
-	else
-		return (NULL);
 }
 
 /*

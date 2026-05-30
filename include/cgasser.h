@@ -23,6 +23,7 @@ void	ft_history(char *user_input);
 int	ft_signals(void);
 
 char	**ft_split_quoted(char const *s, char c);
+int	ft_len_word_quoted(char const *s, char c, int index);
 
 t_list	*ft_lex_and_parse(char *str, t_env *env);
 
