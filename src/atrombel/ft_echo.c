@@ -1,18 +1,32 @@
 #include "minishell.h"
 #include "atrombel.h"
 
-void	print_echo(char *arg, t_data *data, int mode)
+void	print_echo(char *arg, t_data *data)
 {
-	char	*suffixes[3];
-
-	suffixes[0] = " ";
-	suffixes[1] = "";
-	suffixes[2] = "\n";
-	if (printf("%s%s", arg, suffixes[mode]) == -1)
+	if (printf("%s", arg) == -1)
 	{
 			data->last_exit_status = 1;
 			return ;
 	}
+}
+
+// return 1 if arg[0] is a valid -n flag
+int	is_valid_n_flag(char *args)
+{
+	int	i;
+
+	if (!args)
+		return (0);
+	if (args[0] != '-' || args[1] != 'n')
+		return (0);
+	i = 2;
+	while (args[i])
+	{
+		if (args[i] != 'n')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 // data last command error number "echo $?"" to implement also echo should display env ? if yes to implement as well expl echo $PWD/home/atrombel/42/3/minishell
@@ -20,20 +34,22 @@ void	print_echo(char *arg, t_data *data, int mode)
 void	ft_echo(t_cmd *cmd, t_data *data)
 {
 	data->last_exit_status = 0;
-	if (!cmd->args || !((char *)cmd->args->content)[0])
+	int	i;
+
+	i = 0;
+	if (!cmd->args || !(cmd->args[0]))
 	{
-		if (!(cmd->flags && ft_strncmp("-n", ((char *)cmd->flags->content), 3) == 0))// et si on a un turc comme echo -en BEN ECHO CAPTE LES 2 FLAG MAIS SURTOUT LE N DONC FT_STRNCMP NE MARCHERA
-			write(1, "\n", 1);
+
+		if (is_valid_n_flag(cmd->args[0]) == 0)
+			write(1,"\n", 1);
 		data->last_exit_status = 1;
 		return;
 	}
-	while (cmd->args->next)
+	while (cmd->args[i])
 	{
-		print_echo(((char *)cmd->args->content), data, 0);
-		cmd->args = cmd->args->next;
+		print_echo(cmd->args[i], data);
+		i++;
 	}
-	if (cmd->flags && (ft_strncmp("-n",  ((char *)cmd->flags->content), 3) == 0))
-		print_echo(((char *)cmd->args->content), data, 1);
-	else
-		print_echo(((char *)cmd->args->content), data, 2);
+	if (is_valid_n_flag(cmd->args[0]) == 0)
+		write(1,"\n", 1);
 }

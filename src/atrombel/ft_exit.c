@@ -4,27 +4,49 @@
 
 //	exit - cause normal process termination
 // a voir si rajouter data et code erreur
-void	ft_exit(t_cmd *content, t_env *env, t_list *head)
-{
-	int	nbr;
-	t_list	*args;
 
-	args = content->args;
-	nbr = EXIT_SUCCESS;
+
+// return 1 if error else 0
+static int	ft_isnumeric_check(const char *s)
+{
+
+	if (!s || !*s)
+		return (0);
+	if (*s == '-' || *s == '+' )
+		s++;
+	if (!*s)
+		return (0);
+	while(*s)
+	{
+		if (*s < '0' || *s > '9')
+			return (0);
+		s++;
+	}
+	return (1);
+
+}
+
+//tester exit ""
+void	ft_exit(t_cmd *cmd, t_env *env, t_list *head)
+{
+	int		nbr;
+	char	**args;
+
+	args = cmd->args;
+	nbr = EXIT_SUCCESS;// a tester en profondeur
 	if (args)
 	{
-		if (((char *)args->content)[1])
+		if (args[1])
 		{
 			printf("-minishell: exit: too many arguments\n"); // remplacer par un printf fans fd 2, securiser printf ?
 			return ;
 		}
-		if (((char *)args->content) &&((char *)args->content)[0])
+		if ( args && args[0])
 		{
-			nbr = ft_atoi(((char *)args->content));
-			if (nbr == 0 &&((char *)args->content)[0] != '0')
+
+			if (ft_isnumeric_check(args[0]) == 0)
 			{
-				printf("-minishell: exit: %s: numeric argument required\n",((char *)args->content)); // remplacer par un printf dans fd 2
-				//return ; mon wsl exit quand meme a voir ubuntu ecole
+				printf("-minishell: exit: %s: numeric argument required\n", args[0]); // remplacer par un printf dans fd 2 //return ; mon wsl exit quand meme a voir ubuntu ecole
 				nbr = 2;
 			}
 		}

@@ -59,24 +59,21 @@ void	export_with_args(char *arg, t_env *env)
 
 // la commande seule $export affiche tout env dans lordre avec delcare -x au debut
 // faire une copie et la trier
-void	ft_export(t_cmd *content, t_env *env)
+void	ft_export(t_cmd *cmd, t_env *env)
 {
 	int		i;
-	t_list	*args;
+	char	**args;
 
-	args = content->args;
+	args = cmd->args;
 	i = 0;
-	if (!(args && args->content && ((char *)args->content)[0]))
+	if (!args || !args[0] || !args[0][0])
 	{
 		export_without_args(env);//TO DO
 		return ;
 	}
-	//write(1, "0.2\n", 4);
-	while(args)
+	while(args[i])
 	{
-		export_with_args((char *)args->content, env);
+		export_with_args(args[i], env);
 		i++;
-		args = args->next;
 	}
-	//write(1, "F\n", 2);
 }
