@@ -1,6 +1,8 @@
 
 #include "cgasser.h"
 
+#include "ft_printf.h"
+
 int	ft_fill_arg(t_cmd *cmd, char *word, t_env *env);
 
 int	ft_fill_word(t_cmd *cmd, char *word, t_env *env)
@@ -8,7 +10,7 @@ int	ft_fill_word(t_cmd *cmd, char *word, t_env *env)
 	int	status;
 
 	status = 0;
-	if (!cmd->cmd && !cmd->path)
+	if (!cmd->args && !cmd->path)
 	{
 		if(ft_fill_cmd(cmd, word, env) != 0)
 			return (1);
@@ -32,6 +34,6 @@ int	ft_fill_arg(t_cmd *cmd, char *word, t_env *env)
 	ft_strlcpy(arg, word, ft_strlen(word) + 1);
 	arg = ft_expand_var(arg, env);
 	arg = ft_trim_quotes(arg);
-	ft_arrayadd_back(cmd->args, arg);
+	cmd->args = ft_arrayadd_back(cmd->args, arg);
 	return (0);
 }

@@ -9,12 +9,16 @@ int	ft_is_word_path(t_cmd *cmd, char *word);
 
 int	ft_fill_cmd(t_cmd *cmd, char *word, t_env *env)
 {
+	char	*name;
+
+	name = NULL;
 	if (ft_check_cmd(cmd, word, env) == 0)
 	{
-		cmd->cmd = ft_calloc(sizeof(char *), (ft_strlen(word) + 1));
-		if (!cmd->cmd)
+		name = ft_calloc(sizeof(char *), (ft_strlen(word) + 1));
+		if (!name)
 			return (perror(ALLOC_ERR), 1);
-		ft_strlcpy(cmd->cmd, word, ft_strlen(word) + 1);
+		ft_strlcpy(name, word, ft_strlen(word) + 1);
+		cmd->args = ft_arrayadd_back(cmd->args, name);
 		return (0);
 	}
 	if (ft_is_word_path(cmd, word) == 1)
@@ -106,7 +110,7 @@ int	ft_is_word_path(t_cmd *cmd, char *word)
 		cmd_ptr++;
 		cmd_name = ft_calloc(sizeof(char), ft_strlen(cmd_ptr) + 1);
 		ft_strlcpy(cmd_name, cmd_ptr, ft_strlen(cmd_ptr) + 1);
-		cmd->cmd = cmd_name;
+		cmd->args = ft_arrayadd_back(cmd->args, cmd_name);
 		return (1);
 	}
 	return (0);

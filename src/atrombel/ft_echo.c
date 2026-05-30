@@ -1,15 +1,6 @@
 #include "minishell.h"
 #include "atrombel.h"
 
-void	print_echo(char *arg, t_data *data)
-{
-	if (printf("%s", arg) == -1)
-	{
-			data->last_exit_status = 1;
-			return ;
-	}
-}
-
 // return 1 if arg[0] is a valid -n flag
 int	is_valid_n_flag(char *args)
 {
@@ -35,21 +26,29 @@ void	ft_echo(t_cmd *cmd, t_data *data)
 {
 	data->last_exit_status = 0;
 	int	i;
+	int	boul;
 
+	boul = 0;
 	i = 0;
 	if (!cmd->args || !(cmd->args[0]))
 	{
-
-		if (is_valid_n_flag(cmd->args[0]) == 0)
-			write(1,"\n", 1);
+		write(1,"\n", 1);
 		data->last_exit_status = 1;
 		return;
 	}
+	if (is_valid_n_flag(cmd->args[0]) == 1)
+	{
+		boul = 1;
+		i = 1;
+	}
 	while (cmd->args[i])
 	{
-		print_echo(cmd->args[i], data);
+
+		write(1, cmd->args[i], ft_strlen(cmd->args[i]));
 		i++;
+		if (cmd->args[i])
+			write(1," ", 1);
 	}
-	if (is_valid_n_flag(cmd->args[0]) == 0)
+	if (boul == 0)
 		write(1,"\n", 1);
 }

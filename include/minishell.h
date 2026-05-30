@@ -45,11 +45,10 @@ typedef struct s_env
 	struct s_env	*next;
 } t_env;
 
-typedef struct s_cmd //token
+typedef struct s_cmd
 {
-	char	*cmd; //command name
 	char	*path; //command path
-	char	**args; //arguments (and flags)
+	char	**args; //name of the command, flag and arguments
 	t_list	*redirs; //redirections
 }	t_cmd;
 

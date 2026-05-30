@@ -15,8 +15,6 @@ void	ft_free_cmd(void *content)
 	t_cmd	*cmd;
 	
 	cmd = (t_cmd *)content;
-	if (cmd->cmd)
-		free(cmd->cmd);
 	if (cmd->path)
 		free(cmd->path);
 	if (cmd->args)
