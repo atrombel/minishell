@@ -103,7 +103,7 @@ char	*ft_strchr_quoted(const char *s, int c)
 	i = 0;
 	while (s[i] != '\0' && s[i] != cc && s[i] != 39 && s[i] != 34 )
 		i++;
-	if (s[i] == cc || s[i] != 39 || s[i] != 34)
+	if (s[i] == cc || s[i] == 39 || s[i] == 34)
 	{
 		res = (char *)&s[i];
 		return (res);
