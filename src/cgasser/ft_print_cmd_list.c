@@ -25,8 +25,9 @@ void	ft_print_cmd(t_cmd *cmd)
 	int	i;
 
 	i = 0;
-	if (cmd->cmd)
-		ft_printf("\ncmd: %s", cmd->cmd);
+	if (cmd->args)
+		ft_printf("\ncmd: %s", cmd->args[i]);
+	i++;
 	if (cmd->path)
 		ft_printf("\tpath: %s", cmd->path);
 	if (cmd->args)
