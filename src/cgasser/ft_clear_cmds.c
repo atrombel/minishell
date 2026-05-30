@@ -15,11 +15,14 @@ void	ft_free_cmd(void *content)
 	t_cmd	*cmd;
 	
 	cmd = (t_cmd *)content;
-	free(cmd->cmd);
-	free(cmd->path);
-	ft_lstclear(&cmd->flags, free);
-	ft_lstclear(&cmd->args, free);
-	ft_lstclear(&cmd->redirs, ft_free_redirs);
+	if (cmd->cmd)
+		free(cmd->cmd);
+	if (cmd->path)
+		free(cmd->path);
+	if (cmd->args)
+		ft_free_array(cmd->args);
+	if (cmd->redirs)
+		ft_lstclear(&cmd->redirs, ft_free_redirs);
 	free(cmd);
 }
 

@@ -49,8 +49,7 @@ typedef struct s_cmd //token
 {
 	char	*cmd; //command name
 	char	*path; //command path
-	t_list	*flags; //flag(s)
-	t_list	*args; //arguments
+	char	**args; //arguments (and flags)
 	t_list	*redirs; //redirections
 }	t_cmd;
 

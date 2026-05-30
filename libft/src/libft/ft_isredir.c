@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isquote.c                                       :+:      :+:    :+:   */
+/*   ft_isredir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgasser <cgasser@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/28 12:25:24 by cgasser           #+#    #+#             */
-/*   Updated: 2026/05/28 16:42:20 by cgasser          ###   ####lausanne.ch   */
+/*   Created: 2026/05/28 16:40:06 by cgasser           #+#    #+#             */
+/*   Updated: 2026/05/28 16:42:13 by cgasser          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isquote(int c)
+int	ft_isredir(int c)
 {
-	if (c != 39 && c != 34)
+	if (c != 60 && c != 62)
 		return (0);
 	return (1);
 }

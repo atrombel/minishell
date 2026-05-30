@@ -6,7 +6,7 @@
 /*   By: cgasser <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 18:54:58 by cgasser           #+#    #+#             */
-/*   Updated: 2026/05/28 12:28:24 by cgasser          ###   ####lausanne.ch   */
+/*   Updated: 2026/05/28 16:42:11 by cgasser          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_isprint(int c);
 int		ft_isquote(int c);
+int		ft_ispipe(int c);
+int		ft_isredir(int c);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 
