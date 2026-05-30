@@ -4,33 +4,29 @@
 
 void	ft_execute_cmd(t_cmd	*cmd, t_data *data, t_env **env, t_list *head)
 {
-	(void)cmd;
-	(void)data;
-	(void)env;
-	(void)head;
-	// char	**envp;
-	// char	**args;
+	char	**envp;
+	char	**args;
 
-	// envp = env_to_charstar_reconversion(env);
-	//args = args_charstar_reconversion;
-	// if (!envp)
-	// {
-	// 	error_print("ERROR");
-	// 	return ;
-	// }
-	printf(" MD NOT YET DONE\n");
-	//execve(cmd->path, cmd->args, envp);// attention ARGS EST PAS UN ARGUMENT IL FAUT LE RECONVERTIR // WARNING UNUSABLE RIGHT NOW BECAUSE FLAGS EN ARGUMENT ARE SORTED WHICH SHOULDNT BE, UPDATE IN PROCESS
-	//error_print("execve failed");
-	//
-	//clean_all_there_is_to_clean();
-	//exit(126);
+	envp = env_to_charstar_reconversion(env);
+	args = args_charstar_reconversion;
+	if (!envp)
+	{
+		error_print("ERROR");
+		return ;
+	}
+	//printf(" MD NOT YET DONE\n");
+	execve(cmd->path, cmd->args, envp);
+	error_print("execve failed");
+
+	// clean_all_there_is_to_clean(); A FAIRE
+	// exit(126);
 	// /switch (errno) {
-    // case EACCES:
-    //     exit(126);   // fichier trouve mais pas executable
-    // case ENOENT:
-    //     exit(127);   // fichier introuvabl /// A CREER UNE FONCTION QUI GERE LES CODE RETOUR POUR LUI
-    // default:
-    //     exit(126);   // autre erreur d'exécution → 126 par convention
+	// case EACCES:
+	// 	exit(126);   // fichier trouve mais pas executable
+	// case ENOENT:
+	// 	exit(127);   // fichier introuvabl /// A CREER UNE FONCTION QUI GERE LES CODE RETOUR POUR LUI
+	// default:
+	// 	exit(126);   // autre erreur d'exécution → 126 par convention
 }
 
 // organise execution of cmd and application of redir
