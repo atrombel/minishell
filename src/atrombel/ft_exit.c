@@ -34,6 +34,7 @@ void	ft_exit(t_cmd *cmd, t_env *env, t_list *head)
 
 	args = cmd->args;
 	nbr = EXIT_SUCCESS;// a tester en profondeur
+
 	if (args)
 	{
 		if (args[1])
