@@ -73,7 +73,7 @@ int	ft_env_storing(int nbr, char **dest, t_env *env)
 }
 
 
-char **env_to_charstar_reconversion(t_env *env)
+char	**env_to_charstar_reconversion(t_env *env)
 {
 	int		nbr;
 	char	**dest;
