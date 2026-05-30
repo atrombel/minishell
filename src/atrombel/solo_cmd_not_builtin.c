@@ -2,7 +2,7 @@
 #include "minishell.h"
 #include "atrombel.h"
 
-void	ft_execute_cmd(t_cmd	*cmd, t_data *data, t_env *env, t_list *head)
+void	ft_execute_cmd(t_cmd	*cmd, t_data *data, t_env **env, t_list *head)
 {
 	(void)cmd;
 	(void)data;

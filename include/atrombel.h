@@ -1,7 +1,6 @@
 #ifndef ATROMBEL_H
 # define ATROMBEL_H
-# include <limits.h> //verifier si jai le droit dutiliser
-# include <errno.h> // for errno uses
+
 
 
 void	ft_exe_main(t_list *cmd_head, t_data *data, t_env **env);
@@ -45,16 +44,17 @@ void	stdin_redir(t_redir	*redir,  t_data *data, int *error);
 void	stdin_redir(t_redir	*redir,  t_data *data, int *error);
 void	stdout_appnd(t_redir	*redir,  t_data *data, int *error);
 void	heredoc_reddir_apply(t_redir	*redir,  t_data *data, int *error);
+int		ft_redir_apply(t_list *cmd_head, t_data *data);
+void	fd_redir_restoration_close(t_data *data);
 
 //cmd with no pipe functions
-void	solo_cmd(t_list *cmd_head, t_data *data, t_env **env);
+void	solo_cmd(t_list *cmd_head, t_data *data, t_env *env);
 void	stdin_redir(t_redir *redir, t_data *data, int *error);
 void	stdout_redir(t_redir *redir, t_data *data, int *error);
 void	stdout_appnd(t_redir *redir, t_data *data, int *error);
 void	heredoc_reddir_apply(t_redir *redir, t_data *data, int *error);
-void	fd_redir_restoration_close(t_data *data);
-void	solo_builtin(t_list *cmd_head, t_data *data, t_env **env);
-void	solo_cmd_not_builtin(t_list *cmd_head, t_data *data, t_env **env);
+void	solo_builtin(t_list *cmd_head, t_data *data, t_env *env);
+void	solo_cmd_not_builtin(t_list *cmd_head, t_data *data, t_env *env);
 
 // function that reconvert env to his original char ** form
 char	**env_to_charstar_reconversion(t_env *env);

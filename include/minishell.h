@@ -9,6 +9,8 @@
 # include "libft.h"
 # include <stdlib.h>
 # include <signal.h>
+# include <sys/wait.h>
+# include <errno.h> // for errno uses
 
 //redirection types
 # define IN 4 //"<"

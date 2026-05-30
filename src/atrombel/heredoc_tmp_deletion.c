@@ -20,8 +20,8 @@ void	heredoc_close(t_redir *redir)
 // function that find if there is a heredoc associated to the function
 void	heredoc_close_cmd ( t_list *cmd_head)
 {
-	if (!cmd_head || !(t_cmd)cmd_head->content)
-		return;
+	if (!cmd_head || !cmd_head->content)
+		return ;
 	t_list *redirs;
 	t_redir *redir;
 
