@@ -21,6 +21,8 @@ int	ft_fill_redir(t_cmd *cmd, t_list **temp)
 		return (perror(ALLOC_ERR), 1);
 	ft_strlcpy(redir->arg, token->word, ft_strlen(token->word) + 1);
 	redir->hd_filename = NULL;
+	redir->hd_tmp_fd = -1;
+	redir->last_hd_nbr = 0;
 	ft_lstadd_back(&cmd->redirs, ft_lstnew(redir));
 	return (0);
 }
@@ -28,7 +30,7 @@ int	ft_fill_redir(t_cmd *cmd, t_list **temp)
 t_redir	*ft_new_redir()
 {
 	t_redir	*new_redir;
-	
+
 	new_redir = NULL;
 	new_redir = ft_calloc(sizeof(t_redir), 1);
 	return (new_redir);

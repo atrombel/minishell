@@ -30,23 +30,23 @@ void	free_node_env(t_env *node)
 	}
 }
 
-void	ft_unset(t_cmd *content, t_env **env)
+void	ft_unset(t_cmd *cmd, t_env **env)
 {
 	int		i;
 	t_env	*prev_node;
 	t_env	*current_node;
-	t_list	*args;
+	char	**args;
 
-	args = content->args;
+	args = cmd->args;
 	i = 0;
-	if (!(args && args->content && ((char *)args->content)[0]))
-		return;
-	while (args)
+	if (!args || !args[0] || !args[0][0])
+			return;
+	while (args[i])
 	{
-		prev_node = find_prev_node(*env, ((char *)args->content));
+		prev_node = find_prev_node(*env, args[i]);
 		if (prev_node == NULL)
 			return ;
-		else if (prev_node->key == (*env)->key)// alors on doit changer head
+		else if (prev_node->key == (*env)->key)// alors on doit changer head car on est au debut de la liste
 		{
 			*env = (*env)->next;
 			free_node_env(prev_node);
@@ -58,6 +58,5 @@ void	ft_unset(t_cmd *content, t_env **env)
 			free_node_env(current_node);
 		}
 		i++;
-		args = args->next;
 	}
 }
