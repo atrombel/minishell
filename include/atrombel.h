@@ -4,8 +4,8 @@
 // struct that contain usefull data to see if really that usefull long term
 
 /* env */
-t_env	init_env(char **envp);
-t_env	node_env_creation(void);
+t_env	*init_env(char **envp);
+t_env	*node_env_creation(void);
 void	add_back_env(t_env **head, t_env *new);
 char	*ft_get_value_env(t_env *env, char *str);
 void	ft_change_value_env(t_env *env, char *key, char *str);

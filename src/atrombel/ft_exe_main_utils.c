@@ -4,44 +4,44 @@
 //function that will check if the function is a builtin, retour code erreur a reflechir
 //function return 0 if builtin else 1
 // faut lui passer cmd par cmd cmd_head->content
-int ft_builtin_verif(t_cmd *content)
+int ft_builtin_verif(t_cmd *cmd)
 {
-	if (!content || !content->cmd)
+	if (!cmd || !cmd->args[0])
 		return (0);
-	if (ft_strncmp("echo", content->cmd, 5) == 0)
+	if (ft_strncmp("echo", cmd->args[0], 5) == 0)
 		return (0);
-	if (ft_strncmp("cd", content->cmd, 3) == 0)
+	if (ft_strncmp("cd", cmd->args[0], 3) == 0)
 		return (0);
-	if (ft_strncmp("pwd", content->cmd, 4) == 0)
+	if (ft_strncmp("pwd", cmd->args[0], 4) == 0)
 		return (0);
-	if (ft_strncmp("env", content->cmd, 4) == 0)
+	if (ft_strncmp("env", cmd->args[0], 4) == 0)
 		return (0);
-	if (ft_strncmp("exit", content->cmd, 5) == 0)
+	if (ft_strncmp("exit", cmd->args[0], 5) == 0)
 		return (0);
-	if (ft_strncmp("export", content->cmd, 7) == 0)
+	if (ft_strncmp("export", cmd->args[0], 7) == 0)
 		return (0);
-	if (ft_strncmp("unset", content->cmd, 6) == 0)
+	if (ft_strncmp("unset", cmd->args[0], 6) == 0)
 		return (0);
 	return (1);
 }
 
-int	ft_execute_builtin(t_cmd *content, t_data *data, t_env **env, t_list *head)
+int	ft_execute_builtin(t_cmd *cmd, t_data *data, t_env **env, t_list *head)
 {
-	if (!content || !content->cmd)
+	if (!cmd || !cmd->args[0])
 		return (0);
-	if (ft_strncmp("echo", content->cmd, 5) == 0)
-		return (ft_echo(content, data), 0);
-	if (ft_strncmp("cd", content->cmd, 3) == 0)
-		return (ft_cd(content, data, *env), 0);
-	if (ft_strncmp("pwd", content->cmd, 4) == 0)
+	if (ft_strncmp("echo", cmd->args[0], 5) == 0)
+		return (ft_echo(cmd, data), 0);
+	if (ft_strncmp("cd", cmd->args[0], 3) == 0)
+		return (ft_cd(cmd, data, *env), 0);
+	if (ft_strncmp("pwd", cmd->args[0], 4) == 0)
 		return (ft_pwd(data, *env), 0);
-	if (ft_strncmp("env", content->cmd, 4) == 0)
+	if (ft_strncmp("env", cmd->args[0], 4) == 0)
 		return (ft_env(data, *env), 0);
-	if (ft_strncmp("exit", content->cmd, 5) == 0)
-		return (ft_exit(content, *env, head), 0);
-	if (ft_strncmp("export", content->cmd, 7) == 0)
-		return (ft_export(content, *env), 0);
-	if (ft_strncmp("unset", content->cmd, 6) == 0)
-		return (ft_unset(content, env), 0);
+	if (ft_strncmp("exit", cmd->args[0], 5) == 0)
+		return (ft_exit(cmd, *env, head), 0);
+	if (ft_strncmp("export", cmd->args[0], 7) == 0)
+		return (ft_export(cmd, *env), 0);
+	if (ft_strncmp("unset", cmd->args[0], 6) == 0)
+		return (ft_unset(cmd, env), 0);
 	return (1);
 }
