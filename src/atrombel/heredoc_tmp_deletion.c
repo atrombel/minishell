@@ -4,16 +4,14 @@
 
 void	heredoc_close(t_redir *redir)
 {
-
-	if (redir->type == IN_DELIM)
+	if (redir->hd_filename)
 	{
-		if (redir->hd_filename)
-		{
-			if (unlink(redir->hd_filename) == -1)
-				perror("unlink");
-			if (redir->hd_tmp_fd >= 0)
-				close(redir->hd_tmp_fd);
-		}
+		//printf("herdeco close hd = %s\n", redir->hd_filename);
+		if (unlink(redir->hd_filename) == -1)
+			perror("unlink");
+		free(redir->hd_filename);
+		if (redir->hd_tmp_fd >= 0)
+			close(redir->hd_tmp_fd);
 	}
 }
 

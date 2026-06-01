@@ -38,8 +38,8 @@ void	ft_unset(t_cmd *cmd, t_env **env)
 	char	**args;
 
 	args = cmd->args;
-	i = 0;
-	if (!args || !args[0] || !args[0][0])
+	i = 1;
+	if (!args[1] || !args[1][0])
 			return;
 	while (args[i])
 	{

@@ -29,17 +29,17 @@ void	ft_echo(t_cmd *cmd, t_data *data)
 	int	boul;
 
 	boul = 0;
-	i = 0;
-	if (!cmd->args || !(cmd->args[0]))
+	i = 1;
+	if (!cmd->args || !cmd->args[0] || !cmd->args[1])
 	{
 		write(1,"\n", 1);
 		data->last_exit_status = 1;
 		return;
 	}
-	if (is_valid_n_flag(cmd->args[0]) == 1)
+	if (is_valid_n_flag(cmd->args[1]) == 1)
 	{
 		boul = 1;
-		i = 1;
+		i = 2;
 	}
 	while (cmd->args[i])
 	{

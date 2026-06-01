@@ -14,10 +14,9 @@ void	ft_execute_cmd(t_cmd	*cmd, t_data *data, t_env **env, t_list *head)
 		error_print("ERROR");
 		return ;
 	}
-	//printf(" MD NOT YET DONE\n");
 	execve(cmd->path, cmd->args, envp);
 	error_print("execve failed");
-
+	// penser a free envp
 	// clean_all_there_is_to_clean(); A FAIRE
 	// exit(126);
 	// /switch (errno) {
@@ -36,6 +35,11 @@ void	ft_execute_cmd_redir(t_cmd	*cmd, t_data *data, t_env **env, t_list *cmd_hea
 	int	status;
 
 	pid = fork();
+	if (pid == -1)
+	{
+		error_print("fork");
+		return ;
+	}
 	if(pid == 0)//child
 	{
 		if (cmd->redirs)
@@ -45,12 +49,9 @@ void	ft_execute_cmd_redir(t_cmd	*cmd, t_data *data, t_env **env, t_list *cmd_hea
 		}
 		else
 			ft_execute_cmd(cmd, data, env, cmd_head);
+		exit(126);
 	}
-	if (pid == -1)
-	{
-		error_print("fork");
-		return ;
-	}
+
 	if (pid > 0)
 	{
 		waitpid(pid, &status, 0);
