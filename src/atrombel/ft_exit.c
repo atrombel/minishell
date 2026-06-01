@@ -27,7 +27,7 @@ static int	ft_isnumeric_check(const char *s)
 }
 
 //tester exit ""
-void	ft_exit(t_cmd *cmd, t_env *env, t_list *head)
+void	ft_exit(t_cmd *cmd, t_env *env, t_list *head, t_data *data)
 {
 	int		nbr;
 	char	**args;
@@ -35,22 +35,24 @@ void	ft_exit(t_cmd *cmd, t_env *env, t_list *head)
 	args = cmd->args;
 	nbr = EXIT_SUCCESS;// a tester en profondeur
 
-	if (args)
+	if (!args[1])
+		exit(0);
+	if (args[2])
 	{
-		if (args[1])
-		{
-			printf("-minishell: exit: too many arguments\n"); // remplacer par un printf fans fd 2, securiser printf ?
-			return ;
-		}
-		if ( args && args[0])
-		{
+		printf("-minishell: exit: too many arguments\n"); // remplacer par un printf fans fd 2, securiser printf ?
+		data->last_exit_status = 1;
+		return ;
+	}
+	if ( args[0] && args[1])
+	{
 
-			if (ft_isnumeric_check(args[0]) == 0)
-			{
-				printf("-minishell: exit: %s: numeric argument required\n", args[0]); // remplacer par un printf dans fd 2 //return ; mon wsl exit quand meme a voir ubuntu ecole
-				nbr = 2;
-			}
+		if (ft_isnumeric_check(args[1]) == 0)
+		{
+			printf("-minishell: exit: %s: numeric argument required\n", args[0]); // remplacer par un printf dans fd 2 //return ; mon wsl exit quand meme a voir ubuntu ecole
+			nbr = 2;
 		}
+		else
+			nbr = ft_atoi(args[1]);
 	}
 	ft_env_clean(env);
 	ft_clear_cmds(&head);// A DEMANDER CYRILLE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

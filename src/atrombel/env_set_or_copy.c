@@ -92,6 +92,11 @@ t_env	*init_env(char **envp)
 	{
 		while(envp[i])
 		{
+			if (ft_strncmp(envp[i], "_=", 2) == 0)
+			{
+				i++;
+				continue;
+			}
 			new_node = node_env_creation();
 			if (!new_node || new_value_storing(envp[i], new_node) == 1 )
 			{

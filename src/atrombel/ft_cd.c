@@ -46,7 +46,7 @@ void	ft_chdir(char	*path, t_data *data, t_env *env)
 // check if mulitple args or not
 static int	nbr_args_check(char	**args, t_data *data)
 {
-	if (args && args[0] && args[1])
+	if (args && args[0] && args[1] && args[2])
 	{
 		data->last_exit_status = 1;
 		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
@@ -61,10 +61,10 @@ static char	*path_define_cd(char **args, t_env *env)
 	char	*path;
 
 	path = NULL;
-	if (args == NULL || (args[0]) == NULL)
+	if (args[1] == NULL)
 		path = ft_get_value_env(env,"HOME");
 	else
-		path = args[0];
+		path = args[1];
 	return (path);
 }
 

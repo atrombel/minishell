@@ -21,14 +21,21 @@ char	*ft_readline(t_env *env)
 			}
 		}
 	}
-	dest = ft_strjoin(str, "$ ");
+	dest = ft_strjoin("\001\033[1;32m\002", str);
 	if (!dest)
 	{
 		perror("minishell: ");
 		return (NULL);
 	}
-	user_input = readline(dest);
-	free (dest);
+	free(str);
+	str = ft_strjoin(dest, "\001\033[0m\002$ ");
+	free(dest);
+	if (!str)
+	{
+		perror("minishell: ");
+		return (NULL);
+	}
+	user_input = readline(str);
 	free (str);
 	return (user_input);
 }
