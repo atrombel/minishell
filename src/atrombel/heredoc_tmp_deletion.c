@@ -6,7 +6,7 @@ void	heredoc_close(t_redir *redir)
 {
 	if (redir->hd_filename)
 	{
-		printf("herdeco close hd = %s\n", redir->hd_filename);
+		//printf("herdeco close hd = %s\n", redir->hd_filename);
 		if (unlink(redir->hd_filename) == -1)
 			perror("unlink");
 		free(redir->hd_filename);

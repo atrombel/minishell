@@ -14,7 +14,7 @@ void	heredoc_tmp_init(t_redir *redir, t_data *data)
 		data->last_exit_status = errno;
 		return ; // a voir comment le securiser mieux que ca a la fin
 	}
-	redir->hd_tmp_fd = open(str, O_CREAT | O_WRONLY, 0644);// a secriser le retour
+	redir->hd_tmp_fd = open(str, O_CREAT | O_WRONLY | O_TRUNC, 0644);// a secriser le retour
 	if (redir->hd_tmp_fd == -1)// a definir
 		data->last_exit_status = errno;
 	redir->hd_filename = ft_strdup(str);
@@ -35,12 +35,19 @@ void	open_heredoc(t_redir *redir, t_data *data, t_list *cmd_head)
 		input = readline("> ");
 		if (g_sig == 130)// faire une fonction qui fait tout ca
 		{
-			heredoc_tmp_deletion(cmd_head);
+			heredoc_tmp_deletion(cmd_head);// verifier lesaks fd si je ferme bien redir->hd_tmp_fd
 			return ;
 		}
 		if (ft_strncmp(input, redir->arg, len + 1) == 0) //limiteur par inclu dans le resultat final expl  cat << xd > lslssl
+		{
+			close(redir->hd_tmp_fd);
+			redir->hd_tmp_fd = open(redir->hd_filename, O_RDONLY);
+			if (redir->hd_tmp_fd < 0)
+					perror("minishell: heredoc");
 			break ;
+		}
 		ft_putstr_fd(input, redir->hd_tmp_fd);
+		ft_putstr_fd("\n", redir->hd_tmp_fd);
 	}
 }
 

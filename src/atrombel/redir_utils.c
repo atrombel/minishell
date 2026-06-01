@@ -55,6 +55,7 @@ void	heredoc_reddir_apply(t_redir *redir, t_data *data, int *error)
 {
 	(void)error; //  a voir  si je limplemente par apres
 	(void)data;// a implementr retour erreur data
-	dup2(redir->hd_tmp_fd, 1);// heredoc deja open. // a securiser
+	dup2(redir->hd_tmp_fd, 0);// heredoc deja open. // a securiser
 	close(redir->hd_tmp_fd); // faudra delete a la fin les heredocs !!!!!!!!!!!!!!!!
+	redir->hd_tmp_fd = -1;
 }
