@@ -18,13 +18,14 @@ typedef struct s_token //token
 void	ft_history(char *user_input);
 int	ft_signals(void);
 
-char	**ft_split_quoted(char const *s, char c);
+char	**ft_split_quoted(char *s, char c);
+int	ft_len_word_quoted(char *s, char c, int index);
 
-t_list	*ft_lex_and_parse(char *str, t_env *env);
+t_list	*ft_lex_and_parse(char *str, t_data data);
 
-t_list	*ft_parse(t_list *tokens, t_env *env);
+t_list	*ft_parse(t_list *tokens, t_data data);
 int	ft_fill_redir(t_cmd *cmd, t_list **temp);
-int	ft_fill_word(t_cmd *cmd, char *word, t_env *env);
+int	ft_fill_word(t_cmd *cmd, char *word, t_data data);
 int	ft_fill_cmd(t_cmd *cmd, char *word, t_env *env);
 
 int	ft_is_redir(char *str);
