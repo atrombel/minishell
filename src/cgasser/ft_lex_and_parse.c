@@ -6,7 +6,7 @@
 t_list	*ft_lexer(char **array);
 void	ft_token_type(t_token *token);
 
-t_list	*ft_lex_and_parse(char *str, t_env *env)
+t_list	*ft_lex_and_parse(char *str, t_env *env, t_data data)
 {
 	char	**array;
 	t_list	*tokens;
@@ -23,7 +23,7 @@ t_list	*ft_lex_and_parse(char *str, t_env *env)
 	tokens = ft_lexer(array);
 	if (!tokens)
 		return (NULL);
-	return (ft_parse(tokens, env));
+	return (ft_parse(tokens, env, data));
 }
 
 t_list	*ft_lexer(char **array)
@@ -41,10 +41,10 @@ t_list	*ft_lexer(char **array)
 		size = ft_strlen(array[i]) + 1;
 		token = ft_calloc(sizeof(t_token), 1);
 		if (!token)
-			return (ft_clear_tokens(&tokens), perror(ALLOC_ERR), NULL);
+			return (ft_clear_tokens(&tokens), perror("ft_lexer"), NULL);
 		token->word = ft_calloc(sizeof(char), size);
 		if (!token->word)
-			return (ft_clear_tokens(&tokens), perror(ALLOC_ERR), NULL);
+			return (ft_clear_tokens(&tokens), perror("ft_lexer"), NULL);
 		ft_strlcpy(token->word, array[i], size);
 		ft_token_type(token);
 		ft_lstadd_back(&tokens, ft_lstnew(token));

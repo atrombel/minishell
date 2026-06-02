@@ -10,7 +10,7 @@ t_env	*ft_get_value(char *str, t_env *env, int i, int var_name_len);
 
 //take a string as parameter and expand variables starting with $
 //return a string allocated with ft_calloc, and free original str
-char	*ft_expand_var(char *str, t_env *env)
+char	*ft_expand_var(char *str, t_env *env, t_data data)
 {
 	int	i;
 
@@ -22,8 +22,12 @@ char	*ft_expand_var(char *str, t_env *env)
 	while (str[i] != '\0')
 	{
 		if (str[i] == '$' && str[i + 1] != ' ' && !ft_isquote(str[i + 1]) \
-			&& str[i + 1] != '?' && str[i + 1] != '\0')
+			&& str[i + 1] != '\0')
+		{
 			str = ft_put_var(str, env, i);
+			if (!str)
+				return (NULL);
+		}
 		else
 			i++;
 	}
@@ -47,6 +51,8 @@ char	*ft_put_var(char *str, t_env *env, int i)
 	if (value)
 		size += ft_strlen(value);
 	res = ft_calloc(sizeof(char), size);
+	if (!res)
+		return (free(str), perror("ft_put_var: "), NULL);
 	ft_strlcpy(res, str, i + 1);
 	if (value)
 		ft_strlcat(res, value, size);
@@ -82,6 +88,8 @@ char	*ft_cpy_value(char *str, t_env *env, int i, int var_name_len)
 		return (NULL);
 	value_len = ft_strlen(temp->value);
 	value = ft_calloc(sizeof(char), value_len + 1);
+	if (!value)
+		return (perror("ft_cpy_value: "), NULL);
 	ft_strlcpy(value, temp->value, value_len + 1);
 	return (value);
 }

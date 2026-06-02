@@ -2,15 +2,15 @@
 #include "cgasser.h"
 #include "ft_printf.h"
 
-int	ft_find_next_word(char const *s, char c, int index);
-int	ft_count_word_quoted(char const *s, char c);
+int	ft_find_next_word(char  *s, char c, int index);
+int	ft_count_word_quoted(char  *s, char c);
 
 //regular split from the libft, that jump the quoted "" or '' sequences
 //allocate memory (using malloc(3)) and returns an array of strings obtained by
 //splitting 's' using the character 'c' as a delimiter. The array must end with
 //a NULL pointer.
 
-char	**ft_split_quoted(char const *s, char c)
+char	**ft_split_quoted(char *s, char c)
 {
 	int		i;
 	int		j;
@@ -23,14 +23,14 @@ char	**ft_split_quoted(char const *s, char c)
 		return (NULL);
 	res = ft_calloc(sizeof(char *), ft_count_word_quoted(s, c) + 1);
 	if (!res)
-		return (perror(ALLOC_ERR), NULL);
+		return (perror("ft_split_quoted"), NULL);
 	i = ft_find_next_word(s, c, i);
 	while (s[i] != '\0')
 	{
 		len_word = ft_len_word_quoted(s, c, i);
 		res[j] = ft_calloc(sizeof(char), (len_word + 1));
 		if (!res[j])
-			return (perror(ALLOC_ERR), ft_free_array(res), NULL);
+			return (perror("ft_split_quoted"), ft_free_array(res), NULL);
 		ft_strlcpy(res[j], s + i, len_word + 1);
 		i += len_word;
 		i = ft_find_next_word(s, c, i);
@@ -39,14 +39,14 @@ char	**ft_split_quoted(char const *s, char c)
 	return (res);
 }
 
-int	ft_find_next_word(char const *s, char c, int index)
+int	ft_find_next_word(char *s, char c, int index)
 {
 	while (s[index] == c)
 		index++;
 	return (index);
 }
 
-int	ft_count_word_quoted(char const *s, char c)
+int	ft_count_word_quoted(char *s, char c)
 {
 	int	count;
 	int	i;
@@ -62,6 +62,7 @@ int	ft_count_word_quoted(char const *s, char c)
 			count++;
 		i += ft_len_word_quoted(s, c, i);
 	}
+	ft_printf("number of words: %d\n", count);
 	return (count);
 }
 

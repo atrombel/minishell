@@ -2,10 +2,10 @@
 #include "cgasser.h"
 
 int	ft_len_quote(char *start);
-int	ft_len_oper(char *start, int c);
+int	ft_len_oper(char *start);
 int	ft_len_word(char *start, int c);
 
-int	ft_len_word_quoted(char const *s, char c, int index)
+int	ft_len_word_quoted(char *s, char c, int index)
 {
 	char	*start;
 	int		len;
@@ -14,7 +14,7 @@ int	ft_len_word_quoted(char const *s, char c, int index)
 	len = 0;
 	len = ft_len_quote(start);
 	if (len == 0)
-		len = ft_len_oper(start, c);
+		len = ft_len_oper(start);
 	if (len == 0)
 		len = ft_len_word(start, c);
 	return (len);
@@ -36,12 +36,13 @@ int	ft_len_quote(char *start)
 		end = ft_strchr(start + 1, 39);
 		if (end)
 			end++;
+	}
 	if (!end)
 		return (0);
 	return (start - end);
 }
 
-int	ft_len_oper(char *start, int c)
+int	ft_len_oper(char *start)
 {
 	if (ft_strncmp(start, "|", 1) == 0 || ft_strncmp(start, "<", 1) == 0 \
 		|| ft_strncmp(start, ">", 1) == 0 || ft_strncmp(start, "=", 1) == 0)
@@ -56,9 +57,9 @@ int	ft_len_word(char *start, int c)
 	int	len;
 
 	len = 0;
-	while (letter != '\0' && letter != c && !ft_isquote(letter) && \
-		letter != '|' && letter != '<' && letter != '>' \
-		&& letter != '='))
+	while (start[len] != '\0' && start[len] != c && !ft_isquote(start[len]) && \
+		start[len] != '|' && start[len] != '<' && start[len] != '>' \
+		&& start[len] != '=')
 		len++;
 	return (len);
 }
