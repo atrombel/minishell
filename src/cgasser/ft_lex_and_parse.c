@@ -6,7 +6,7 @@
 t_list	*ft_lexer(char **array);
 void	ft_token_type(t_token *token);
 
-t_list	*ft_lex_and_parse(char *str, t_env *env, t_data data)
+t_list	*ft_lex_and_parse(char *str, t_data data)
 {
 	char	**array;
 	t_list	*tokens;
@@ -23,7 +23,7 @@ t_list	*ft_lex_and_parse(char *str, t_env *env, t_data data)
 	tokens = ft_lexer(array);
 	if (!tokens)
 		return (NULL);
-	return (ft_parse(tokens, env, data));
+	return (ft_parse(tokens, data));
 }
 
 t_list	*ft_lexer(char **array)

@@ -23,27 +23,28 @@
 //global variable to store signals
 extern volatile sig_atomic_t g_sig;
 
-// I need this struct t_env just for cd and others to work properly,
-// if this wasnt there i wouldnt be able to update the PWD of my working directoy resulting desyncronasation when I call pwd
-// Lors de la conversion de la liste en char envp pour fork, extraire que les variables de $type == 0$.
-typedef struct s_data// prblmt que je vais devoir le mettre en init pour chaque argument donc data sera seuelemt pour last exist status'
-{
-	int last_exit_status;
-	int	pipe_fd[2];
-	int	infile;
-	int	outfile;
-	int	stdin_save;
-	int stdout_save;
-	int	tmp_fd;
-	int		last_hd_nbr; // suffixe du tmp por plusieur heredoc
-} t_data;
-
 typedef struct s_env
 {
 	char			*key;	// "PWD"
 	char			*value; // "/home/user"
 	struct s_env	*next;
 } t_env;
+
+// I need this struct t_env just for cd and others to work properly,
+// if this wasnt there i wouldnt be able to update the PWD of my working directoy resulting desyncronasation when I call pwd
+// Lors de la conversion de la liste en char envp pour fork, extraire que les variables de $type == 0$.
+typedef struct s_data// prblmt que je vais devoir le mettre en init pour chaque argument donc data sera seuelemt pour last exist status'
+{
+	int		last_exit_status;
+	int		pipe_fd[2];
+	int		infile;
+	int		outfile;
+	int		stdin_save;
+	int		stdout_save;
+	int		tmp_fd;
+	int		last_hd_nbr; // suffixe du tmp por plusieur heredoc
+	t_env	*env;
+} t_data;
 
 typedef struct s_cmd
 {
@@ -61,6 +62,6 @@ typedef struct s_redir //redirection
 
 }	t_redir;
 
-char	*ft_expand_var(char *str, t_env *env);
+char	*ft_expand_var(char *str, t_data data);
 
 #endif
