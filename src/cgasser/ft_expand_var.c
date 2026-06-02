@@ -3,14 +3,14 @@
 #include "ft_printf.h"
 #include <stdlib.h>
 
-char	*ft_put_var(char *str, t_data data, int i);
+char	*ft_put_var(char *str, t_data *data, int i);
 int	ft_var_name_len(char *str, int i);
-char	*ft_cpy_value(char *str, t_data data, int i, int var_name_len);
+char	*ft_cpy_value(char *str, t_data *data, int i, int var_name_len);
 t_env	*ft_get_value(char *str, t_env *env, int i, int var_name_len);
 
 //take a string as parameter and expand variables starting with $
 //return a string allocated with ft_calloc, and free original str
-char	*ft_expand_var(char *str, t_data data)
+char	*ft_expand_var(char *str, t_data *data)
 {
 	int	i;
 
@@ -36,7 +36,7 @@ char	*ft_expand_var(char *str, t_data data)
 
 //takes as argument the orignial string and the index of the '$'
 //and return the full string with the $NAME replaced by the value
-char	*ft_put_var(char *str, t_data data, int i)
+char	*ft_put_var(char *str, t_data *data, int i)
 {
 	char	*value;
 	char	*res;
@@ -76,7 +76,7 @@ int	ft_var_name_len(char *str, int i)
 }
 
 //copy the value from the node returned by ft_get_value
-char	*ft_cpy_value(char *str, t_data data, int i, int var_name_len)
+char	*ft_cpy_value(char *str, t_data *data, int i, int var_name_len)
 {
 	t_env	*temp;
 	char	*value;

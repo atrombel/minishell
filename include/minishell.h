@@ -61,6 +61,6 @@ typedef struct s_redir //redirection
 	int		hd_tmp_fd; // le fd du heredoc associe
 }	t_redir;
 
-char	*ft_expand_var(char *str, t_data data);
+char	*ft_expand_var(char *str, t_data *data);
 
 #endif

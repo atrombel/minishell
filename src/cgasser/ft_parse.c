@@ -2,10 +2,10 @@
 #include "cgasser.h"
 #include <stdlib.h>
 
-int	ft_make_and_fill_cmd(t_list *cmd_head, t_list **temp, t_data data);
+int	ft_make_and_fill_cmd(t_list *cmd_head, t_list **temp, t_data *data);
 t_cmd	*ft_new_cmd();
 
-t_list	*ft_parse(t_list *tokens, t_data data)
+t_list	*ft_parse(t_list *tokens, t_data *data)
 {
 	t_list	*cmds;
 	t_list	*temp;
@@ -27,7 +27,7 @@ t_list	*ft_parse(t_list *tokens, t_data data)
 	return (cmds);
 }
 
-int	ft_make_and_fill_cmd(t_list *cmds, t_list **temp, t_data data)
+int	ft_make_and_fill_cmd(t_list *cmds, t_list **temp, t_data *data)
 {
 	t_cmd	*cmd;
 	t_token	*token;

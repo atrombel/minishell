@@ -3,9 +3,9 @@
 
 #include "ft_printf.h"
 
-int	ft_fill_arg(t_cmd *cmd, char *word, t_data data);
+int	ft_fill_arg(t_cmd *cmd, char *word, t_data *data);
 
-int	ft_fill_word(t_cmd *cmd, char *word, t_data data)
+int	ft_fill_word(t_cmd *cmd, char *word, t_data *data)
 {
 	int	status;
 
@@ -23,7 +23,7 @@ int	ft_fill_word(t_cmd *cmd, char *word, t_data data)
 }
 
 
-int	ft_fill_arg(t_cmd *cmd, char *word, t_data data)
+int	ft_fill_arg(t_cmd *cmd, char *word, t_data *data)
 {
 	char	*arg;
 
