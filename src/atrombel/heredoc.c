@@ -17,7 +17,7 @@ void	heredoc_tmp_init(t_redir *redir, t_data *data)
 {
 	char *str;
 
-	str = ft_strjoin("heredoc_tmp", ft_itoa(redir->last_hd_nbr));
+	str = ft_strjoin("heredoc_tmp", ft_itoa(data->last_hd_nbr));
 	printf("hd = %s\n", str);
 	if (!str)
 	{
@@ -28,7 +28,9 @@ void	heredoc_tmp_init(t_redir *redir, t_data *data)
 	if (redir->hd_tmp_fd == -1)// a definir
 		data->last_exit_status = errno;
 	redir->hd_filename = ft_strdup(str);
+	data->last_hd_nbr++;
 	free(str);
+
 }
 
 // fonction qui rempli le heredoc
@@ -51,7 +53,7 @@ void	open_heredoc(t_redir *redir, t_data *data, t_list *cmd_head, t_env **env)
 		}
 		if (g_sig == 130)// faire une fonction qui fait tout ca
 		{
-			heredoc_tmp_deletion(cmd_head);// verifier lesaks fd si je ferme bien redir->hd_tmp_fd
+			heredoc_tmp_deletion(cmd_head, data);// verifier lesaks fd si je ferme bien redir->hd_tmp_fd
 			return ;
 		}
 		if (ft_strncmp(input, redir->arg, len + 1) == 0) //limiteur par inclu dans le resultat final expl  cat << xd > lslssl
@@ -78,10 +80,7 @@ void	check_if_herdoc(t_cmd	*cmd, t_data *data, t_list *cmd_head, t_env **env)
 	{
 		redir = (t_redir *)redirs->content;
 		if (redir->type == IN_DELIM)
-		{
 			open_heredoc(redir, data, cmd_head, env);
-			redir->last_hd_nbr++;
-		}
 		redirs = redirs->next;
 	}
 }
@@ -96,7 +95,7 @@ void	heredoc_check_init(t_list *cmd_head, t_data *data, t_env **env)
 	{
 		if (g_sig == 130)
 		{
-			heredoc_tmp_deletion(cmd_head);
+			heredoc_tmp_deletion(cmd_head, data);
 			return ;
 		}
 		cmd = (t_cmd *)cmd_head->content;

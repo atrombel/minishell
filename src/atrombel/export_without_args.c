@@ -77,10 +77,7 @@ t_env	*export_only_env_copy(t_env *env)
 		add_back_env(&head, new);
 		env=env->next;
 	}
-	// printf("\033[0;32m export_only_env_copy closed ok \033[0m\n");
-	// write(1, "1\n", 2);
 	return (head);
-
 }
 
 // function that manage operation process when export doesnt have args

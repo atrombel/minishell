@@ -70,6 +70,6 @@ void	solo_cmd_not_builtin(t_list *cmd_head, t_data *data, t_env **env)
 
 	cmd = (t_cmd *)cmd_head->content;
 	ft_execute_cmd_redir(cmd, data, env, cmd_head);
-	heredoc_tmp_deletion(cmd_head);
+	heredoc_tmp_deletion(cmd_head, data);
 
 }

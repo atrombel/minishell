@@ -17,7 +17,7 @@ void	solo_cmd(t_list *cmd_head, t_data *data, t_env **env)
 			data->stdout_save = dup(1);
 			ft_redir_apply(cmd_head, data);
 			fd_redir_restoration_close(data);
-			heredoc_tmp_deletion(cmd_head);
+			heredoc_tmp_deletion(cmd_head, data);
 		}
 		return ;
 	}

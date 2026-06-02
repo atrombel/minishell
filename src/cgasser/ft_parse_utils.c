@@ -22,7 +22,6 @@ int	ft_fill_redir(t_cmd *cmd, t_list **temp)
 	ft_strlcpy(redir->arg, token->word, ft_strlen(token->word) + 1);
 	redir->hd_filename = NULL;
 	redir->hd_tmp_fd = -1;
-	redir->last_hd_nbr = 0;
 	ft_lstadd_back(&cmd->redirs, ft_lstnew(redir));
 	return (0);
 }
