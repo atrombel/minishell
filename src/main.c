@@ -18,7 +18,7 @@ int	main(int argc, char **argv, char **envp)
 	if (ft_signals() != 0)
 		return (1);
 	env = init_env(envp);
-	data_init(&data);
+	data_init(&data, env);
 	while (1)
 	{
 		user_input = ft_readline(env);

@@ -10,6 +10,8 @@ int	ft_redir_apply(t_list *cmd_head, t_data *data)
 	int		error;
 
 	error = 0;
+	if (!cmd_head->content->redirs)
+		return (error);
 	redirs = ((t_cmd *)cmd_head->content)->redirs;
 	while(redirs)
 	{
