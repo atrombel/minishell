@@ -14,6 +14,8 @@ void	reset_pipe(t_data *data)
 }
 void	exe_pipeline(t_list *cmd_head, t_data *data, pid_t pid, t_env **env)
 {
+	int status;
+
 	if (cmd_head->next)
 		pipe(data->pipe_fd);
 	pid = fork();
@@ -33,10 +35,10 @@ void	exe_pipeline(t_list *cmd_head, t_data *data, pid_t pid, t_env **env)
 		if (ft_redir_apply(cmd_head, data) == 0)
 			solo_cmd(cmd_head, data, env);
 		else
-			exit(1)
+			exit(1);
 		exit(126);
 	}
-	while (waitpid(-1, &status, 0) > 0);
+	while (waitpid(-1, &status, 0) > 0)
 		data->last_exit_status = status;
 	dup2(data->pipe_fd[0], data->tmp_fd);
 	if (cmd_head->next)
