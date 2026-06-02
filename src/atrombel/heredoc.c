@@ -34,7 +34,7 @@ void	heredoc_tmp_init(t_redir *redir, t_data *data)
 }
 
 // fonction qui rempli le heredoc
-void	open_heredoc(t_redir *redir, t_data *data, t_list *cmd_head, t_env **env)
+void	open_heredoc(t_redir *redir, t_data *data, t_list *cmd_head)
 {
 	char	*input;
 	int		len;
@@ -45,7 +45,7 @@ void	open_heredoc(t_redir *redir, t_data *data, t_list *cmd_head, t_env **env)
 	while(1)
 	{
 		input = readline("> ");
-		input = ft_expand_var(input, *env);
+		input = ft_expand_var(input, *data);
 		if (!input)
 		{
 			hd_ctrl_d(data, redir);
@@ -70,7 +70,7 @@ void	open_heredoc(t_redir *redir, t_data *data, t_list *cmd_head, t_env **env)
 }
 
 // fonction qui check si y a un herdoc
-void	check_if_herdoc(t_cmd	*cmd, t_data *data, t_list *cmd_head, t_env **env)
+void	check_if_herdoc(t_cmd	*cmd, t_data *data, t_list *cmd_head)
 {
 	t_list *redirs;
 	t_redir *redir;
@@ -80,14 +80,14 @@ void	check_if_herdoc(t_cmd	*cmd, t_data *data, t_list *cmd_head, t_env **env)
 	{
 		redir = (t_redir *)redirs->content;
 		if (redir->type == IN_DELIM)
-			open_heredoc(redir, data, cmd_head, env);
+			open_heredoc(redir, data, cmd_head);
 		redirs = redirs->next;
 	}
 }
 
 // fonction qui parcoure cmd par cmd
 // WARNING strjoin dans la creation des nom de fichier tmp heredocs
-void	heredoc_check_init(t_list *cmd_head, t_data *data, t_env **env)
+void	heredoc_check_init(t_list *cmd_head, t_data *data)
 {
 	t_cmd	*cmd;
 
@@ -99,7 +99,7 @@ void	heredoc_check_init(t_list *cmd_head, t_data *data, t_env **env)
 			return ;
 		}
 		cmd = (t_cmd *)cmd_head->content;
-		check_if_herdoc(cmd, data, cmd_head, env);
+		check_if_herdoc(cmd, data, cmd_head);
 		cmd_head = cmd_head->next;
 	}
 }

@@ -2,7 +2,7 @@
 #include "minishell.h"
 #include "atrombel.h"
 
-void	data_init(t_data	*data, t_env	*env)
+void	data_init(t_data	*data, t_env	*envp)
 {
 	data->last_exit_status = 0;
 	data->infile = -1;
@@ -13,4 +13,5 @@ void	data_init(t_data	*data, t_env	*env)
 	data->pipe_fd[0] = -1;
 	data->pipe_fd[1] = -1;
 	data->last_hd_nbr = 0;
+	data->env = envp;
 }

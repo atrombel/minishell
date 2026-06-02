@@ -16,7 +16,7 @@
 # define IN 4 //"<"
 # define OUT 5 //">"
 # define IN_DELIM 6 // "<<"
-# define OUT_APPN 7 //">>,"
+# define OUT_APPN 7 //">>"
 //error types
 # define ALLOC_ERR "Error\nMemory allocation failed\n"
 
@@ -59,7 +59,6 @@ typedef struct s_redir //redirection
 	char	*arg; //filename or delimitor
 	char	*hd_filename; //heredoc temporary file created to store the input of the user associated to a command MALLOC
 	int		hd_tmp_fd; // le fd du heredoc associe
-
 }	t_redir;
 
 char	*ft_expand_var(char *str, t_data data);

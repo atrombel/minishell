@@ -34,7 +34,7 @@ void	export_printf(t_env *env_tmp);
 int		export_new_value_storing(t_env *env, t_env *new);
 
 /* heredoc */
-void	heredoc_check_init(t_list *cmd_head, t_data *data, t_env **env);
+void	heredoc_check_init(t_list *cmd_head, t_data *data);
 void	heredoc_close(t_redir *redir);
 void	herdoc_finder(t_list *cmd_head);
 void	heredoc_tmp_deletion(t_list *cmd_head, t_data *data);
@@ -57,8 +57,11 @@ int		ft_builtin_verif(t_cmd *content);
 int		ft_execute_builtin(t_cmd *content, t_data *data, t_env **env, t_list *head);
 
 /* utils */
-void	data_init(t_data *data);
+void	data_init(t_data	*data, t_env	*envp);
 char	*ft_readline(t_env *env);
 void	error_print(char *str);
+
+/* pipeline */
+void	exe_pipeline(t_list *cmd_head, t_data *data, pid_t pid, t_env **env);
 
 #endif
