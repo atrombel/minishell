@@ -1,6 +1,8 @@
+
 #ifndef ATROMBEL_H
 # define ATROMBEL_H
-# include <limits.h> //verifier si jai le droit dutiliser // sinon remove it if not used
+# include <limits.h> //verifier si jai le droit dutiliser
+ // sinon remove it if not used
 // struct that contain usefull data to see if really that usefull long term
 
 /* env */
@@ -32,10 +34,10 @@ void	export_printf(t_env *env_tmp);
 int		export_new_value_storing(t_env *env, t_env *new);
 
 /* heredoc */
-void	heredoc_check_init(t_list *cmd_head, t_data *data);
+void	heredoc_check_init(t_list *cmd_head, t_data *data, t_env **env);
 void	heredoc_close(t_redir *redir);
 void	herdoc_finder(t_list *cmd_head);
-void	heredoc_tmp_deletion(t_list *cmd_head);
+void	heredoc_tmp_deletion(t_list *cmd_head, t_data *data);
 
 /* redirections */
 void	stdin_redir(t_redir *redir, t_data *data, int *error);

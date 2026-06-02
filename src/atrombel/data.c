@@ -12,4 +12,5 @@ void	data_init(t_data	*data)
 	data->tmp_fd = -1;
 	data->pipe_fd[0] = -1;
 	data->pipe_fd[1] = -1;
+	data->last_hd_nbr = 0;
 }

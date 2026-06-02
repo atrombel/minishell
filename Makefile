@@ -27,8 +27,7 @@ ATROMBEL_CFILES = ft_exe_main.c ft_echo.c ft_cd.c env_set_or_copy.c ft_env.c \
 		 ft_unset.c ft_readline.c data.c env_to_charstar_reconversion.c error_print.c \
 		 ft_exe_main_utils.c heredoc.c heredoc_tmp_deletion.c redir_utils.c\
 		 solo_builtin.c solo_cmd.c solo_cmd_not_builtin.c special_and_env_parameter.c\
-		 strs_cmp_max_len.c args_charstar_reconversion.c redir_apply.c\
-		 mutiple_cmd.c
+		 strs_cmp_max_len.c redir_apply.c mutiple_cmd.c
 
 
 ATROMBEL_SRCS = $(addprefix $(ATROMBEL_SRC_DIR)/, $(ATROMBEL_CFILES))

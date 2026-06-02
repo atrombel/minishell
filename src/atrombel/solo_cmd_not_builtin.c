@@ -41,7 +41,8 @@ void	ft_execute_cmd_redir(t_cmd	*cmd, t_data *data, t_env **env, t_list *cmd_hea
 		return ;
 	}
 	if(pid == 0)//child
-	{
+	{	write(1, "\033[32m[DEBUG] je suis passé ici\n\033[0m", 37);
+
 		if (cmd->redirs)
 		{
 			if (ft_redir_apply(cmd_head, data) == 0)
@@ -54,6 +55,7 @@ void	ft_execute_cmd_redir(t_cmd	*cmd, t_data *data, t_env **env, t_list *cmd_hea
 
 	if (pid > 0)
 	{
+		write(1, "\033[35m[DEBUG] je suis passé ici\n\033[0m", 37);
 		waitpid(pid, &status, 0);
 		if (WIFEXITED(status))
 			data->last_exit_status = WEXITSTATUS(status);
@@ -68,5 +70,6 @@ void	solo_cmd_not_builtin(t_list *cmd_head, t_data *data, t_env **env)
 
 	cmd = (t_cmd *)cmd_head->content;
 	ft_execute_cmd_redir(cmd, data, env, cmd_head);
-	heredoc_tmp_deletion(cmd_head);
+	heredoc_tmp_deletion(cmd_head, data);
+
 }

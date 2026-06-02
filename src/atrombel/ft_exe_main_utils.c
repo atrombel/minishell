@@ -6,8 +6,8 @@
 // faut lui passer cmd par cmd cmd_head->content
 int ft_builtin_verif(t_cmd *cmd)
 {
-	if (!cmd || !cmd->args[0])
-		return (1);
+	if (!cmd || !cmd->args || !cmd->args[0])
+		return (0);
 	if (ft_strncmp("echo", cmd->args[0], 5) == 0)
 		return (1);
 	if (ft_strncmp("cd", cmd->args[0], 3) == 0)

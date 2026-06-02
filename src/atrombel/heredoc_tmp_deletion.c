@@ -4,6 +4,7 @@
 
 void	heredoc_close(t_redir *redir)
 {
+	printf("heredoc_close = > %s\n", redir->hd_filename);
 	if (redir->hd_filename)
 	{
 		//printf("herdeco close hd = %s\n", redir->hd_filename);
@@ -34,12 +35,13 @@ void	heredoc_close_cmd ( t_list *cmd_head)
 }
 
 //fonction that delte the heredoc and everything linked to it
-void	heredoc_tmp_deletion(t_list *cmd_head)
+void	heredoc_tmp_deletion(t_list *cmd_head, t_data *data)
 {
 	while(cmd_head)
 	{
 		heredoc_close_cmd(cmd_head);
 		cmd_head = cmd_head->next;
 	}
+	data->last_hd_nbr = 0;
 
 }

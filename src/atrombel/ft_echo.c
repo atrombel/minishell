@@ -24,7 +24,7 @@ int	is_valid_n_flag(char *args)
 // echo - display a line of text
 void	ft_echo(t_cmd *cmd, t_data *data)
 {
-	data->last_exit_status = 0;
+	(void)data;// AAAAAAAAAA ENLEVER
 	int	i;
 	int	boul;
 
@@ -33,13 +33,12 @@ void	ft_echo(t_cmd *cmd, t_data *data)
 	if (!cmd->args || !cmd->args[0] || !cmd->args[1])
 	{
 		write(1,"\n", 1);
-		data->last_exit_status = 1;
 		return;
 	}
-	if (is_valid_n_flag(cmd->args[1]) == 1)
+	while (is_valid_n_flag(cmd->args[i]) == 1)
 	{
 		boul = 1;
-		i = 2;
+		i++;
 	}
 	while (cmd->args[i])
 	{
@@ -51,4 +50,5 @@ void	ft_echo(t_cmd *cmd, t_data *data)
 	}
 	if (boul == 0)
 		write(1,"\n", 1);
+
 }
