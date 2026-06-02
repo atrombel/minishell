@@ -60,4 +60,6 @@ typedef struct s_redir //redirection
 	int		last_hd_nbr; // suffixe du tmp por plusieur heredoc
 }	t_redir;
 
+char	*ft_expand_var(char *str, t_env *env);
+
 #endif
