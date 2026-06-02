@@ -7,7 +7,7 @@ void	multiple_cmd(t_list *cmd_head, t_data *data, t_env **env)
 
 
 	pid = -1;
-	while(cmd_head && cmd_head->next)
+	while(cmd_head )
 	{
 		if (cmd_head->content)
 			exe_pipeline(cmd_head, data, pid, env);
