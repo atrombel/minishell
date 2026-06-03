@@ -60,6 +60,7 @@ int		ft_execute_builtin(t_cmd *content, t_data *data, t_env **env, t_list *head)
 void	data_init(t_data	*data, t_env	*envp);
 char	*ft_readline(t_env *env);
 void	error_print(char *str);
+void	is_minishell_lvl(t_cmd	*cmd, t_env **env);
 
 /* pipeline */
 void	exe_pipeline(t_list *cmd_head, t_data *data, pid_t pid, t_env **env);
