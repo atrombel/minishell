@@ -8,6 +8,7 @@ void	ft_execute_cmd(t_cmd	*cmd, t_data *data, t_env **env, t_list *head)
 	(void)head;
 	char	**envp;
 
+	is_minishell_lvl(cmd, env);// rajouter dans multiple pipe;
 	envp = env_to_charstar_reconversion(*env);
 	if (!envp)
 	{
