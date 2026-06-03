@@ -62,7 +62,6 @@ int	ft_count_word_quoted(char *s, char c)
 			count++;
 		i += ft_len_word_quoted(s, c, i);
 	}
-	ft_printf("number of words: %d\n", count);
 	return (count);
 }
 

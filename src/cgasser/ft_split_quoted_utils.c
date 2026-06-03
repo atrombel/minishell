@@ -1,5 +1,6 @@
 
 #include "cgasser.h"
+#include "ft_printf.h"
 
 int	ft_len_quote(char *start);
 int	ft_len_oper(char *start);
@@ -39,7 +40,7 @@ int	ft_len_quote(char *start)
 	}
 	if (!end)
 		return (0);
-	return (start - end);
+	return (end - start);
 }
 
 int	ft_len_oper(char *start)

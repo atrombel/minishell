@@ -82,7 +82,7 @@ char	*ft_cpy_value(char *str, t_data *data, int i, int var_name_len)
 
 	temp = NULL;
 	value = NULL;
-	if (ft_strncmp(str + i, "$?", 2) == 0 && var_name_len == 1)
+	if (ft_strncmp(str + i, "$?", 2) == 0 && var_name_len == 2)
 		return (ft_itoa(data->last_exit_status));
 	temp = ft_get_value(str, data->env, i, var_name_len);
 	if (!temp)
