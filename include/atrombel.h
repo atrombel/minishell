@@ -65,4 +65,8 @@ void	is_minishell_lvl(t_cmd	*cmd, t_env **env);
 /* pipeline */
 void	exe_pipeline(t_list *cmd_head, t_data *data, pid_t pid, t_env **env);
 
+/* signals*/
+int	set_signals_default();
+int	set_signals_ignore();
+
 #endif
