@@ -45,7 +45,7 @@ void	open_heredoc(t_redir *redir, t_data *data, t_list *cmd_head)
 	while(1)
 	{
 		input = readline("> ");
-		input = ft_expand_var(input, *data);
+		input = ft_expand_var(input, data);
 		if (!input)
 		{
 			hd_ctrl_d(data, redir);
