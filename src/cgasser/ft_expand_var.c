@@ -67,15 +67,13 @@ int	ft_var_name_len(char *str, int i)
 	int	len;
 
 	len = 0;
-	while (!ft_isquote(str[i]) && str[i] != ' ' && str[i] != '\0')
-	{
+	while (!ft_isquote(str[i + len]) && str[i + len] != ' ' && str[i + len] != '\0')
 		len++;
-		i++;
-	}
 	return (len);
 }
 
-//copy the value from the node returned by ft_get_value
+//copy the value from the node returned by ft_get_value or itoa the last
+//exit status in case of $?
 char	*ft_cpy_value(char *str, t_data *data, int i, int var_name_len)
 {
 	t_env	*temp;
