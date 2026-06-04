@@ -15,7 +15,7 @@ int	cd_success(t_env *env, char *old_pwd)
 		return (1);
 	}
 	ft_change_value_env(env, "OLDPWD", old_pwd);
-	free(old_pwd);
+	free (old_pwd);
 	ft_change_value_env(env, "PWD", new_wd);
 	free (new_wd);
 	return (0);
@@ -28,9 +28,7 @@ void	ft_chdir(char	*path, t_data *data, t_env *env)
 
 	if (chdir(path) == -1)
 	{
-		ft_putstr_fd("minishell: cd: ", 2);
-		perror(path);
-		write(2, "\n", 1);
+		error_msg("cd", "No such file or directory");
 		data->last_exit_status = 1;
 		return ;
 	}
@@ -49,8 +47,8 @@ static int	nbr_args_check(char	**args, t_data *data)
 {
 	if (args && args[0] && args[1] && args[2])
 	{
+		error_msg("cd", "too many arguments");
 		data->last_exit_status = 1;
-		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
 		return (1);
 	}
 	return (0);
@@ -81,8 +79,8 @@ void	ft_cd(t_cmd *cmd, t_data *data, t_env *env)
 	path = path_define_cd(args, env);
 	if (!path)// strong against unset HOME
 	{
+		error_msg("cd", "HOME not set");
 		data->last_exit_status = 1;
-		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 		return ;
 	}
 	ft_chdir(path, data, env);

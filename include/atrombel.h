@@ -19,7 +19,7 @@ int		ft_addnew_key_and_value(t_env *env, char *str);
 void	env_lst_cmd_update(t_env *env, char *last_arg);
 
 /* builtins */
-void	ft_echo(t_cmd *cmd, t_data *data);
+void	ft_echo(t_cmd *cmd);
 void	ft_cd(t_cmd *content, t_data *data, t_env *env);
 void	ft_pwd(t_data *data, t_env *env);
 void	ft_env(t_data *data, t_env *env);
@@ -61,7 +61,9 @@ int		ft_execute_builtin(t_cmd *content, t_data *data, t_env **env, t_list *head)
 void	data_init(t_data	*data, t_env	*envp);
 char	*ft_readline(t_env *env);
 void	error_print(char *str);
+void	error_msg(char *str, char *msg);
 void	is_minishell_lvl(t_cmd	*cmd, t_env **env);
+void	command_not_found(char *str);
 
 /* pipeline */
 void	exe_pipeline(t_list *cmd_head, t_data *data, pid_t pid, t_env **env);

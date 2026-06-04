@@ -38,7 +38,7 @@ void	solo_cmd(t_list *cmd_head, t_data *data, t_env **env)
 	if (!cmd_head || !cmd_head->content)
 		return ;
 	cmd = (t_cmd *)cmd_head->content;
-	if (!cmd->args || !cmd->args[0])
+	if (!cmd->is_valid)
 	{
 		if (cmd->redirs)
 		{
@@ -48,6 +48,8 @@ void	solo_cmd(t_list *cmd_head, t_data *data, t_env **env)
 			fd_redir_restoration_close(data);
 			heredoc_tmp_deletion(cmd_head, data);
 		}
+		if (cmd->args && cmd->args[0])
+			command_not_found(cmd->args[0]);
 		return ;
 	}
 	if (ft_builtin_verif((t_cmd *)cmd_head->content) == 1)

@@ -33,7 +33,7 @@ void	child_exe(t_list *cmd_head, t_data *data, t_env **env)
 		solo_cmd(cmd_head, data, env);
 	else
 		exit(1);
-	exit(126);
+
 }
 
 void	exe_pipeline(t_list *cmd_head, t_data *data, pid_t pid, t_env **env)

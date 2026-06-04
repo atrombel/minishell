@@ -3,10 +3,27 @@
 #include "atrombel.h"
 #include "cgasser.h"
 
-void	ft_execute_cmd(t_cmd	*cmd, t_data *data, t_env **env, t_list *head)
+
+void	waitpid_operations(t_data *data, int pid)
 {
-	(void)data;
-	(void)head;
+	int	status;
+
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		data->last_exit_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+	{
+		if (WTERMSIG(status) == SIGINT)
+					write(1, "\n", 1);
+		else if (WTERMSIG(status) == SIGQUIT)
+			write(1, "Quit (core dumped)\n", 19);
+		data->last_exit_status = 128 + WTERMSIG(status);
+	}
+	ft_signals();
+}
+
+void	ft_execute_cmd(t_cmd *cmd, t_env **env)
+{
 	char	**envp;
 
 	is_minishell_lvl(cmd, env);// rajouter dans multiple pipe;
@@ -19,23 +36,15 @@ void	ft_execute_cmd(t_cmd	*cmd, t_data *data, t_env **env, t_list *head)
 	set_signals_default();
 	execve(cmd->path, cmd->args, envp);
 	error_print("execve failed");
-	// penser a free envp
-	// clean_all_there_is_to_clean(); A FAIRE
-	// exit(126);
-	// /switch (errno) {
-	// case EACCES:
-	// 	exit(126);   // fichier trouve mais pas executable a verifier le 126
-	// case ENOENT:
-	// 	exit(127);   // fichier introuvabl /// A CREER UNE FONCTION QUI GERE LES CODE RETOUR POUR LUI
-	// default:
-	// 	exit(126);   // autre erreur d'exécution → 126 par convention
+	if (errno == EACCES)
+		exit(126);
+	exit(127);
 }
 
 // organise execution of cmd and application of redir
 void	ft_execute_cmd_redir(t_cmd	*cmd, t_data *data, t_env **env, t_list *cmd_head)
 {
 	int	pid;
-	int	status;
 
 	set_signals_ignore();
 	pid = fork();
@@ -44,26 +53,18 @@ void	ft_execute_cmd_redir(t_cmd	*cmd, t_data *data, t_env **env, t_list *cmd_hea
 		error_print("fork");
 		return ;
 	}
-	if(pid == 0)//child
+	else if(pid == 0)//child
 	{
 		if (cmd->redirs)// a voir si je peux enelever ceci
 		{
 			if (ft_redir_apply(cmd_head, data) == 0)
-				ft_execute_cmd(cmd, data, env, cmd_head);
+				ft_execute_cmd(cmd, env);
 		}
 		else
-			ft_execute_cmd(cmd, data, env, cmd_head);
-		exit(126);
+			ft_execute_cmd(cmd, env);
 	}
-	if (pid > 0)
-	{
-		waitpid(pid, &status, 0);
-		if (WIFEXITED(status))
-			data->last_exit_status = WEXITSTATUS(status);
-		else if (WIFSIGNALED(status))
-			data->last_exit_status = 128 + WTERMSIG(status);
-		ft_signals();
-	}
+	else if (pid > 0)
+		waitpid_operations(data, pid);
 }
 
 void	solo_cmd_not_builtin(t_list *cmd_head, t_data *data, t_env **env)
@@ -73,5 +74,4 @@ void	solo_cmd_not_builtin(t_list *cmd_head, t_data *data, t_env **env)
 	cmd = (t_cmd *)cmd_head->content;
 	ft_execute_cmd_redir(cmd, data, env, cmd_head);
 	heredoc_tmp_deletion(cmd_head, data);
-
 }

@@ -8,7 +8,6 @@
 //expl cat < po.c
 void	stdin_redir(t_redir *redir, t_data *data, int *error)
 {
-	 // a implemetner le retour erreur data
 	data->infile = open(redir->arg, O_RDONLY);
 	if (data->infile < 0)
 	{
@@ -23,7 +22,6 @@ void	stdin_redir(t_redir *redir, t_data *data, int *error)
 
 void	stdout_redir(t_redir *redir, t_data *data, int *error)
 {
-	// a implemetner le retour erreur data
 	data->outfile = open(redir->arg, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (data->outfile < 0)
 	{
@@ -38,7 +36,6 @@ void	stdout_redir(t_redir *redir, t_data *data, int *error)
 
 void	stdout_appnd(t_redir *redir, t_data *data, int *error)
 {
-	// a implemetner le retour erreur data
 	data->outfile = open(redir->arg, O_CREAT | O_RDWR | O_APPEND, 0644);
 	if (data->outfile < 0)
 	{
