@@ -38,6 +38,9 @@ int	ft_fill_arg(t_cmd *cmd, char *word, t_data *data)
 	arg = ft_trim_quotes(arg);
 	if (!arg)
 		return (1);
-	cmd->args = ft_arrayadd_back(cmd->args, arg);
+	if (arg && arg[0] != '\0')
+		cmd->args = ft_arrayadd_back(cmd->args, arg);
+	else
+		free(arg);
 	return (0);
 }
