@@ -1,6 +1,7 @@
 
 #include "minishell.h"
 #include "atrombel.h"
+#include "cgasser.h"
 
 void	ft_execute_cmd(t_cmd	*cmd, t_data *data, t_env **env, t_list *head)
 {
@@ -15,6 +16,7 @@ void	ft_execute_cmd(t_cmd	*cmd, t_data *data, t_env **env, t_list *head)
 		error_print("ERROR");
 		return ;
 	}
+	set_signals_default();
 	execve(cmd->path, cmd->args, envp);
 	error_print("execve failed");
 	// penser a free envp
@@ -22,7 +24,7 @@ void	ft_execute_cmd(t_cmd	*cmd, t_data *data, t_env **env, t_list *head)
 	// exit(126);
 	// /switch (errno) {
 	// case EACCES:
-	// 	exit(126);   // fichier trouve mais pas executable
+	// 	exit(126);   // fichier trouve mais pas executable a verifier le 126
 	// case ENOENT:
 	// 	exit(127);   // fichier introuvabl /// A CREER UNE FONCTION QUI GERE LES CODE RETOUR POUR LUI
 	// default:
@@ -35,6 +37,7 @@ void	ft_execute_cmd_redir(t_cmd	*cmd, t_data *data, t_env **env, t_list *cmd_hea
 	int	pid;
 	int	status;
 
+	set_signals_ignore();
 	pid = fork();
 	if (pid == -1)
 	{
@@ -52,7 +55,6 @@ void	ft_execute_cmd_redir(t_cmd	*cmd, t_data *data, t_env **env, t_list *cmd_hea
 			ft_execute_cmd(cmd, data, env, cmd_head);
 		exit(126);
 	}
-
 	if (pid > 0)
 	{
 		waitpid(pid, &status, 0);
@@ -60,6 +62,7 @@ void	ft_execute_cmd_redir(t_cmd	*cmd, t_data *data, t_env **env, t_list *cmd_hea
 			data->last_exit_status = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
 			data->last_exit_status = 128 + WTERMSIG(status);
+		ft_signals();
 	}
 }
 
