@@ -35,7 +35,7 @@ void	ft_print_cmd(t_cmd *cmd)
 		ft_printf("\targs:");
 		while (cmd->args[i])
 		{
-			ft_printf(" $%s$,", cmd->args[i]);
+			ft_printf(" %s,", cmd->args[i]);
 			i++;
 		}
 	}
