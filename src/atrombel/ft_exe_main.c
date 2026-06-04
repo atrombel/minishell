@@ -2,7 +2,6 @@
 #include "minishell.h"
 #include "atrombel.h"
 
-// PENSER A FAIRTE LA CORRECTION DES DOUBLE QUOTE DE ECHO PARTOUT DANS LES BUILTINS
 // main function that will sort and  organise the operation between the execution processes
 void	ft_exe_main(t_list *cmd_head, t_data *data, t_env **env)
 {

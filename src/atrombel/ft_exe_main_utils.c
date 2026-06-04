@@ -30,7 +30,7 @@ int	ft_execute_builtin(t_cmd *cmd, t_data *data, t_env **env, t_list *head)
 	if (!cmd || !cmd->args[0])
 		return (0);
 	if (ft_strncmp("echo", cmd->args[0], 5) == 0)
-		return (ft_echo(cmd), 0);
+		return (ft_echo(cmd, data), 0);
 	if (ft_strncmp("cd", cmd->args[0], 3) == 0)
 		return (ft_cd(cmd, data, *env), 0);
 	if (ft_strncmp("pwd", cmd->args[0], 4) == 0)

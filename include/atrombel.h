@@ -19,7 +19,7 @@ int		ft_addnew_key_and_value(t_env *env, char *str);
 void	env_lst_cmd_update(t_env *env, char *last_arg);
 
 /* builtins */
-void	ft_echo(t_cmd *cmd);
+void	ft_echo(t_cmd *cmd,  t_data *data);
 void	ft_cd(t_cmd *content, t_data *data, t_env *env);
 void	ft_pwd(t_data *data, t_env *env);
 void	ft_env(t_data *data, t_env *env);

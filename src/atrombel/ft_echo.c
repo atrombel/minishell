@@ -22,7 +22,7 @@ int	is_valid_n_flag(char *args)
 
 // data last command error number "echo $?"" to implement also echo should display env ? if yes to implement as well expl echo $PWD/home/atrombel/42/3/minishell
 // echo - display a line of text
-void	ft_echo(t_cmd *cmd)
+void	ft_echo(t_cmd *cmd,  t_data *data)
 {
 	int	i;
 	int	boul;
@@ -48,4 +48,5 @@ void	ft_echo(t_cmd *cmd)
 	}
 	if (boul == 0)
 		write(1,"\n", 1);
+	data->last_exit_status = 0;
 }

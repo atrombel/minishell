@@ -49,7 +49,10 @@ void	solo_cmd(t_list *cmd_head, t_data *data, t_env **env)
 			heredoc_tmp_deletion(cmd_head, data);
 		}
 		if (cmd->args && cmd->args[0])
+		{
 			command_not_found(cmd->args[0]);
+			data->last_exit_status = 127;
+		}
 		return ;
 	}
 	if (ft_builtin_verif((t_cmd *)cmd_head->content) == 1)
