@@ -107,7 +107,8 @@ t_env	*ft_get_value(char *str, t_env *env, int i, int var_name_len)
 	var_name = str + i + 1;
 	while (temp != NULL)
 	{
-		if (ft_strncmp(var_name, temp->key, var_name_len) == 0)
+		if (ft_strncmp(var_name, temp->key, var_name_len - 1) == 0 \
+		&& ft_strlen(temp->key) == (size_t)(var_name_len - 1))
 			break;
 		temp = temp->next;
 	}

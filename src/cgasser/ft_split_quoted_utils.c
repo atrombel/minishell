@@ -26,6 +26,8 @@ int	ft_len_quote(char *start)
 	char	*end;
 
 	end = NULL;
+	if (!ft_isquote(*start))
+		return (0);
 	if (*start == 34)
 	{
 		end = ft_strchr(start + 1, 34);
@@ -39,7 +41,7 @@ int	ft_len_quote(char *start)
 			end++;
 	}
 	if (!end)
-		return (0);
+		return (1);
 	return (end - start);
 }
 
