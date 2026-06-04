@@ -2,6 +2,35 @@
 #include "minishell.h"
 #include "atrombel.h"
 
+// update "-=..." in env, use ONLY if cmd execution was succesful
+void	env_lst_cmd_update(t_env *env, char *last_arg)
+{
+	char	*new_key;
+
+	new_key = NULL;
+	if (ft_get_value_env(env, "_") == NULL)
+	{
+		new_key = ft_strjoin("_=", last_arg);// malloc to secure
+		if (!new_key)
+			return ;
+		ft_addnew_key_and_value(env, new_key);
+	}
+	else
+		ft_change_value_env(env, "_", last_arg);
+}
+
+
+void	update_underscore_env( t_env **env, t_cmd *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd->args[i])
+		i++;
+	i--;
+	env_lst_cmd_update(*env, cmd->args[i]);
+}
+
 void	solo_cmd(t_list *cmd_head, t_data *data, t_env **env)
 {
 	t_cmd *cmd;
@@ -25,4 +54,5 @@ void	solo_cmd(t_list *cmd_head, t_data *data, t_env **env)
 		solo_builtin(cmd_head, data, env);
 	else
 		solo_cmd_not_builtin(cmd_head, data, env);
+	update_underscore_env(env, cmd);
 }

@@ -16,6 +16,7 @@ int		new_value_storing(char *envp_i, t_env *new);
 int		env_key_copy_check(char *new_key, t_env *tmp_env);
 char	**env_to_charstar_reconversion(t_env *env);
 int		ft_addnew_key_and_value(t_env *env, char *str);
+void	env_lst_cmd_update(t_env *env, char *last_arg);
 
 /* builtins */
 void	ft_echo(t_cmd *cmd, t_data *data);
