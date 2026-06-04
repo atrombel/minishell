@@ -45,7 +45,7 @@ void	ft_echo(t_cmd *cmd, t_data *data)
 
 		write(1, cmd->args[i], ft_strlen(cmd->args[i]));
 		i++;
-		if (cmd->args[i])
+		if (cmd->args[i] && cmd->args[i][0] != '\0')
 			write(1," ", 1);
 	}
 	if (boul == 0)
