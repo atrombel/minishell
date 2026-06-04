@@ -25,6 +25,10 @@ void	ft_print_cmd(t_cmd *cmd)
 	int	i;
 
 	i = 0;
+	if (cmd->is_valid == 1)
+		ft_printf("\ncommand is valid");
+	if (cmd->is_valid == 0)
+		ft_printf("\ncommand is unvalid");
 	if (cmd->args)
 		ft_printf("\ncmd: %s", cmd->args[i]);
 	i++;

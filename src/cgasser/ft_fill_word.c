@@ -11,10 +11,7 @@ int	ft_fill_word(t_cmd *cmd, char *word, t_data *data)
 
 	status = 0;
 	if (!cmd->args && !cmd->path)
-	{
-		if(ft_fill_cmd(cmd, word, data->env) != 0)
-			return (1);
-	}
+		status = ft_fill_cmd(cmd, word, data->env);
 	else
 		status = ft_fill_arg(cmd, word, data);
 	if (status != 0)
