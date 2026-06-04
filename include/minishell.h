@@ -48,6 +48,7 @@ typedef struct s_data// prblmt que je vais devoir le mettre en init pour chaque 
 
 typedef struct s_cmd
 {
+	int		is_valid; //1 if it is a valid command, 0 otherwise
 	char	*path; //command path
 	char	**args; //name of the command, flag and arguments
 	t_list	*redirs; //redirections
