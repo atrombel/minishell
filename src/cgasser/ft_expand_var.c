@@ -66,8 +66,9 @@ int	ft_var_name_len(char *str, int i)
 {
 	int	len;
 
-	len = 0;
-	while (!ft_isquote(str[i + len]) && str[i + len] != ' ' && str[i + len] != '\0')
+	len = 1;
+	while (!ft_isquote(str[i + len]) && str[i + len] != ' ' \
+		&& str[i + len] != '\0' && str[i + len] != '$')
 		len++;
 	return (len);
 }
