@@ -23,8 +23,7 @@ void	cmd_pipe_exe(t_list *cmd_head, t_data *data, t_env **env)
 	else
 	{
 		set_signals_default();
-		if (ft_redir_apply(cmd_head, data) == 0)
-			ft_execute_cmd(cmd, env);
+		ft_execute_cmd(cmd, env);
 	}
 	exit(0);
 }
@@ -53,6 +52,8 @@ void	child_exe(t_list *cmd_head, t_data *data, t_env **env)
 		close(data->pipe_fd[1]);
 		close(data->pipe_fd[0]);
 	}
+	if (ft_redir_apply(cmd_head, data) != 0)
+		exit(1);
 	cmd_pipe_exe(cmd_head, data, env);
 }
 void	exe_pipeline(t_list *cmd_head, t_data *data, pid_t pid, t_env **env)
@@ -62,6 +63,11 @@ void	exe_pipeline(t_list *cmd_head, t_data *data, pid_t pid, t_env **env)
 		pipe(data->pipe_fd);
 	set_signals_ignore();
 	pid = fork();
+	if (pid == -1)
+	{
+		error_print("exe_pipe");
+		return ;
+	}
 	if (pid == 0) // faire aussi cas < 0
 		child_exe(cmd_head, data, env);
 	data->tmp_fd = data->pipe_fd[0];
@@ -69,4 +75,5 @@ void	exe_pipeline(t_list *cmd_head, t_data *data, pid_t pid, t_env **env)
 		reset_pipe(data, 0);
 	else
 		reset_pipe(data, 1);
+
 }
