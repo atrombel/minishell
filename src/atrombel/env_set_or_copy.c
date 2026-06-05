@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_set_or_copy.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atrombel <atrombel@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/05 14:33:22 by atrombel          #+#    #+#             */
-/*   Updated: 2026/06/05 14:33:27 by atrombel         ###   ########.fr       */
+/*   Created: 2026/06/05 15:51:32 by atrombel          #+#    #+#             */
+/*   Updated: 2026/06/05 15:51:32 by atrombel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "minishell.h"
 #include "atrombel.h"
