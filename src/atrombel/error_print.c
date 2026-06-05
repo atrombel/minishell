@@ -16,6 +16,7 @@ void	command_not_found(char *str)
 	write(2, "\n", 1);
 }
 
+// for erno
 void	error_print(char *str)
 {
 	if (!str)
