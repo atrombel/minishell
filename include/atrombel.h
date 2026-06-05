@@ -47,6 +47,7 @@ void	stdout_appnd(t_redir *redir, t_data *data, int *error);
 void	heredoc_reddir_apply(t_redir *redir, t_data *data, int *error);
 int		ft_redir_apply(t_list *cmd_head, t_data *data);
 void	fd_redir_restoration_close(t_data *data);
+int		redir_but_cmd_invalid(t_list *cmd_head, t_data *data, t_cmd *cmd);
 
 /* execution */
 void	ft_exe_main(t_list *cmd_head, t_data *data, t_env **env);
@@ -56,6 +57,7 @@ void	solo_cmd_not_builtin(t_list *cmd_head, t_data *data, t_env **env);
 void	multiple_cmd(t_list *cmd_head, t_data *data, t_env **env);
 int		ft_builtin_verif(t_cmd *content);
 int		ft_execute_builtin(t_cmd *content, t_data *data, t_env **env, t_list *head);
+void	ft_execute_cmd(t_cmd *cmd, t_env **env);
 
 /* utils */
 void	data_init(t_data	*data, t_env	*envp);
@@ -67,6 +69,7 @@ void	command_not_found(char *str);
 
 /* pipeline */
 void	exe_pipeline(t_list *cmd_head, t_data *data, pid_t pid, t_env **env);
+void	waitpid_operations(t_data *data);
 
 /* signals*/
 int	set_signals_default();

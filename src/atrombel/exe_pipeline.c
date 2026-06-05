@@ -5,6 +5,30 @@
 //pipe_fd[0] = fd de lecture
 //pipe_fd[1] = fd d'écriture
 
+
+void	cmd_pipe_exe(t_list *cmd_head, t_data *data, t_env **env)
+{
+	t_cmd *cmd;
+
+	if (!cmd_head || !cmd_head->content)
+		return ;
+	cmd = (t_cmd *)cmd_head->content;
+	if (redir_but_cmd_invalid(cmd_head, data, cmd) == 1)
+		return ;
+	if (ft_builtin_verif(cmd_head->content) == 1)
+	{
+		solo_builtin(cmd_head, data, env);
+		exit(data->last_exit_status);// checker des erreur avec ca
+	}
+	else
+	{
+		set_signals_default();
+		if (ft_redir_apply(cmd_head, data) == 0)
+			ft_execute_cmd(cmd, env);
+	}
+	exit(0);
+}
+
 void	reset_pipe(t_data *data, int mode)
 {
 	if (mode == 1)
@@ -29,24 +53,17 @@ void	child_exe(t_list *cmd_head, t_data *data, t_env **env)
 		close(data->pipe_fd[1]);
 		close(data->pipe_fd[0]);
 	}
-	if (ft_redir_apply(cmd_head, data) == 0)
-		solo_cmd(cmd_head, data, env);
-	else
-		exit(1);
-
+	cmd_pipe_exe(cmd_head, data, env);
 }
-
 void	exe_pipeline(t_list *cmd_head, t_data *data, pid_t pid, t_env **env)
 {
-	int status;
 
 	if (cmd_head->next)
 		pipe(data->pipe_fd);
+	set_signals_ignore();
 	pid = fork();
 	if (pid == 0) // faire aussi cas < 0
 		child_exe(cmd_head, data, env);
-	while (waitpid(-1, &status, 0) > 0)
-		data->last_exit_status = status;
 	data->tmp_fd = data->pipe_fd[0];
 	if (cmd_head->next)
 		reset_pipe(data, 0);

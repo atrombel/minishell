@@ -2,7 +2,7 @@
 #include "atrombel.h"
 
 //function that will check if the function is a builtin, retour code erreur a reflechir
-//function return 0 if builtin else 1
+//function return 1 if builtin else 0
 // faut lui passer cmd par cmd cmd_head->content
 int ft_builtin_verif(t_cmd *cmd)
 {

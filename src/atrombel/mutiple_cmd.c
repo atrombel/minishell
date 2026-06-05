@@ -12,4 +12,5 @@ void	multiple_cmd(t_list *cmd_head, t_data *data, t_env **env)
 			exe_pipeline(cmd_head, data, pid, env);
 		cmd_head = cmd_head->next;
 	}
+	waitpid_operations(data);
 }

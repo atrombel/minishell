@@ -4,11 +4,12 @@
 #include "cgasser.h"
 
 
-void	waitpid_operations(t_data *data, int pid)
+void	waitpid_operations(t_data *data)
 {
 	int	status;
 
-	waitpid(pid, &status, 0);
+	while (waitpid(-1, &status, 0) > 0)
+		data->last_exit_status = status;
 	if (WIFEXITED(status))
 		data->last_exit_status = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
@@ -19,7 +20,6 @@ void	waitpid_operations(t_data *data, int pid)
 			write(1, "Quit (core dumped)\n", 19);
 		data->last_exit_status = 128 + WTERMSIG(status);
 	}
-	ft_signals();
 }
 
 void	ft_execute_cmd(t_cmd *cmd, t_env **env)
@@ -64,7 +64,7 @@ void	ft_execute_cmd_redir(t_cmd	*cmd, t_data *data, t_env **env, t_list *cmd_hea
 			ft_execute_cmd(cmd, env);
 	}
 	else if (pid > 0)
-		waitpid_operations(data, pid);
+		waitpid_operations(data);
 }
 
 void	solo_cmd_not_builtin(t_list *cmd_head, t_data *data, t_env **env)

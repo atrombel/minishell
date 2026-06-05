@@ -14,7 +14,6 @@
 // applque la redir sinon return 1 si error 0 si tout bon
 
 
-
 //Executes a builtin command when it is not part of a pipeline
 void	solo_builtin(t_list *cmd_head, t_data *data, t_env **env)
 {
