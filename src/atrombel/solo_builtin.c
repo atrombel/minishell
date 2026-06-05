@@ -27,7 +27,7 @@ void	solo_builtin(t_list *cmd_head, t_data *data, t_env **env)
 		if (ft_redir_apply(cmd_head, data) == 0)
 			ft_execute_builtin(cmd, data, env, cmd_head);
 		fd_redir_restoration_close(data);
-		heredoc_tmp_deletion(cmd_head, data);
+		//heredoc_tmp_deletion(cmd_head, data);
 	}
 	else
 		ft_execute_builtin(cmd, data, env, cmd_head);
