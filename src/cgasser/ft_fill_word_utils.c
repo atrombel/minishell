@@ -7,28 +7,31 @@ int	ft_check_env(t_cmd *cmd, char *word, char **paths);
 char	**ft_get_envpaths(t_env *env);
 int	ft_is_word_path(t_cmd *cmd, char *word);
 
-int	ft_fill_cmd(t_cmd *cmd, char *word, t_env *env)
+int	ft_fill_cmd(t_cmd *cmd, char **word, t_env *env)
 {
 	char	*name;
 
 	name = NULL;
-	if (ft_check_cmd(cmd, word, env) == 0)
+	*word = ft_trim_quotes(*word);
+	if (ft_check_cmd(cmd, *word, env) == 0)
 		cmd->is_valid = 1;
-	if (cmd->is_valid == 0)
+	if (cmd->is_valid == 0 && (*word)[ft_strlen(*word) - 1] != '/')
 	{
-		if (ft_is_word_path(cmd, word) == 1)
+		if (ft_is_word_path(cmd, *word) == 1)
 			return (0);
 	}
-	name = ft_calloc(sizeof(char *), (ft_strlen(word) + 1));
+	name = ft_calloc(sizeof(char *), (ft_strlen(*word) + 1));
 	if (!name)
 		return (perror(ALLOC_ERR), 1);
-	ft_strlcpy(name, word, ft_strlen(word) + 1);
+	ft_strlcpy(name, *word, ft_strlen(*word) + 1);
 	cmd->args = ft_arrayadd_back(cmd->args, name);
 	return (0);
 }
 
 int	ft_check_cmd(t_cmd *cmd, char *word, t_env *env)
 {
+	if (word[ft_strlen(word) - 1] == '/')
+		return (1);
 	if (ft_strncmp(word, "echo", 5) == 0)
 		return (0);
 	else if (ft_strncmp(word, "cd", 3) == 0)

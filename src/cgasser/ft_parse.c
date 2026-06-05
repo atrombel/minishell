@@ -47,7 +47,7 @@ int	ft_make_and_fill_cmd(t_list *cmds, t_list **temp, t_data *data)
 		ft_lstadd_back(&cmds, ft_lstnew(cmd));
 	}
 	else if (token->type == WORD)
-		status = ft_fill_word(cmd, token->word, data);
+		status = ft_fill_word(cmd, &token->word, data);
 	if (status == 0)
 		return (0);
 	return (1);

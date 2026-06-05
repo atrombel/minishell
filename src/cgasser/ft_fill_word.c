@@ -5,7 +5,7 @@
 
 int	ft_fill_arg(t_cmd *cmd, char *word, t_data *data);
 
-int	ft_fill_word(t_cmd *cmd, char *word, t_data *data)
+int	ft_fill_word(t_cmd *cmd, char **word, t_data *data)
 {
 	int	status;
 
@@ -13,7 +13,7 @@ int	ft_fill_word(t_cmd *cmd, char *word, t_data *data)
 	if (!cmd->args && !cmd->path)
 		status = ft_fill_cmd(cmd, word, data->env);
 	else
-		status = ft_fill_arg(cmd, word, data);
+		status = ft_fill_arg(cmd, *word, data);
 	if (status != 0)
 		return (1);
 	return (0);
