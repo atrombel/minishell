@@ -22,8 +22,6 @@ int	export_new_value_storing(t_env *env, t_env *new)
 	return (0);
 }
 
-
-
 // ATTENTION SI JE TAPE EXPORT a= PUIS EXPORT, export doit me display a=""
 void	export_with_args(char *arg, t_env *env)
 {
