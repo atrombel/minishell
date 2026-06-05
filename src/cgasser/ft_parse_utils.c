@@ -12,13 +12,15 @@ int	ft_fill_redir(t_cmd *cmd, t_list **temp)
 	redir = NULL;
 	redir = ft_new_redir();
 	if (!redir)
-		return (perror(ALLOC_ERR), 1);
+		return (perror("ft_fill_redir"), 1);
 	redir->type = ft_is_redir(token->word);
+	if (!((*temp)->next))
+		return (1);
 	*temp = (*temp)->next;
 	token = (t_token *)(*temp)->content;
 	redir->arg = ft_calloc(sizeof(char), ft_strlen(token->word) + 1);
 	if (!redir->arg)
-		return (perror(ALLOC_ERR), 1);
+		return (perror("ft_fill_redir"), 1);
 	ft_strlcpy(redir->arg, token->word, ft_strlen(token->word) + 1);
 	redir->hd_filename = NULL;
 	redir->hd_tmp_fd = -1;

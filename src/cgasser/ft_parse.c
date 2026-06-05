@@ -14,7 +14,7 @@ t_list	*ft_parse(t_list *tokens, t_data *data)
 	cmds = NULL;
 	ft_lstadd_back(&cmds, ft_lstnew(ft_new_cmd()));
 	if (!cmds)
-		return (perror(ALLOC_ERR), NULL);
+		return (perror("ft_parse"), NULL);
 	temp = tokens;
 	while (temp != NULL)
 	{
@@ -43,7 +43,7 @@ int	ft_make_and_fill_cmd(t_list *cmds, t_list **temp, t_data *data)
 	{
 		cmd = ft_new_cmd();
 		if (!cmd)
-			return (perror(ALLOC_ERR), 1);
+			return (perror("ft_make_and_fill_cmd"), 1);
 		ft_lstadd_back(&cmds, ft_lstnew(cmd));
 	}
 	else if (token->type == WORD)
