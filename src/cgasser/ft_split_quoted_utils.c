@@ -47,11 +47,11 @@ int	ft_len_quote(char *start)
 
 int	ft_len_oper(char *start)
 {
+	if (ft_strncmp(start, ">>", 2) == 0 || ft_strncmp(start, "<<", 2) == 0)
+			return (2);
 	if (ft_strncmp(start, "|", 1) == 0 || ft_strncmp(start, "<", 1) == 0 \
 		|| ft_strncmp(start, ">", 1) == 0 || ft_strncmp(start, "=", 1) == 0)
 			return (1);
-	if (ft_strncmp(start, ">>", 2) == 0 || ft_strncmp(start, "<<", 2) == 0)
-			return (2);
 	return (0);
 }
 
