@@ -1,12 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_exe_main.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/05 15:52:24 by atrombel          #+#    #+#             */
+/*   Updated: 2026/06/05 16:00:14 by atrombel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 #include "atrombel.h"
-
-
-
-
-
-
 
 // main function that will sort and  organise the operation between the execution processes
 void	ft_exe_main(t_list *cmd_head, t_data *data, t_env **env)

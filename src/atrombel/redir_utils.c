@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redir_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/05 16:01:21 by atrombel          #+#    #+#             */
+/*   Updated: 2026/06/05 16:01:21 by atrombel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "minishell.h"
 #include "atrombel.h"
@@ -8,7 +20,6 @@
 //expl cat < po.c
 void	stdin_redir(t_redir *redir, t_data *data, int *error)
 {
-	 // a implemetner le retour erreur data
 	data->infile = open(redir->arg, O_RDONLY);
 	if (data->infile < 0)
 	{
@@ -23,7 +34,6 @@ void	stdin_redir(t_redir *redir, t_data *data, int *error)
 
 void	stdout_redir(t_redir *redir, t_data *data, int *error)
 {
-	// a implemetner le retour erreur data
 	data->outfile = open(redir->arg, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (data->outfile < 0)
 	{
@@ -38,7 +48,6 @@ void	stdout_redir(t_redir *redir, t_data *data, int *error)
 
 void	stdout_appnd(t_redir *redir, t_data *data, int *error)
 {
-	// a implemetner le retour erreur data
 	data->outfile = open(redir->arg, O_CREAT | O_RDWR | O_APPEND, 0644);
 	if (data->outfile < 0)
 	{

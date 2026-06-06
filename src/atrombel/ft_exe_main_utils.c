@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_exe_main_utils.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/05 15:52:19 by atrombel          #+#    #+#             */
+/*   Updated: 2026/06/05 15:52:19 by atrombel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include "atrombel.h"
 
 //function that will check if the function is a builtin, retour code erreur a reflechir
-//function return 0 if builtin else 1
+//function return 1 if builtin else 0
 // faut lui passer cmd par cmd cmd_head->content
 int ft_builtin_verif(t_cmd *cmd)
 {

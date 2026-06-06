@@ -1,7 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/05 15:52:11 by atrombel          #+#    #+#             */
+/*   Updated: 2026/06/05 15:52:11 by atrombel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include "atrombel.h"
 
 // function that get the value of a key expl PWD is the key and /home/usr/minishell is the value -> warning malloc used
+// str is the key
 // maybe adding some error management to this too
 char	*ft_get_value_env(t_env *env, char *str)
 {
@@ -42,18 +55,14 @@ void	ft_change_value_env(t_env *env, char *key, char *str)
 // commentary : ft_strdup not secured if it fail you should clear everything including minishell
 int	ft_addnew_key_and_value(t_env *env, char *str)
 {
-	//printf("\033[0;32m ft_addnew_key_and_value \033[0m\n");
 	t_env *new_node;
-\
+
 	if (!env || !str)
-	{
-		write(1, "non\n", 4);
 		return (1);
-	}
 	while (env->next)
 		env = env->next;
 	new_node = node_env_creation();// to secure
-	new_value_storing(str, new_node);//
+	new_value_storing(str, new_node);// to secure
 	env->next = new_node;
 	return (0);
 }

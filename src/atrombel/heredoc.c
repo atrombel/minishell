@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/05 16:01:10 by atrombel          #+#    #+#             */
+/*   Updated: 2026/06/05 16:01:10 by atrombel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "minishell.h"
 #include "atrombel.h"
@@ -9,6 +21,9 @@ void	hd_ctrl_d(t_data *data, t_redir *redir)
 	ft_putstr_fd("')\n", 2);
 	close(redir->hd_tmp_fd);
 	redir->hd_tmp_fd = open(redir->hd_filename, O_RDONLY);
+	if (redir->hd_tmp_fd < 0)
+		perror("minishell: heredoc");
+	unlink(redir->hd_filename); //
 	data->last_exit_status = 0;
 }
 
@@ -16,8 +31,11 @@ void	hd_ctrl_d(t_data *data, t_redir *redir)
 void	heredoc_tmp_init(t_redir *redir, t_data *data)
 {
 	char *str;
+	char *nbr;
 
-	str = ft_strjoin("heredoc_tmp", ft_itoa(data->last_hd_nbr));
+	nbr = ft_itoa(data->last_hd_nbr);
+	str = ft_strjoin("heredoc_tmp", nbr);
+	free(nbr);
 	printf("hd = %s\n", str);
 	if (!str)
 	{
@@ -36,36 +54,40 @@ void	heredoc_tmp_init(t_redir *redir, t_data *data)
 // fonction qui rempli le heredoc
 void	open_heredoc(t_redir *redir, t_data *data, t_list *cmd_head)
 {
+	(void)cmd_head;
 	char	*input;
-	int		len;
+	int	 len;
 
-	len = ft_strlen(redir->arg);//securiser si arg NULL
-	input = NULL;
+	len = ft_strlen(redir->arg);
 	heredoc_tmp_init(redir, data);
-	while(1)
+	while (1)
 	{
 		input = readline("> ");
-		input = ft_expand_var(input, data);
+		if (g_sig == 130)
+		{
+			free(input);
+			//heredoc_tmp_deletion(cmd_head, data);
+			return ;
+		}
 		if (!input)
 		{
 			hd_ctrl_d(data, redir);
 			break ;
 		}
-		if (g_sig == 130)// faire une fonction qui fait tout ca
+		if (ft_strncmp(input, redir->arg, len + 1) == 0)
 		{
-			heredoc_tmp_deletion(cmd_head, data);// verifier lesaks fd si je ferme bien redir->hd_tmp_fd
-			return ;
-		}
-		if (ft_strncmp(input, redir->arg, len + 1) == 0) //limiteur par inclu dans le resultat final expl  cat << xd > lslssl
-		{
+			free(input);
 			close(redir->hd_tmp_fd);
 			redir->hd_tmp_fd = open(redir->hd_filename, O_RDONLY);
 			if (redir->hd_tmp_fd < 0)
-					perror("minishell: heredoc");
+				perror("minishell: heredoc");
+			unlink(redir->hd_filename);
 			break ;
 		}
+		input = ft_expand_var(input, data);
 		ft_putstr_fd(input, redir->hd_tmp_fd);
 		ft_putstr_fd("\n", redir->hd_tmp_fd);
+		free(input);
 	}
 }
 
@@ -95,7 +117,7 @@ void	heredoc_check_init(t_list *cmd_head, t_data *data)
 	{
 		if (g_sig == 130)
 		{
-			heredoc_tmp_deletion(cmd_head, data);
+			//heredoc_tmp_deletion(cmd_head, data);
 			return ;
 		}
 		cmd = (t_cmd *)cmd_head->content;
