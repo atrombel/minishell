@@ -41,9 +41,11 @@ void	export_printf(t_env *env_tmp);
 int		export_new_value_storing(t_env *env, t_env *new);
 
 /* heredoc */
-void	heredoc_check_init(t_list *cmd_head, t_data *data);
-//void	heredoc_close(t_redir *redir);
-//void	herdoc_finder(t_list *cmd_head);
+int		heredoc_check_init(t_list *cmd_head, t_data *data);
+void	sigint_heredoc(t_redir *redir, t_data *data, char	*input);
+void	if_heredoc_eof_detected(t_redir *redir, char	*input);
+void	heredoc_input_trim(	char	*input);
+
 
 /* redirections */
 void	stdin_redir(t_redir *redir, t_data *data, int *error);
@@ -77,7 +79,9 @@ void	exe_pipeline(t_list *cmd_head, t_data *data, pid_t pid, t_env **env);
 void	waitpid_operations(t_data *data);
 
 /* signals*/
-int	set_signals_default();
-int	set_signals_ignore();
+int		set_signals_default();
+int		set_signals_ignore();
+void	signals_heredoc(void);
+void	 handler_heredoc(int sig);
 
 #endif

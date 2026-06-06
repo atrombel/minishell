@@ -43,3 +43,20 @@ int	set_signals_default()
 	return (0);
 
 }
+
+void	signals_heredoc(void)
+{
+	struct sigaction	sa;
+
+	sa.sa_handler = handler_heredoc;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sigaction(SIGINT, &sa, NULL);
+	sa.sa_handler = SIG_IGN;
+	sigaction(SIGQUIT, &sa, NULL);
+}
+void handler_heredoc(int sig)
+{
+	g_sig = sig;
+	write(1, "\n", 1);
+}
