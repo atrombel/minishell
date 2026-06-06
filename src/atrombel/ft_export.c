@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_export.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/05 16:00:33 by atrombel          #+#    #+#             */
+/*   Updated: 2026/06/05 16:00:33 by atrombel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 #include "atrombel.h"
@@ -21,8 +32,6 @@ int	export_new_value_storing(t_env *env, t_env *new)
 		return (1);
 	return (0);
 }
-
-
 
 // ATTENTION SI JE TAPE EXPORT a= PUIS EXPORT, export doit me display a=""
 void	export_with_args(char *arg, t_env *env)

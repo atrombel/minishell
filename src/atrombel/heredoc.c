@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/05 16:01:10 by atrombel          #+#    #+#             */
+/*   Updated: 2026/06/05 16:01:10 by atrombel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "minishell.h"
 #include "atrombel.h"
@@ -11,7 +23,7 @@ void	hd_ctrl_d(t_data *data, t_redir *redir)
 	redir->hd_tmp_fd = open(redir->hd_filename, O_RDONLY);
 	if (redir->hd_tmp_fd < 0)
 		perror("minishell: heredoc");
-	unlink(redir->hd_filename); // ✅ supprime le fichier tmp
+	unlink(redir->hd_filename); //
 	data->last_exit_status = 0;
 }
 

@@ -1,18 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   solo_builtin.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/05 16:01:28 by atrombel          #+#    #+#             */
+/*   Updated: 2026/06/05 16:01:28 by atrombel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "minishell.h"
 #include "atrombel.h"
-
-
-// void	ft_redir_close(t_data *data)
-// {
-
-
-
-
-// }
-
-// applque la redir sinon return 1 si error 0 si tout bon
-
 
 //Executes a builtin command when it is not part of a pipeline
 void	solo_builtin(t_list *cmd_head, t_data *data, t_env **env)

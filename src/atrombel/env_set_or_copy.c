@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_set_or_copy.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/05 15:51:32 by atrombel          #+#    #+#             */
+/*   Updated: 2026/06/05 15:51:32 by atrombel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include "atrombel.h"
 
@@ -66,7 +78,6 @@ int	new_value_storing(char *envp_i, t_env *new)
 	return (0);
 }
 
-
 void	ft_free_node(t_env	*node)
 {
 	if (node->key)
@@ -77,39 +88,15 @@ void	ft_free_node(t_env	*node)
 		free(node);
 }
 
-
 //copy envp into a chained list env needed for export cd etc and env -i (
 /// faire gafe env ne doit garder au final (expl si je run un nouveau minshell) un env avec uniquement des key avec des value valide !)
 t_env	*init_env(char **envp)
 {
-	int		i;
 	t_env	*head;
-	t_env	*new_node;
 
-	i = 0;
 	head = NULL;
 	if (envp)
-	{
-		while(envp[i])
-		{
-			if (ft_strncmp(envp[i], "_=", 2) == 0)
-			{
-				i++;
-				continue;
-			}
-			new_node = node_env_creation();
-			if (!new_node || new_value_storing(envp[i], new_node) == 1 )
-			{
-				if (new_node)
-					ft_free_node(new_node);
-				ft_env_clean(head);
-				ft_putstr_fd("env malloc error\n", 2);
-				exit(1);// to check if good idea or not
-			}
-			add_back_env(&head, new_node);
-			i++;
-		}
-	}
+		head = init_env_envp_exist(envp, head);
 	// else
 	// {
 	// 	head = emergency_env() // A CODER : une fonciton qui cree un env de secour si envp == NULL.
