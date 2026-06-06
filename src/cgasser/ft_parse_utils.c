@@ -20,7 +20,7 @@ int	ft_fill_redir(t_cmd *cmd, t_list **temp)
 		return (1);
 	*temp = (*temp)->next;
 	token = (t_token *)(*temp)->content;
-	if (token->type == PIPE)
+	if (token->type == PIPE || token->type == REDIR)
 		return (1);
 	redir->arg = ft_calloc(sizeof(char), ft_strlen(token->word) + 1);
 	if (!redir->arg)
