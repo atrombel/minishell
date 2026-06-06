@@ -6,7 +6,6 @@
 // struct that contain usefull data to see if really that usefull long term
 
 /* env */
-t_env	*init_env(char **envp);
 t_env	*node_env_creation(void);
 void	add_back_env(t_env **head, t_env *new);
 char	*ft_get_value_env(t_env *env, char *str);
@@ -17,6 +16,13 @@ int		env_key_copy_check(char *new_key, t_env *tmp_env);
 char	**env_to_charstar_reconversion(t_env *env);
 int		ft_addnew_key_and_value(t_env *env, char *str);
 void	env_lst_cmd_update(t_env *env, char *last_arg);
+t_env	*init_env_envp_exist(char **envp, t_env	*head);
+t_env	*init_env(char **envp);
+void	ft_free_node(t_env	*node);
+int		new_value_storing(char *envp_i, t_env *new);
+void	add_back_env(t_env **head, t_env *new);
+t_env	*node_env_creation();
+
 
 /* builtins */
 void	ft_echo(t_cmd *cmd,  t_data *data);
@@ -36,8 +42,8 @@ int		export_new_value_storing(t_env *env, t_env *new);
 
 /* heredoc */
 void	heredoc_check_init(t_list *cmd_head, t_data *data);
-void	heredoc_close(t_redir *redir);
-void	herdoc_finder(t_list *cmd_head);
+//void	heredoc_close(t_redir *redir);
+//void	herdoc_finder(t_list *cmd_head);
 
 /* redirections */
 void	stdin_redir(t_redir *redir, t_data *data, int *error);

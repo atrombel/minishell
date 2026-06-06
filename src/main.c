@@ -27,7 +27,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_history(user_input);
 		cmd_head = ft_lex_and_parse(user_input, &data);
 		ft_print_cmd_list(cmd_head);
-		//ft_exe_main(cmd_head, &data, &env);
+		ft_exe_main(cmd_head, &data, &env);
 		ft_clear_cmds(&cmd_head);
 	}
 	rl_clear_history();
