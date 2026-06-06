@@ -38,7 +38,6 @@ int		export_new_value_storing(t_env *env, t_env *new);
 void	heredoc_check_init(t_list *cmd_head, t_data *data);
 void	heredoc_close(t_redir *redir);
 void	herdoc_finder(t_list *cmd_head);
-void	heredoc_tmp_deletion(t_list *cmd_head, t_data *data);
 
 /* redirections */
 void	stdin_redir(t_redir *redir, t_data *data, int *error);
