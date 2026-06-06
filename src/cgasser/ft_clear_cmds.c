@@ -29,6 +29,7 @@ void	ft_free_redirs(void *content)
 	t_redir	*redir;
 
 	redir = (t_redir *)content;
-	free(redir->arg);
+	if (redir->arg)
+		free(redir->arg);
 	free(redir);
 }
