@@ -6,7 +6,7 @@
 /*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:52:24 by atrombel          #+#    #+#             */
-/*   Updated: 2026/06/05 16:00:14 by atrombel         ###   ########.fr       */
+/*   Updated: 2026/06/06 16:09:06 by atrombel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	ft_exe_main(t_list *cmd_head, t_data *data, t_env **env)
 {
 	if ( !cmd_head || !cmd_head->content)
 		return ;
-	heredoc_check_init(cmd_head, data);
+	if (heredoc_check_init(cmd_head, data) == -1)
+		return ;
 	if(cmd_head->next)
 		multiple_cmd(cmd_head, data, env);
 	else
