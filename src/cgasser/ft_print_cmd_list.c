@@ -34,7 +34,7 @@ void	ft_print_cmd(t_cmd *cmd)
 	i++;
 	if (cmd->path)
 		ft_printf("\tpath: %s", cmd->path);
-	if (cmd->args)
+	if (cmd->args[i])
 	{
 		ft_printf("\targs:");
 		while (cmd->args[i])
@@ -58,6 +58,14 @@ void	ft_print_redir(t_cmd *cmd)
 	while (temp != NULL)
 	{
 		ft_printf("\ntype: %d, filename: %s", ((t_redir *)temp->content)->type, ((t_redir *)temp->content)->arg);
+		if (((t_redir *)temp->content)->type == IN_DELIM)
+		{
+			ft_printf("\tmust be expanded: ");
+			if (((t_redir *)temp->content)->is_expanded == 1)
+				ft_printf("yes");
+			else
+				ft_printf("no");
+		}
 		temp = temp->next;
 	}
 }
