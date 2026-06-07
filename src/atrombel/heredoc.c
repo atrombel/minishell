@@ -82,7 +82,8 @@ int	open_heredoc(t_redir *redir, t_data *data)
 		heredoc_input_trim(input);
 		if (ft_strncmp(input, redir->arg, len + 1) == 0)
 			return(if_heredoc_eof_detected(redir, input), 0);
-		input = ft_expand_var(input, data);
+		if (redir->is_expanded == 1)
+			input = ft_expand_var(input, data);
 		ft_putstr_fd(input, redir->hd_tmp_fd);
 		ft_putstr_fd("\n", redir->hd_tmp_fd);
 		free(input);
