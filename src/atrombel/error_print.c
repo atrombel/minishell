@@ -17,7 +17,6 @@
 
 // REMPLACER TOUT LES PRINTFS DERREUR PAR CA SI POSSIBLE
 // str doit etre la commande le nom de fricheir etc un char * du probleme
-
 void	command_not_found(char *str)
 {
 	if (!str)
@@ -28,7 +27,7 @@ void	command_not_found(char *str)
 	write(2, "\n", 1);
 }
 
-// for erno
+// for errno
 void	error_print(char *str)
 {
 	if (!str)

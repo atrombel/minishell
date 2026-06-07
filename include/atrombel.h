@@ -22,6 +22,7 @@ void	ft_free_node(t_env	*node);
 int		new_value_storing(char *envp_i, t_env *new);
 void	add_back_env(t_env **head, t_env *new);
 t_env	*node_env_creation();
+t_env	*emergency_env(t_env *head);
 
 
 /* builtins */
