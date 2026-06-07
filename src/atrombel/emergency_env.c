@@ -13,7 +13,7 @@
 #include "minishell.h"
 #include "atrombel.h"
 
-static void free_envp_tab(char **envp, int i)
+static void	free_envp_tab(char **envp, int i)
 {
 	while (i >= 0)
 	{
@@ -24,11 +24,13 @@ static void free_envp_tab(char **envp, int i)
 	free(envp);
 }
 
-static char **init_envp_tab(void)
+static char	**init_envp_tab(void)
 {
 	char	**envp;
 	char	*pwd;
+	char	*str;
 
+	str = "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin";
 	envp = malloc(sizeof(char *) * 6);
 	if (!envp)
 		return (NULL);
@@ -38,7 +40,7 @@ static char **init_envp_tab(void)
 	if (!pwd)
 		return (free(envp), NULL);
 	envp[0] = ft_strdup("SHELL=/bin/minishell");
-	envp[1] = ft_strdup("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin");
+	envp[1] = ft_strdup(str);
 	envp[2] = ft_strjoin("PWD=", pwd);
 	envp[3] = ft_strdup("OLDPWD=");
 	envp[4] = ft_strdup("SHLVL=1");
@@ -48,6 +50,7 @@ static char **init_envp_tab(void)
 		return (free_envp_tab(envp, 4), NULL);
 	return (envp);
 }
+
 // if env doesnt exist for some reason ...
 t_env	*emergency_env(t_env *head)
 {
@@ -63,7 +66,8 @@ t_env	*emergency_env(t_env *head)
 	{
 		new_node = node_env_creation();
 		if (!new_node || new_value_storing(envp[i], new_node) == 1)
-			return (ft_free_node(new_node), ft_env_clean(head), free_envp_tab(envp, 4), NULL);
+			return (ft_free_node(new_node), ft_env_clean(head),
+				free_envp_tab(envp, 4), NULL);
 		add_back_env(&head, new_node);
 		i++;
 	}

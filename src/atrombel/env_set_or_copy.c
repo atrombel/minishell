@@ -51,9 +51,9 @@ void	add_back_env(t_env **head, t_env *new)
 }
 
 // function that stores the key
-//expl PWD and value expl ./home/usr data in the node
-//envp_i = for example :
-//envp_i -> WAYLAND_DISPLAY=wayland-0 key and vvalue inside
+// expl PWD and value expl ./home/usr data in the node
+// envp_i = for example :
+// envp_i -> WAYLAND_DISPLAY=wayland-0 key and value inside
 // new is for the node
 // to secure ft_strdup
 int	new_value_storing(char *envp_i, t_env *new)
@@ -83,6 +83,8 @@ int	new_value_storing(char *envp_i, t_env *new)
 
 void	ft_free_node(t_env	*node)
 {
+	if (!node)
+		return ;
 	if (node->key)
 		free(node->key);
 	if (node->value)
@@ -91,11 +93,8 @@ void	ft_free_node(t_env	*node)
 		free(node);
 }
 
-//copy envp into a chained list env needed for export cd etc and env -i (
-/// faire gafe env ne doit garder au final
-//(expl si je run un nouveau minshell)
-//un env avec uniquement des key avec des value valide !)
-t_env	*init_env(char **envp)
+//copy envp into a chained list env needed for export cd etc and env -i ()
+t_env	*init_env(char	**envp)
 {
 	t_env	*head;
 
@@ -103,7 +102,7 @@ t_env	*init_env(char **envp)
 	if (envp && envp[0])
 		head = init_env_envp_exist(envp, head);
 	else
-		head = emergency_env(head); // A CODER : une fonciton qui cree un env de secour si envp == NULL.
+		head = emergency_env(head);
 	if (!head)
 	{
 		error_msg("env", "error in setting env");

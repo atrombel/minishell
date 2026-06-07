@@ -10,15 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "minishell.h"
 #include "atrombel.h"
 
-char	*ft_readline(t_env *env)
+char	*getcwd_secured_for_ftreadline(t_env *env)
 {
-	char	*user_input;
-	char	*dest;
 	char	*str;
 
 	str = getcwd(NULL, 0);
@@ -35,21 +31,34 @@ char	*ft_readline(t_env *env)
 			}
 		}
 	}
+	return (str);
+}
+
+
+char	*ft_readline(t_env *env)
+{
+	char	*user_input;
+	char	*dest;
+	char	*str;
+
+	str = getcwd_secured_for_ftreadline(env);
+	if (!str)
+		return (NULL);
 	dest = ft_strjoin("\001\033[1;32m\002", str);
 	if (!dest)
-	{
-		perror("minishell: ");
-		return (NULL);
-	}
+		return (perror("minishell: "), NULL);
 	free(str);
 	str = ft_strjoin(dest, "\001\033[0m\002$ ");
 	free(dest);
 	if (!str)
-	{
-		perror("minishell: ");
-		return (NULL);
-	}
+		return (perror("minishell: "), NULL);
 	user_input = readline(str);
 	free (str);
+	if (!user_input)
+	{
+		printf("exit\n");
+		ft_env_clean(env);
+		exit(0);
+	}
 	return (user_input);
 }

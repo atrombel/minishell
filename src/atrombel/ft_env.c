@@ -13,7 +13,8 @@
 #include "minishell.h"
 #include "atrombel.h"
 
-// function that get the value of a key expl PWD is the key and /home/usr/minishell is the value -> warning malloc used
+// function that get the value of a key
+// expl PWD is the key and /home/usr/minishell is the value -> warning malloc used
 // str is the key
 // maybe adding some error management to this too
 char	*ft_get_value_env(t_env *env, char *str)
@@ -61,8 +62,11 @@ int	ft_addnew_key_and_value(t_env *env, char *str)
 		return (1);
 	while (env->next)
 		env = env->next;
-	new_node = node_env_creation();// to secure
-	new_value_storing(str, new_node);// to secure
+	new_node = node_env_creation();
+	if (!new_node)
+		return (1);
+	if (new_value_storing(str, new_node) == 1)
+		return (1);
 	env->next = new_node;
 	return (0);
 }

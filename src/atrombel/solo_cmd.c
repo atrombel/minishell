@@ -15,24 +15,31 @@
 #include "atrombel.h"
 
 // update "-=..." in env
-void	env_lst_cmd_update(t_env *env, char *last_arg)
+void	env_lst_cmd_update(t_env *env, char *last_arg, t_data *data)
 {
 	char	*new_key;
 
 	new_key = NULL;
 	if (ft_get_value_env(env, "_") == NULL)
 	{
-		new_key = ft_strjoin("_=", last_arg);// malloc to secure
+		new_key = ft_strjoin("_=", last_arg);
 		if (!new_key)
+		{
+			data->last_exit_status = 1;
 			return ;
-		ft_addnew_key_and_value(env, new_key);
+		}
+		if (ft_addnew_key_and_value(env, new_key) == 1)
+		{
+			data->last_exit_status = 1;
+			return ;
+		}
 	}
 	else
 		ft_change_value_env(env, "_", last_arg);
 }
 
 
-void	update_underscore_env( t_env **env, t_cmd *cmd)
+void	update_underscore_env( t_env **env, t_cmd *cmd, t_data *data)
 {
 	int	i;
 
@@ -42,7 +49,7 @@ void	update_underscore_env( t_env **env, t_cmd *cmd)
 	while (cmd->args[i])
 		i++;
 	i--;
-	env_lst_cmd_update(*env, cmd->args[i]);
+	env_lst_cmd_update(*env, cmd->args[i], data);
 }
 
 int	redir_but_cmd_invalid(t_list *cmd_head, t_data *data, t_cmd *cmd)
@@ -59,7 +66,7 @@ int	redir_but_cmd_invalid(t_list *cmd_head, t_data *data, t_cmd *cmd)
 		if (cmd->args && cmd->args[0])
 		{
 			command_not_found(cmd->args[0]);
-			data->last_exit_status = 127; // save le retour
+			data->last_exit_status = 127;
 		}
 		return 1;
 	}
@@ -96,5 +103,5 @@ void	solo_cmd(t_list *cmd_head, t_data *data, t_env **env)
 		solo_builtin(cmd_head, data, env);
 	else
 		solo_cmd_not_builtin(cmd_head, data, env);
-	update_underscore_env(env, cmd);
+	update_underscore_env(env, cmd, data);
 }

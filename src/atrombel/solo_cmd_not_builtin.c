@@ -43,10 +43,11 @@ void	ft_execute_cmd(t_cmd *cmd, t_env **env)
 	if (!envp)
 	{
 		error_print("ERROR");
-		return ;
+		exit(1);
 	}
 	set_signals_default();
 	execve(cmd->path, cmd->args, envp);
+	charstar_env_clean(envp);
 	error_print("execve failed");
 	if (errno == EACCES)
 		exit(126);

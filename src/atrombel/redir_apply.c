@@ -15,6 +15,7 @@
 #include "atrombel.h"
 
 // Applies all redirections associated with a command node that
+// if error = 0 all good else ...
 int	ft_redir_apply(t_list *cmd_head, t_data *data)
 {
 	t_list	*redirs;
