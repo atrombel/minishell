@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 #include "atrombel.h"
 
@@ -30,8 +29,9 @@ void	stdin_redir(t_redir *redir, t_data *data, int *error)
 		perror("dup2");
 		*error = 1;
 	}
-	close(data->infile);
+	secure_close(&data->infile);
 }
+
 //apply redirection ">" expl cat > po.c
 void	stdout_redir(t_redir *redir, t_data *data, int *error)
 {
@@ -48,8 +48,9 @@ void	stdout_redir(t_redir *redir, t_data *data, int *error)
 		perror("dup2");
 		*error = 1;
 	}
-	close(data->outfile);
+	secure_close(&data->outfile);
 }
+
 //apply redirection ">>"
 void	stdout_appnd(t_redir *redir, t_data *data, int *error)
 {
@@ -66,8 +67,9 @@ void	stdout_appnd(t_redir *redir, t_data *data, int *error)
 		perror("dup2");
 		*error = 1;
 	}
-	close(data->outfile);
+	secure_close(&data->outfile);
 }
+
 //apply redirection "<<"
 void	heredoc_reddir_apply(t_redir *redir, t_data *data, int *error)
 {
@@ -82,6 +84,6 @@ void	heredoc_reddir_apply(t_redir *redir, t_data *data, int *error)
 		perror("dup2");
 		*error = 1;
 	}
-	close(redir->hd_tmp_fd);
+	secure_close(&redir->hd_tmp_fd);
 	redir->hd_tmp_fd = -1;
 }

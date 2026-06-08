@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 
 t_env	*find_prev_node(t_env *env, char *str)
@@ -42,33 +41,37 @@ void	free_node_env(t_env *node)
 	}
 }
 
-void	ft_unset(t_cmd *cmd, t_env **env)
+void	unset_one(char *arg, t_env **env)
 {
-	int		i;
 	t_env	*prev_node;
 	t_env	*current_node;
-	char	**args;
 
-	args = cmd->args;
-	i = 1;
-	if (!args[1] || !args[1][0])
-			return;
-	while (args[i])
+	prev_node = find_prev_node(*env, arg);
+	if (prev_node == NULL)
+		return ;
+	if (prev_node->key == (*env)->key)
 	{
-		prev_node = find_prev_node(*env, args[i]);
-		if (prev_node == NULL)
-			return ;
-		else if (prev_node->key == (*env)->key)// alors on doit changer head car on est au debut de la liste
-		{
-			*env = (*env)->next;
-			free_node_env(prev_node);
-		}
-		else
-		{
-			current_node = prev_node->next;
-			prev_node->next = current_node->next;
-			free_node_env(current_node);
-		}
+		*env = (*env)->next;
+		free_node_env(prev_node);
+	}
+	else
+	{
+		current_node = prev_node->next;
+		prev_node->next = current_node->next;
+		free_node_env(current_node);
+	}
+}
+
+void	ft_unset(t_cmd *cmd, t_env **env)
+{
+	int	i;
+
+	i = 1;
+	if (!cmd->args[1] || !cmd->args[1][0])
+		return ;
+	while (cmd->args[i])
+	{
+		unset_one(cmd->args[i], env);
 		i++;
 	}
 }

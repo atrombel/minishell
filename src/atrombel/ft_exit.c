@@ -25,7 +25,7 @@ static int	ft_isnumeric_check(const char *s)
 		s++;
 	if (!*s)
 		return (0);
-	while(*s)
+	while (*s)
 	{
 		if (*s < '0' || *s > '9')
 			return (0);

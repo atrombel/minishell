@@ -47,7 +47,8 @@ int		heredoc_check_init(t_list *cmd_head, t_data *data);
 void	sigint_heredoc(t_redir *redir, t_data *data, char	*input);
 void	if_heredoc_eof_detected(t_redir *redir, char	*input);
 void	heredoc_input_trim(	char	*input);
-
+int		heredoc_loop(t_redir *redir, t_data *data);
+int		hd_ctrl_d(t_data *data, t_redir *redir);
 
 /* redirections */
 void	stdin_redir(t_redir *redir, t_data *data, int *error);
@@ -75,6 +76,7 @@ void	error_print(char *str);
 void	error_msg(char *str, char *msg);
 void	is_minishell_lvl(t_cmd	*cmd, t_env **env);
 void	command_not_found(char *str);
+int		secure_close(int *fd);
 
 /* pipeline */
 void	exe_pipeline(t_list *cmd_head, t_data *data, pid_t pid, t_env **env);

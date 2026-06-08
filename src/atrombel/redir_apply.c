@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 #include "atrombel.h"
 
@@ -26,7 +25,7 @@ int	ft_redir_apply(t_list *cmd_head, t_data *data)
 	if (!((t_cmd *)cmd_head->content)->redirs)
 		return (error);
 	redirs = ((t_cmd *)cmd_head->content)->redirs;
-	while(redirs)
+	while (redirs)
 	{
 		redir = (t_redir *)redirs->content;
 		if (redir->type == IN)
@@ -41,10 +40,12 @@ int	ft_redir_apply(t_list *cmd_head, t_data *data)
 			break ;
 		redirs = redirs->next;
 	}
-	return(error);
+	return (error);
 }
 
-// restores the original standard input and output file descrptors after redirection execution,
+// restores the original
+//standard input and output file descrptors
+// after redirection execution,
 // and cleans up all temporary file descriptors.
 // This function is used to reset the shell state after executing a command
 // that modified stdin/stdout (via dup2 redirections)
@@ -52,22 +53,18 @@ void	fd_redir_restoration_close(t_data *data)
 {
 	if (data->stdin_save >= 0)
 	{
-		if (dup2(data->stdin_save, 0) == -1)// to sercure
+		if (dup2(data->stdin_save, 0) == -1)
 			error_print("error");
-		close(data->stdin_save);
-		data->stdin_save = -1;
+		secure_close(&data->stdin_save);
 	}
 	if (data->stdout_save >= 0)
 	{
-		if (dup2(data->stdout_save , 1) == -1)// to sercure
+		if (dup2(data->stdout_save, 1) == -1)
 			error_print("error");
-		close(data->stdout_save );
-		data->stdout_save  = -1;
+		secure_close(&data->stdout_save);
 	}
 	if (data->infile != -1)
-		close (data->infile);
-	data->infile = -1;
+		secure_close(&data->infile);
 	if (data->outfile != -1)
-		close (data->outfile);
-	data->outfile = -1;
+		secure_close(&data->outfile);
 }

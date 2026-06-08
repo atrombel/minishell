@@ -19,53 +19,64 @@ int	export_new_value_storing(t_env *env, t_env *new)
 		return (0);
 	if (!env->value && env->key)
 	{
-		new->key = ft_strdup(env->key);// malloc to secure
+		new->key = ft_strdup(env->key);
 		if (!new->key)
 			return (1);
 		return (0);
 	}
-	new->key = ft_strdup(env->key);// malloc to secure
+	new->key = ft_strdup(env->key);
 	if (!new->key)
 		return (1);
-	new->value = ft_strdup(env->value);// malloc to secure
+	new->value = ft_strdup(env->value);
 	if (!new->value)
 		return (1);
 	return (0);
 }
 
 // ATTENTION SI JE TAPE EXPORT a= PUIS EXPORT, export doit me display a=""
-void	export_with_args(char *arg, t_env *env, t_data *data)
+static int	export_check_valid(char *arg, t_data *data)
 {
-	int		i;
+	int	i;
 
 	i = 0;
-	if (ft_isalpha(arg[0]) == 0 && arg[0] != '_')// check du premier char
+	if (ft_isalpha(arg[0]) == 0 && arg[0] != '_')
 	{
 		if (arg[0] == '\0')
 			printf("-minishell: export: ': not a valid identifier\n");
 		else
 			printf("-minishell: export: '%s': not a valid identifier\n", arg);
 		data->last_exit_status = 1;
-		return ;
+		return (-1);
 	}
-	while(arg[i] != '=' && arg[i])//check if key is valid
+	while (arg[i] != '=' && arg[i])
 	{
 		if (ft_isalpha(arg[0]) == 0 && arg[0] == '_' && ft_isdigit(arg[i]) == 1)
 		{
-			printf("-minishell: export: '%s': not a valid XD identifier\n", arg);
+			printf("-minishell: export: '%s': not a valid XD identifier\n",
+				arg);
 			data->last_exit_status = 1;
-			return ;
+			return (-1);
 		}
 		i++;
 	}
-	if (arg[i] == '=') // since key is valid and there is a '=' so value exist or is at least "".
+	return (i);
+}
+
+void	export_with_args(char *arg, t_env *env, t_data *data)
+{
+	int	i;
+
+	i = export_check_valid(arg, data);
+	if (i == -1)
+		return ;
+	if (arg[i] == '=')
 		export_key_value(arg, i, env, data);
 	else
 		export_key_only(arg, env);
-	return ;
 }
 
-// la commande seule $export affiche tout env dans lordre avec delcare -x au debut
+// la commande seule $export //affiche tout env dans
+// lordre avec delcare -x au debut
 // faire une copie et la trier
 void	ft_export(t_cmd *cmd, t_env *env, t_data *data)
 {
@@ -79,7 +90,7 @@ void	ft_export(t_cmd *cmd, t_env *env, t_data *data)
 		export_without_args(env);
 		return ;
 	}
-	while(args[i])
+	while (args[i])
 	{
 		export_with_args(args[i], env, data);
 		i++;

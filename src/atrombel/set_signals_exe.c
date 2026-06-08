@@ -10,12 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 #include "atrombel.h"
 
 // ignore signals
-int	set_signals_ignore()
+int	set_signals_ignore(void)
 {
 	struct sigaction	sa;
 
@@ -30,8 +29,9 @@ int	set_signals_ignore()
 }
 
 //default signals behavior
-int	set_signals_default()
-{	struct sigaction	sa;
+int	set_signals_default(void)
+{
+	struct sigaction	sa;
 
 	rl_catch_signals = 0;
 	sa.sa_handler = SIG_DFL;
@@ -41,7 +41,6 @@ int	set_signals_default()
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
 	return (0);
-
 }
 
 void	signals_heredoc(void)
@@ -55,7 +54,8 @@ void	signals_heredoc(void)
 	sa.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &sa, NULL);
 }
-void handler_heredoc(int sig)
+
+void	handler_heredoc(int sig)
 {
 	g_sig = sig;
 	write(1, "\n", 1);

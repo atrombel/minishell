@@ -6,7 +6,7 @@
 /*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:51:54 by atrombel          #+#    #+#             */
-/*   Updated: 2026/06/05 15:51:55 by atrombel         ###   ########.fr       */
+/*   Updated: 2026/06/08 16:50:27 by atrombel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int	cd_success(t_env *env, char *old_pwd)
 	return (0);
 }
 
-// function that actually changes current working wirectory and update pwd and oldpwd fomr env
+// function that actually changes current working
+// directory and update pwd and oldpwd fomr env
 void	ft_chdir(char	*path, t_data *data, t_env *env)
 {
 	char	*old_pwd;
@@ -45,7 +46,7 @@ void	ft_chdir(char	*path, t_data *data, t_env *env)
 	}
 	else
 	{
-		old_pwd = ft_get_value_env(env,"PWD");
+		old_pwd = ft_get_value_env(env, "PWD");
 		if (cd_success(env, old_pwd) == 1)
 			data->last_exit_status = 1;
 		else
@@ -72,7 +73,7 @@ static char	*path_define_cd(char **args, t_env *env)
 
 	path = NULL;
 	if (args[1] == NULL)
-		path = ft_get_value_env(env,"HOME");
+		path = ft_get_value_env(env, "HOME");
 	else
 		path = args[1];
 	return (path);
@@ -88,7 +89,7 @@ void	ft_cd(t_cmd *cmd, t_data *data, t_env *env)
 	if (nbr_args_check(args, data) == 1)
 		return ;
 	path = path_define_cd(args, env);
-	if (!path)// strong against unset HOME
+	if (!path)
 	{
 		error_msg("cd", "HOME not set");
 		data->last_exit_status = 1;

@@ -21,7 +21,7 @@ int	hd_ctrl_d(t_data *data, t_redir *redir)
 		"(wanted `", 2);
 	ft_putstr_fd(redir->arg, 2);
 	ft_putstr_fd("')\n", 2);
-	close(redir->hd_tmp_fd);
+	secure_close(&redir->hd_tmp_fd);
 	redir->hd_tmp_fd = open(redir->hd_filename, O_RDONLY);
 	if (redir->hd_tmp_fd < 0)
 	{
@@ -55,7 +55,7 @@ int	heredoc_tmp_init(t_redir *redir, t_data *data)
 	redir->hd_filename = ft_strdup(str);
 	if (!redir->hd_filename)
 	{
-		close(redir->hd_tmp_fd);
+		secure_close(&redir->hd_tmp_fd);
 		unlink(str);
 		return (data->last_exit_status = errno, free(str), -1);
 	}
@@ -64,34 +64,15 @@ int	heredoc_tmp_init(t_redir *redir, t_data *data)
 }
 
 // fonction qui rempli le heredoc
-
 int	open_heredoc(t_redir *redir, t_data *data)
 {
-	char	*input;
-	int		len;
+	int	ret;
 
-	len = ft_strlen(redir->arg);
 	heredoc_tmp_init(redir, data);
 	signals_heredoc();
-	while (1)
-	{
-		write(1, "> ", 2);
-		input = get_next_line(0);
-		if (g_sig == SIGINT)
-			return (sigint_heredoc(redir, data, input), -1);
-		if (!input)
-			return (hd_ctrl_d(data, redir), 0);
-		heredoc_input_trim(input);
-		if (ft_strncmp(input, redir->arg, len + 1) == 0)
-			return (if_heredoc_eof_detected(redir, input), 0);
-		if (redir->is_expanded == 1)
-			input = ft_expand_var(input, data);
-		ft_putstr_fd(input, redir->hd_tmp_fd);
-		ft_putstr_fd("\n", redir->hd_tmp_fd);
-		free(input);
-	}
+	ret = heredoc_loop(redir, data);
 	ft_signals();
-	return (0);
+	return (ret);
 }
 
 // fonction qui check si y a un herdoc

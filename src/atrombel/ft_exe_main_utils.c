@@ -13,10 +13,11 @@
 #include "minishell.h"
 #include "atrombel.h"
 
-//function that will check if the function is a builtin, retour code erreur a reflechir
+//function that will check if the function
+// is a builtin, retour code erreur a reflechir
 //function return 1 if builtin else 0
 // faut lui passer cmd par cmd cmd_head->content
-int ft_builtin_verif(t_cmd *cmd)
+int	ft_builtin_verif(t_cmd *cmd)
 {
 	if (!cmd || !cmd->args || !cmd->args[0])
 		return (0);

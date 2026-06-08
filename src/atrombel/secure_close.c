@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mutiple_cmd.c                                      :+:      :+:    :+:   */
+/*   secure_close.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/05 16:01:17 by atrombel          #+#    #+#             */
-/*   Updated: 2026/06/05 16:01:17 by atrombel         ###   ########.fr       */
+/*   Created: 2026/06/08 09:47:45 by atrombel          #+#    #+#             */
+/*   Updated: 2026/06/08 09:47:45 by atrombel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "atrombel.h"
 
-void	multiple_cmd(t_list *cmd_head, t_data *data, t_env **env)
+int	secure_close(int *fd)
 {
-	pid_t	pid;
-
-	pid = -1;
-	data->tmp_fd = -1;
-	while (cmd_head)
+	if (fd && *fd >= 0)
 	{
-		if (cmd_head->content)
-			exe_pipeline(cmd_head, data, pid, env);
-		cmd_head = cmd_head->next;
+		if (close(*fd) == -1)
+		{
+			error_print("close error");
+			*fd = -1;
+			return (1);
+		}
+		*fd = -1;
 	}
-	waitpid_operations(data);
+	return (0);
 }
