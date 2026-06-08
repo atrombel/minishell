@@ -57,10 +57,10 @@ typedef struct s_cmd
 typedef struct s_redir //redirection
 {
 	int		type; //type of redirection (cf macro above)
-	char	*arg; //filename or delimitor
-	char	*hd_filename; //heredoc temporary file created to store the input of the user associated to a command MALLOC
 	int		hd_tmp_fd; // le fd du heredoc associe
 	int		is_expanded; //1 if the heredoc must expand its variables
+	char	*arg; //filename or delimitor
+	char	*hd_filename; //heredoc temporary file created to store the input of the user associated to a command MALLOC
 }	t_redir;
 
 char	*ft_expand_var(char *str, t_data *data);

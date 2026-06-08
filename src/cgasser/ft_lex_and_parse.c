@@ -13,18 +13,19 @@ t_list	*ft_lex_and_parse(char *str, t_data *data)
 
 	array = NULL;
 	tokens = NULL;
+	if (ft_check_quotes(str) != 0)
+		return (NULL);
 	array = ft_split_quoted(str, ' ');
 	free(str);
 	if (!array)
 		return (NULL);
 	if (array[0] == NULL)
 		return (ft_free_array(array), NULL);
-	if (ft_strncmp(array[0], "|", 1) == 0)
-		return (ft_printr("syntax error near unexpected token `|'\n"),\
-		ft_free_array(array), NULL);
 	tokens = ft_lexer(array);
 	if (!tokens)
 		return (NULL);
+	if (ft_check_syntax(tokens) != 0)
+		return (ft_clear_tokens(&tokens), NULL);
 	return (ft_parse(tokens, data));
 }
 
