@@ -6,7 +6,7 @@
 /*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/06 10:36:55 by atrombel          #+#    #+#             */
-/*   Updated: 2026/06/08 10:28:45 by atrombel         ###   ########.fr       */
+/*   Updated: 2026/06/09 08:17:35 by atrombel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int argc, char **argv, char **envp)
 	if (ft_signals() != 0)
 		return (1);
 	env = init_env(envp);
-	if(!env)
+	if (!env)
 		return (1);
 	data_init(&data, env);
 	main_while(data, env);
