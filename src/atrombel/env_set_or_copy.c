@@ -13,12 +13,13 @@
 #include "minishell.h"
 #include "atrombel.h"
 
-// create new node with malloc, return the address of the node all content of node set to NULL
-t_env	*node_env_creation()
+// create new node with malloc,
+// return the address of the node all content of node set to NULL
+t_env	*node_env_creation(void)
 {
-	t_env *node;
+	t_env	*node;
 
-	node = malloc(sizeof(t_env));// TO FREE AT END OF MAIN
+	node = malloc(sizeof(t_env));
 	if (!node)
 		return (NULL);
 	node->key = NULL;
@@ -30,12 +31,12 @@ t_env	*node_env_creation()
 // add a node at the end of the chained list
 void	add_back_env(t_env **head, t_env *new)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = NULL;
 	if (!new)
 		return ;
-	else if(!*head)
+	else if (!*head)
 	{
 		*head = new;
 		return ;
@@ -43,14 +44,16 @@ void	add_back_env(t_env **head, t_env *new)
 	else
 	{
 		tmp = *head;
-		while(tmp->next)
+		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
 }
 
-// function that stores the key expl PWD and value expl ./home/usr data in the node
-//envp_i = for example envp_i -> WAYLAND_DISPLAY=wayland-0 key and vvalue inside
+// function that stores the key
+// expl PWD and value expl ./home/usr data in the node
+// envp_i = for example :
+// envp_i -> WAYLAND_DISPLAY=wayland-0 key and value inside
 // new is for the node
 // to secure ft_strdup
 int	new_value_storing(char *envp_i, t_env *new)
@@ -62,17 +65,17 @@ int	new_value_storing(char *envp_i, t_env *new)
 	sep = ft_strchr(envp_i, '=');
 	if (sep == NULL)
 	{
-		new->key = ft_strdup(envp_i);// malloc to secure
+		new->key = ft_strdup(envp_i);
 		if (!new->key)
 			return (1);
 		return (0);
 	}
 	*sep = '\0';
-	new->key = ft_strdup(envp_i);// malloc to secure
+	new->key = ft_strdup(envp_i);
 	if (!new->key)
 		return (1);
 	*sep = '=';
-	new->value = ft_strdup(sep + 1);// malloc to secure
+	new->value = ft_strdup(sep + 1);
 	if (!new->value)
 		return (1);
 	return (0);
@@ -80,6 +83,8 @@ int	new_value_storing(char *envp_i, t_env *new)
 
 void	ft_free_node(t_env	*node)
 {
+	if (!node)
+		return ;
 	if (node->key)
 		free(node->key);
 	if (node->value)
@@ -88,17 +93,20 @@ void	ft_free_node(t_env	*node)
 		free(node);
 }
 
-//copy envp into a chained list env needed for export cd etc and env -i (
-/// faire gafe env ne doit garder au final (expl si je run un nouveau minshell) un env avec uniquement des key avec des value valide !)
-t_env	*init_env(char **envp)
+//copy envp into a chained list env needed for export cd etc and env -i ()
+t_env	*init_env(char	**envp)
 {
 	t_env	*head;
 
 	head = NULL;
-	if (envp)
+	if (envp && envp[0])
 		head = init_env_envp_exist(envp, head);
-	// else
-	// {
-	// 	head = emergency_env() // A CODER : une fonciton qui cree un env de secour si envp == NULL.
+	else
+		head = emergency_env(head);
+	if (!head)
+	{
+		error_msg("env", "error in setting env");
+		return (NULL);
+	}
 	return (head);
 }

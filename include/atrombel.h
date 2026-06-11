@@ -15,14 +15,15 @@ int		new_value_storing(char *envp_i, t_env *new);
 int		env_key_copy_check(char *new_key, t_env *tmp_env);
 char	**env_to_charstar_reconversion(t_env *env);
 int		ft_addnew_key_and_value(t_env *env, char *str);
-void	env_lst_cmd_update(t_env *env, char *last_arg);
+void	env_lst_cmd_update(t_env *env, char *last_arg, t_data *data, t_list *redirs);
 t_env	*init_env_envp_exist(char **envp, t_env	*head);
 t_env	*init_env(char **envp);
 void	ft_free_node(t_env	*node);
 int		new_value_storing(char *envp_i, t_env *new);
 void	add_back_env(t_env **head, t_env *new);
 t_env	*node_env_creation();
-
+t_env	*emergency_env(t_env *head);
+void	charstar_env_clean(char **dest);
 
 /* builtins */
 void	ft_echo(t_cmd *cmd,  t_data *data);
@@ -30,11 +31,12 @@ void	ft_cd(t_cmd *content, t_data *data, t_env *env);
 void	ft_pwd(t_data *data, t_env *env);
 void	ft_env(t_data *data, t_env *env);
 void	ft_exit(t_cmd *cmd, t_env *env, t_list *head, t_data *data);
-void	ft_export(t_cmd *content, t_env *env);
+void	ft_export(t_cmd *cmd, t_env *env, t_data *data);
 void	ft_unset(t_cmd *content, t_env **env);
+void	exit_clean(t_env *env, t_list *head, int nbr, int mode);
 
 /* export helpers */
-void	export_key_value(char *arg, int i, t_env *env);
+void	export_key_value(char *arg, int i , t_env *env, t_data *data);
 void	export_key_only(char *arg, t_env *env);
 void	export_without_args(t_env *env);
 void	export_printf(t_env *env_tmp);
@@ -45,7 +47,8 @@ int		heredoc_check_init(t_list *cmd_head, t_data *data);
 void	sigint_heredoc(t_redir *redir, t_data *data, char	*input);
 void	if_heredoc_eof_detected(t_redir *redir, char	*input);
 void	heredoc_input_trim(	char	*input);
-
+int		heredoc_loop(t_redir *redir, t_data *data);
+int		hd_ctrl_d(t_data *data, t_redir *redir);
 
 /* redirections */
 void	stdin_redir(t_redir *redir, t_data *data, int *error);
@@ -73,6 +76,8 @@ void	error_print(char *str);
 void	error_msg(char *str, char *msg);
 void	is_minishell_lvl(t_cmd	*cmd, t_env **env);
 void	command_not_found(char *str);
+int		secure_close(int *fd);
+void	update_underscore_env(t_env **env, t_cmd *cmd, t_data *data);
 
 /* pipeline */
 void	exe_pipeline(t_list *cmd_head, t_data *data, pid_t pid, t_env **env);

@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "minishell.h"
 #include "atrombel.h"
 
@@ -26,7 +24,7 @@ void	ft_pwd(t_data *data, t_env *env)
 		pwd = ft_get_value_env(env, "PWD");
 		if (!pwd)
 		{
-				pwd = ft_strdup("minishell");
+			pwd = ft_strdup("minishell");
 			if (!pwd)
 			{
 				perror("minishell: ");

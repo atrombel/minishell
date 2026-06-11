@@ -19,24 +19,24 @@ t_env	*init_env_envp_exist(char **envp, t_env	*head)
 	t_env	*new_node;
 
 	i = 0;
-	while(envp[i])
+	while (envp[i])
 	{
 		if (ft_strncmp(envp[i], "_=", 2) == 0)
 		{
 			i++;
-			continue;
+			continue ;
 		}
 		new_node = node_env_creation();
-		if (!new_node || new_value_storing(envp[i], new_node) == 1 )
+		if (!new_node || new_value_storing(envp[i], new_node) == 1)
 		{
 			if (new_node)
 				ft_free_node(new_node);
 			ft_env_clean(head);
 			ft_putstr_fd("env malloc error\n", 2);
-			exit(1);// to check if good idea or not
+			return (NULL);
 		}
 		add_back_env(&head, new_node);
 		i++;
-		}
+	}
 	return (head);
 }

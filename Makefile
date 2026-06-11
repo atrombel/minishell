@@ -28,7 +28,7 @@ ATROMBEL_CFILES = ft_exe_main.c ft_echo.c ft_cd.c env_set_or_copy.c ft_env.c \
 		 ft_exe_main_utils.c heredoc.c  redir_utils.c solo_builtin.c solo_cmd.c \
 		 solo_cmd_not_builtin.c strs_cmp_max_len.c env_set_or_copy_utils.c \
 		 redir_apply.c mutiple_cmd.c exe_pipeline.c minishell_lvl.c \
-		 set_signals_exe.c heredoc_utils.c
+		 set_signals_exe.c heredoc_utils.c emergency_env.c secure_close.c
 
 ATROMBEL_SRCS = $(addprefix $(ATROMBEL_SRC_DIR)/, $(ATROMBEL_CFILES))
 ATROMBEL_OBJS = $(addprefix $(ATROMBEL_OBJ_DIR)/, $(ATROMBEL_CFILES:.c=.o))

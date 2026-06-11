@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 #include "atrombel.h"
 #include "cgasser.h"
@@ -18,17 +17,18 @@
 int	hd_ctrl_d(t_data *data, t_redir *redir)
 {
 	ft_signals();
-	ft_putstr_fd("minishell: warning: here-document delimited by end-of-file (wanted `", 2);
+	ft_putstr_fd("minishell: warning: here-document delimited by end-of-file\n"
+		"(wanted `", 2);
 	ft_putstr_fd(redir->arg, 2);
 	ft_putstr_fd("')\n", 2);
-	close(redir->hd_tmp_fd);
+	secure_close(&redir->hd_tmp_fd);
 	redir->hd_tmp_fd = open(redir->hd_filename, O_RDONLY);
 	if (redir->hd_tmp_fd < 0)
 	{
 		perror("minishell: heredoc");
 		return (-1);
 	}
-	unlink(redir->hd_filename); //
+	unlink(redir->hd_filename);
 	data->last_exit_status = 0;
 	return (0);
 }
@@ -36,8 +36,8 @@ int	hd_ctrl_d(t_data *data, t_redir *redir)
 //fonctio qui cree le heredoc
 int	heredoc_tmp_init(t_redir *redir, t_data *data)
 {
-	char *str;
-	char *nbr;
+	char	*str;
+	char	*nbr;
 
 	nbr = ft_itoa(data->last_hd_nbr);
 	if (!nbr)
@@ -48,57 +48,41 @@ int	heredoc_tmp_init(t_redir *redir, t_data *data)
 	str = ft_strjoin("heredoc_tmp", nbr);
 	free(nbr);
 	if (!str)
-	{
-		data->last_exit_status = errno;
-		return (-1);
-	}
-	redir->hd_tmp_fd = open(str, O_CREAT | O_WRONLY | O_TRUNC, 0644);// a secriser le retour
-	if (redir->hd_tmp_fd == -1)// a definir
-		data->last_exit_status = errno;
+		return (data->last_exit_status = errno, -1);
+	redir->hd_tmp_fd = open(str, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if (redir->hd_tmp_fd == -1)
+		return (data->last_exit_status = errno, free(str), -1);
 	redir->hd_filename = ft_strdup(str);
+	if (!redir->hd_filename)
+	{
+		secure_close(&redir->hd_tmp_fd);
+		unlink(str);
+		return (data->last_exit_status = errno, free(str), -1);
+	}
 	data->last_hd_nbr++;
-	free(str);
-	return (0);
+	return (free(str), 0);
 }
 
 // fonction qui rempli le heredoc
-
 int	open_heredoc(t_redir *redir, t_data *data)
 {
-	char	*input;
-	int		len;
+	int	ret;
 
-	len = ft_strlen(redir->arg);
 	heredoc_tmp_init(redir, data);
 	signals_heredoc();
-	while (1)
-	{
-		write(1, "> ", 2);
-		input = get_next_line(0);
-		if (g_sig == SIGINT)
-			return (sigint_heredoc(redir, data, input), -1);
-		if (!input)
-			return (hd_ctrl_d(data, redir), 0);
-		heredoc_input_trim(input);
-		if (ft_strncmp(input, redir->arg, len + 1) == 0)
-			return(if_heredoc_eof_detected(redir, input), 0);
-		input = ft_expand_var(input, data);
-		ft_putstr_fd(input, redir->hd_tmp_fd);
-		ft_putstr_fd("\n", redir->hd_tmp_fd);
-		free(input);
-	}
+	ret = heredoc_loop(redir, data);
 	ft_signals();
-	return (0);
+	return (ret);
 }
 
 // fonction qui check si y a un herdoc
 int	check_if_herdoc(t_cmd	*cmd, t_data *data)
 {
-	t_list *redirs;
-	t_redir *redir;
+	t_list	*redirs;
+	t_redir	*redir;
 
 	redirs = cmd->redirs;
-	while(redirs)
+	while (redirs)
 	{
 		redir = (t_redir *)redirs->content;
 		if (redir->type == IN_DELIM)
@@ -117,7 +101,7 @@ int	heredoc_check_init(t_list *cmd_head, t_data *data)
 {
 	t_cmd	*cmd;
 
-	while(cmd_head)
+	while (cmd_head)
 	{
 		if (g_sig == SIGINT)
 		{

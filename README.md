@@ -65,7 +65,24 @@ Each command structure groups:
 
 When a pipe operator is encountered, a new command node is created and linked to the command list in execution order.
 
-* * * * *
+Execution
+---------
+
+it's the part where the magic happends.
+it's the part where redirection are applied, the fork are made.
+the exuction process are divided case by case
+### 3. redirection
+
+redirection << (heredoc) are created right after the parser process in tmp fantom file such as the real bash
+then other redidreciton are applied in specific order.
+every cmd structure has is own redir sructure to keep reddirection tied to his respective command
+
+### cmd.
+the execution phase will sort case by case which situation we are in.
+is it a builtin ? a rdm command ? is there pipes ? etc
+at the end of the executin the last exit status of the command is catched and stored
+in a structure called data taht store the file descriptor for execve and the last_exit_status,
+a key int variable taht stores all the error code from the commands.
 
 Instructions
 ------------
@@ -103,7 +120,19 @@ Resources
     <https://eklitzke.org/path-max-is-tricky>
 -   Minishell project article\
     <https://m4nnb3ll.medium.com/minishell-building-a-mini-bash-a-42-project-b55a10598218>
-
+-   open & close
+     https://www.youtube.com/watch?v=BQJBe4IbsvQ
+-   forks
+    https://www.youtube.com/watch?v=xVSPv-9x3gk
+    https://www.geeksforgeeks.org/c/fork-system-call/
+    https://medium.com/@migueldias3r/the-fork-function-in-c-694ee5757ca8
+    https://www.scaler.com/topics/c-fork/
+    https://www.tutorialspoint.com/article/fork-in-c
+-   waitpids
+    https://stackoverflow.com/questions/21248840/example-of-waitpid-in-use
+    https://linux.die.net/man/2/waitpid
+    https://www.delftstack.com/howto/c/waitpid-in-c/
+    https://www.tutorialspoint.com/unix_system_calls/waitpid.htm really good one
 * * * * *
 
 AI Usage
@@ -119,6 +148,8 @@ They were mainly used to:
 -   clarify signal handling and readline behavior,
 -   review Makefiles and Git workflows,
 -   improve technical understanding of parsing and process management,
--   and help format documentation.
+-   help format documentation.
+-   improve technical understanding of fork, bash function.
+-   helped with execve planification
 
 All generated explanations and suggestions were manually reviewed, tested, and rewritten when necessary in order to fully understand and validate the final implementation.

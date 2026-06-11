@@ -42,7 +42,7 @@ typedef struct s_data// prblmt que je vais devoir le mettre en init pour chaque 
 	int		stdin_save;
 	int		stdout_save;
 	int		tmp_fd;
-	int		last_hd_nbr; // suffixe du tmp por plusieur heredoc
+	int		last_hd_nbr; // suffixe du tmp pour plusieur heredoc
 	t_env	*env;
 } t_data;
 

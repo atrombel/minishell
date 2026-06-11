@@ -10,27 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 #include "atrombel.h"
 #include "cgasser.h"
 
-
 void	waitpid_operations(t_data *data)
 {
 	int	status;
+	int	last_status;
 
+	last_status = 0;
 	while (waitpid(-1, &status, 0) > 0)
-		data->last_exit_status = status;
-	if (WIFEXITED(status))
-		data->last_exit_status = WEXITSTATUS(status);
-	else if (WIFSIGNALED(status))
+		last_status = status;
+	if (WIFEXITED(last_status))
+		data->last_exit_status = WEXITSTATUS(last_status);
+	else if (WIFSIGNALED(last_status))
 	{
-		if (WTERMSIG(status) == SIGINT)
-					write(1, "\n", 1);
-		else if (WTERMSIG(status) == SIGQUIT)
+		if (WTERMSIG(last_status) == SIGINT)
+			write(1, "\n", 1);
+		else if (WTERMSIG(last_status) == SIGQUIT)
 			write(1, "Quit (core dumped)\n", 19);
-		data->last_exit_status = 128 + WTERMSIG(status);
+		data->last_exit_status = 128 + WTERMSIG(last_status);
 	}
 }
 
@@ -38,15 +38,16 @@ void	ft_execute_cmd(t_cmd *cmd, t_env **env)
 {
 	char	**envp;
 
-	is_minishell_lvl(cmd, env);// rajouter dans multiple pipe;
+	is_minishell_lvl(cmd, env);
 	envp = env_to_charstar_reconversion(*env);
 	if (!envp)
 	{
 		error_print("ERROR");
-		return ;
+		exit(1);
 	}
 	set_signals_default();
 	execve(cmd->path, cmd->args, envp);
+	charstar_env_clean(envp);
 	error_print("execve failed");
 	if (errno == EACCES)
 		exit(126);
@@ -54,7 +55,8 @@ void	ft_execute_cmd(t_cmd *cmd, t_env **env)
 }
 
 // organise execution of cmd and application of redir
-void	ft_execute_cmd_redir(t_cmd	*cmd, t_data *data, t_env **env, t_list *cmd_head)
+void	ft_execute_cmd_redir(t_cmd	*cmd, t_data *data,
+	t_env **env, t_list *cmd_head)
 {
 	int	pid;
 
@@ -65,9 +67,9 @@ void	ft_execute_cmd_redir(t_cmd	*cmd, t_data *data, t_env **env, t_list *cmd_hea
 		error_print("fork");
 		return ;
 	}
-	else if(pid == 0)//child
+	else if (pid == 0)
 	{
-		if (cmd->redirs)// a voir si je peux enelever ceci
+		if (cmd->redirs)
 		{
 			if (ft_redir_apply(cmd_head, data) == 0)
 				ft_execute_cmd(cmd, env);
@@ -85,5 +87,4 @@ void	solo_cmd_not_builtin(t_list *cmd_head, t_data *data, t_env **env)
 
 	cmd = (t_cmd *)cmd_head->content;
 	ft_execute_cmd_redir(cmd, data, env, cmd_head);
-	//heredoc_tmp_deletion(cmd_head, data);
 }

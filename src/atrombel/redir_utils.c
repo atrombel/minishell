@@ -10,14 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 #include "atrombel.h"
 
-
-// A SECURISER TOUT LES DUP2
-
-//expl cat < po.c
+//apply redirection "<" expl cat < po.c
 void	stdin_redir(t_redir *redir, t_data *data, int *error)
 {
 	data->infile = open(redir->arg, O_RDONLY);
@@ -28,10 +24,15 @@ void	stdin_redir(t_redir *redir, t_data *data, int *error)
 		*error = 1;
 		return ;
 	}
-	dup2(data->infile, 0);
-	close(data->infile);
+	if (dup2(data->infile, 0) == -1)
+	{
+		perror("dup2");
+		*error = 1;
+	}
+	secure_close(&data->infile);
 }
 
+//apply redirection ">" expl cat > po.c
 void	stdout_redir(t_redir *redir, t_data *data, int *error)
 {
 	data->outfile = open(redir->arg, O_CREAT | O_RDWR | O_TRUNC, 0644);
@@ -42,10 +43,15 @@ void	stdout_redir(t_redir *redir, t_data *data, int *error)
 		*error = 1;
 		return ;
 	}
-	dup2(data->outfile, 1);
-	close(data->outfile);
+	if (dup2(data->outfile, 1) == -1)
+	{
+		perror("dup2");
+		*error = 1;
+	}
+	secure_close(&data->outfile);
 }
 
+//apply redirection ">>"
 void	stdout_appnd(t_redir *redir, t_data *data, int *error)
 {
 	data->outfile = open(redir->arg, O_CREAT | O_RDWR | O_APPEND, 0644);
@@ -56,15 +62,28 @@ void	stdout_appnd(t_redir *redir, t_data *data, int *error)
 		*error = 1;
 		return ;
 	}
-	dup2(data->outfile, 1);
-	close(data->outfile);
+	if (dup2(data->outfile, 1) == -1)
+	{
+		perror("dup2");
+		*error = 1;
+	}
+	secure_close(&data->outfile);
 }
 
+//apply redirection "<<"
 void	heredoc_reddir_apply(t_redir *redir, t_data *data, int *error)
 {
-	(void)error; //  a voir  si je limplemente par apres
-	(void)data;// a implementr retour erreur data
-	dup2(redir->hd_tmp_fd, 0);// heredoc deja open. // a securiser
-	close(redir->hd_tmp_fd); // faudra delete a la fin les heredocs !!!!!!!!!!!!!!!!
+	if (redir->hd_tmp_fd == -1)
+	{
+		data->last_exit_status = 1;
+		*error = 1;
+		return ;
+	}
+	if (dup2(redir->hd_tmp_fd, 0) == -1)
+	{
+		perror("dup2");
+		*error = 1;
+	}
+	secure_close(&redir->hd_tmp_fd);
 	redir->hd_tmp_fd = -1;
 }
