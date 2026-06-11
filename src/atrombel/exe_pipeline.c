@@ -22,6 +22,7 @@ void	cmd_pipe_exe(t_list *cmd_head, t_data *data, t_env **env)
 	if (!cmd_head || !cmd_head->content)
 		return ;
 	cmd = (t_cmd *)cmd_head->content;
+	update_underscore_env(env, cmd, data);
 	if (redir_but_cmd_invalid(cmd_head, data, cmd) == 1)
 		exit(data->last_exit_status);
 	if (ft_builtin_verif(cmd_head->content) == 1)

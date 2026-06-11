@@ -6,7 +6,7 @@
 /*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:51:54 by atrombel          #+#    #+#             */
-/*   Updated: 2026/06/08 16:50:27 by atrombel         ###   ########.fr       */
+/*   Updated: 2026/06/11 11:01:56 by atrombel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,6 @@ void	ft_cd(t_cmd *cmd, t_data *data, t_env *env)
 		return ;
 	}
 	ft_chdir(path, data, env);
+	if (args[1] == NULL)
+		free(path);
 }
