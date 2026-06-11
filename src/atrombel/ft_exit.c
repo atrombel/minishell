@@ -41,6 +41,7 @@ void	exit_clean(t_env *env, t_list *head, int nbr, int mode)
 	ft_env_clean(env);
 	ft_clear_cmds(&head);
 	rl_clear_history();
+	get_next_line(-1);
 	exit(nbr);
 }
 

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/11 20:00:21 by atrombel          #+#    #+#             */
+/*   Updated: 2026/06/11 20:06:17 by atrombel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -10,30 +21,38 @@
 # include <stdlib.h>
 # include <signal.h>
 # include <sys/wait.h>
-# include <errno.h> // for errno uses
+# include <errno.h>
 
 //redirection types
-# define IN 4 //"<"
-# define OUT 5 //">"
-# define IN_DELIM 6 // "<<"
-# define OUT_APPN 7 //">>"
+//---------------------------------------------------
+// IN 4 //"<"
+// OUT 5 //">"
+// IN_DELIM 6 // "<<"
+// OUT_APPN 7 //">>"
+# define IN 4
+# define OUT 5
+# define IN_DELIM 6
+# define OUT_APPN 7
 //error types
 # define ALLOC_ERR "Error\nMemory allocation failed\n"
 
 //global variable to store signals
-extern volatile sig_atomic_t g_sig;
+extern volatile sig_atomic_t	g_sig;
 
+//env
+//---------------------------------------------------
+//key expl "PWD"
+//value expl "/home/user"
 typedef struct s_env
 {
-	char			*key;	// "PWD"
-	char			*value; // "/home/user"
+	char			*key;
+	char			*value;
 	struct s_env	*next;
-} t_env;
+}	t_env;
 
-// I need this struct t_env just for cd and others to work properly,
-// if this wasnt there i wouldnt be able to update the PWD of my working directoy resulting desyncronasation when I call pwd
-// Lors de la conversion de la liste en char envp pour fork, extraire que les variables de $type == 0$.
-typedef struct s_data// prblmt que je vais devoir le mettre en init pour chaque argument donc data sera seuelemt pour last exist status'
+// data storage
+//---------------------------------------------------
+typedef struct s_data
 {
 	int		last_exit_status;
 	int		pipe_fd[2];
@@ -42,25 +61,42 @@ typedef struct s_data// prblmt que je vais devoir le mettre en init pour chaque 
 	int		stdin_save;
 	int		stdout_save;
 	int		tmp_fd;
-	int		last_hd_nbr; // suffixe du tmp pour plusieur heredoc
+	int		last_hd_nbr;
 	t_env	*env;
-} t_data;
+}	t_data;
 
+//cmds
+//---------------------------------------------------
+// is_valid; //1 if it is a valid command, 0 otherwise
+// path; //command path
+// args; //name of the command, flag and arguments
+// redirs; //redirections
 typedef struct s_cmd
 {
-	int		is_valid; //1 if it is a valid command, 0 otherwise
-	char	*path; //command path
-	char	**args; //name of the command, flag and arguments
-	t_list	*redirs; //redirections
+	int		is_valid;
+	char	*path;
+	char	**args;
+	t_list	*redirs;
 }	t_cmd;
 
-typedef struct s_redir //redirection
+//redirection
+//---------------------------------------------------
+// type; type of redirection (cf macro above)
+// hd_tmp_fd;  le fd du heredoc associe
+// is_expanded; 1 if the heredoc must expand its variables
+// arg; filename or delimitor
+// hd_filename; heredoc temporary file created to store the
+// input of the user associated to a command MALLOC
+
+//redir
+//---------------------------------------------------
+typedef struct s_redir
 {
-	int		type; //type of redirection (cf macro above)
-	int		hd_tmp_fd; // le fd du heredoc associe
-	int		is_expanded; //1 if the heredoc must expand its variables
-	char	*arg; //filename or delimitor
-	char	*hd_filename; //heredoc temporary file created to store the input of the user associated to a command MALLOC
+	int		type;
+	int		hd_tmp_fd;
+	int		is_expanded;
+	char	*arg;
+	char	*hd_filename;
 }	t_redir;
 
 char	*ft_expand_var(char *str, t_data *data);

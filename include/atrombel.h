@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   atrombel.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/11 19:58:20 by atrombel          #+#    #+#             */
+/*   Updated: 2026/06/11 19:59:42 by atrombel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef ATROMBEL_H
 # define ATROMBEL_H
 # include <limits.h> //verifier si jai le droit dutiliser
- // sinon remove it if not used
+// sinon remove it if not used
 // struct that contain usefull data to see if really that usefull long term
 
 /* env */
@@ -15,18 +26,19 @@ int		new_value_storing(char *envp_i, t_env *new);
 int		env_key_copy_check(char *new_key, t_env *tmp_env);
 char	**env_to_charstar_reconversion(t_env *env);
 int		ft_addnew_key_and_value(t_env *env, char *str);
-void	env_lst_cmd_update(t_env *env, char *last_arg, t_data *data, t_list *redirs);
+void	env_lst_cmd_update(t_env *env, char *last_arg,
+			t_data *data, t_list *redirs);
 t_env	*init_env_envp_exist(char **envp, t_env	*head);
 t_env	*init_env(char **envp);
 void	ft_free_node(t_env	*node);
 int		new_value_storing(char *envp_i, t_env *new);
 void	add_back_env(t_env **head, t_env *new);
-t_env	*node_env_creation();
+t_env	*node_env_creation(void);
 t_env	*emergency_env(t_env *head);
 void	charstar_env_clean(char **dest);
 
 /* builtins */
-void	ft_echo(t_cmd *cmd,  t_data *data);
+void	ft_echo(t_cmd *cmd, t_data *data);
 void	ft_cd(t_cmd *content, t_data *data, t_env *env);
 void	ft_pwd(t_data *data, t_env *env);
 void	ft_env(t_data *data, t_env *env);
@@ -36,7 +48,7 @@ void	ft_unset(t_cmd *content, t_env **env);
 void	exit_clean(t_env *env, t_list *head, int nbr, int mode);
 
 /* export helpers */
-void	export_key_value(char *arg, int i , t_env *env, t_data *data);
+void	export_key_value(char *arg, int i, t_env *env, t_data *data);
 void	export_key_only(char *arg, t_env *env);
 void	export_without_args(t_env *env);
 void	export_printf(t_env *env_tmp);
@@ -66,7 +78,8 @@ void	solo_builtin(t_list *cmd_head, t_data *data, t_env **env);
 void	solo_cmd_not_builtin(t_list *cmd_head, t_data *data, t_env **env);
 void	multiple_cmd(t_list *cmd_head, t_data *data, t_env **env);
 int		ft_builtin_verif(t_cmd *content);
-int		ft_execute_builtin(t_cmd *content, t_data *data, t_env **env, t_list *head);
+int		ft_execute_builtin(t_cmd *content, t_data *data,
+			t_env **env, t_list *head);
 void	ft_execute_cmd(t_cmd *cmd, t_env **env);
 
 /* utils */
@@ -85,9 +98,9 @@ void	exe_pipeline(t_list *cmd_head, t_data *data, pid_t pid, t_env **env);
 void	waitpid_operations(t_data *data);
 
 /* signals*/
-int		set_signals_default();
-int		set_signals_ignore();
+int		set_signals_default(void);
+int		set_signals_ignore(void);
 void	signals_heredoc(void);
-void	 handler_heredoc(int sig);
+void	handler_heredoc(int sig);
 
 #endif

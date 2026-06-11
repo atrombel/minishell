@@ -64,7 +64,7 @@ int	heredoc_loop(t_redir *redir, t_data *data)
 		if (g_sig == SIGINT)
 			return (sigint_heredoc(redir, data, input), -1);
 		if (!input)
-			return (hd_ctrl_d(data, redir), 0);
+			return (get_next_line(-1), hd_ctrl_d(data, redir), 0);
 		heredoc_input_trim(input);
 		if (ft_strncmp(input, redir->arg, len + 1) == 0)
 			return (if_heredoc_eof_detected(redir, input), 0);

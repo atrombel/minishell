@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgasser <marvin@42lausanne.ch>             +#+  +:+       +#+        */
+/*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 18:54:58 by cgasser           #+#    #+#             */
-/*   Updated: 2026/05/28 16:42:11 by cgasser          ###   ####lausanne.ch   */
+/*   Updated: 2026/06/11 19:57:58 by atrombel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-
+# include <stdio.h>
+# include <fcntl.h>
 # include <stdarg.h>
 # include <stdint.h>
 # include <stdlib.h>
@@ -82,8 +83,6 @@ char	**ft_arrayadd_back(char **array, char *str);
 void	ft_free_array(char **array);
 
 // get_next_line.h
-# include <stdio.h>
-# include <fcntl.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
@@ -91,7 +90,7 @@ void	ft_free_array(char **array);
 
 char	*get_next_line(int fd);
 void	ft_free_gnl(char **ptr);
-
+void	gnl_reset_static(char **holder);
 #endif
 
 //merci Matias

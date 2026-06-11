@@ -6,7 +6,7 @@
 /*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/06 10:36:55 by atrombel          #+#    #+#             */
-/*   Updated: 2026/06/10 17:39:32 by atrombel         ###   ########.fr       */
+/*   Updated: 2026/06/11 19:43:47 by atrombel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	main_while(t_data	data, t_env	*env)
 	}
 	rl_clear_history();
 	ft_env_clean(env);
+	get_next_line(-1);
 }
 
 int	main(int argc, char **argv, char **envp)

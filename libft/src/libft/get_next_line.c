@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgasser <cgasser@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 08:56:10 by cgasser           #+#    #+#             */
-/*   Updated: 2025/11/25 11:21:53 by cgasser        ########   odam.nl        */
+/*   Updated: 2026/06/11 19:55:57 by atrombel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ char	*get_next_line(int fd)
 	int			status;
 	char		*buffer;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0)
+		return (gnl_reset_static(&holder), NULL);
+	if (BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!init_holder(&holder))
 		return (NULL);
