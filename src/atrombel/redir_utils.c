@@ -19,7 +19,10 @@ void	stdin_redir(t_redir *redir, t_data *data, int *error)
 	data->infile = open(redir->arg, O_RDONLY);
 	if (data->infile < 0)
 	{
-		error_print(redir->arg);
+		// if (redir->is_ambigous == 1)
+		// 	error_msg("", "ambiguous redirect");
+		// else
+			error_print(redir->arg);
 		data->last_exit_status = 1;
 		*error = 1;
 		return ;

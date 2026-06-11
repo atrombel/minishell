@@ -15,21 +15,21 @@
 
 int	export_new_value_storing(t_env *env, t_env *new)
 {
-	if (!env || !new)
+	if (!env || !new || !env->key)
 		return (0);
-	if (!env->value && env->key)
-	{
-		new->key = ft_strdup(env->key);
-		if (!new->key)
-			return (1);
+	if (ft_strncmp(env->key, "_", 2) == 0)
 		return (0);
-	}
 	new->key = ft_strdup(env->key);
 	if (!new->key)
 		return (1);
-	new->value = ft_strdup(env->value);
-	if (!new->value)
-		return (1);
+	if (env->value)
+	{
+		new->value = ft_strdup(env->value);
+		if (!new->value)
+			return (1);
+	}
+	else
+		new->value = NULL;
 	return (0);
 }
 
@@ -42,18 +42,18 @@ static int	export_check_valid(char *arg, t_data *data)
 	if (ft_isalpha(arg[0]) == 0 && arg[0] != '_')
 	{
 		if (arg[0] == '\0')
-			printf("-minishell: export: ': not a valid identifier\n");
+			ft_putstr_fd("-minishell: export: ': not a valid identifier\n", 2);
 		else
-			printf("-minishell: export: '%s': not a valid identifier\n", arg);
+			error_export_identifier(arg);
 		data->last_exit_status = 1;
 		return (-1);
 	}
 	while (arg[i] != '=' && arg[i])
 	{
-		if (ft_isalpha(arg[0]) == 0 && arg[0] == '_' && ft_isdigit(arg[i]) == 1)
+		if (ft_isalnum(arg[i]) == 0 && arg[i] != '_')
 		{
 			printf("-minishell: export: '%s': not a valid XD identifier\n",
-				arg);
+				arg);// ENLEVER LE XD
 			data->last_exit_status = 1;
 			return (-1);
 		}

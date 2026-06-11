@@ -47,3 +47,12 @@ void	error_msg(char *str, char *msg)
 	ft_putstr_fd(msg, 2);
 	write(2, "\n", 1);
 }
+
+void	error_export_identifier(char *arg)
+{
+	if (!arg)
+		return ;
+	write(2, "minishell: export: `", 20);
+	ft_putstr_fd(arg, 2);
+	write(2, "': not a valid identifier\n", 26);
+}

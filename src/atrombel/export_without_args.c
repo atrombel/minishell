@@ -81,12 +81,17 @@ t_env	*export_only_env_copy(t_env *env)
 	while (env)
 	{
 		new = node_env_creation();
-		if (export_new_value_storing(env, new) == 1)
+		if (!new || export_new_value_storing(env, new) == 1)
 		{
+			if (new)
+				ft_free_node(new);
 			ft_env_clean(head);
 			return (NULL);
 		}
-		add_back_env(&head, new);
+		if (new->key)
+			add_back_env(&head, new);
+		else
+			ft_free_node(new);
 		env = env->next;
 	}
 	return (head);

@@ -78,6 +78,7 @@ void	is_minishell_lvl(t_cmd	*cmd, t_env **env);
 void	command_not_found(char *str);
 int		secure_close(int *fd);
 void	update_underscore_env(t_env **env, t_cmd *cmd, t_data *data);
+void	error_export_identifier(char *arg);
 
 /* pipeline */
 void	exe_pipeline(t_list *cmd_head, t_data *data, pid_t pid, t_env **env);
