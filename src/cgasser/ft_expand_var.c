@@ -3,115 +3,164 @@
 #include "ft_printf.h"
 #include <stdlib.h>
 
-char	*ft_put_var(char *str, t_data *data, int i);
-int	ft_var_name_len(char *str, int i);
-char	*ft_cpy_value(char *str, t_data *data, int i, int var_name_len);
-t_env	*ft_get_value(char *str, t_env *env, int i, int var_name_len);
+int	ft_strlen_expanded_var(char *str, t_data *data);
+char	*ft_get_value(char *start, t_data *data);
+int	ft_strlen_varname(char *start);
+int	ft_strcpy_expanded_var(char *res, char *str, t_data *data);
 
 //take a string as parameter and expand variables starting with $
 //return a string allocated with ft_calloc, and free original str
 char	*ft_expand_var(char *str, t_data *data)
 {
-	int	i;
+	char	*res;
+	int		expanded_len;
 
-	i = 0;
+	res = NULL;
+	expanded_len = 0;
 	if (!str)
 		return (NULL);
-	if (str[0] == 39 || str[ft_strlen(str) - 1] == 39)
-		return (str);
-	while (str[i] != '\0')
-	{
-		if (str[i] == '$' && str[i + 1] != ' ' && !ft_isquote(str[i + 1]) \
-			&& str[i + 1] != '\0')
-		{
-			str = ft_put_var(str, data, i);
-			if (!str)
-				return (NULL);
-		}
-		else
-			i++;
-	}
-	return (str);
-}
-
-//takes as argument the orignial string and the index of the '$'
-//and return the full string with the $NAME replaced by the value
-char	*ft_put_var(char *str, t_data *data, int i)
-{
-	char	*value;
-	char	*res;
-	char	*str2;
-	int		var_name_len;
-	int		size;
-
-	var_name_len = ft_var_name_len(str, i);
-	value = ft_cpy_value(str, data, i, var_name_len);
-	str2 = str + i + var_name_len;
-	size = i + ft_strlen(str2) + 1;
-	if (value)
-		size += ft_strlen(value);
-	res = ft_calloc(sizeof(char), size);
+	expanded_len = ft_strlen_expanded_var(str, data);
+	if (expanded_len < 0)
+		return (free(str), NULL);
+	res = ft_calloc(sizeof(char), expanded_len + 1);
 	if (!res)
-		return (free(str), perror("ft_put_var: "), NULL);
-	ft_strlcpy(res, str, i + 1);
-	if (value)
-		ft_strlcat(res, value, size);
-	ft_strlcat(res, str2, size);
+		return (free(str), perror("ft_expand_var"), NULL);
+	if (ft_strcpy_expanded_var(res, str, data))
+		return (free(str), NULL);
 	free(str);
 	return (res);
 }
 
-//count the len of the variable name $NAME
-int	ft_var_name_len(char *str, int i)
+int	ft_strlen_expanded_var(char *str, t_data *data)
 {
-	int	len;
+	int		i;
+	int		quote;
+	int		len;
+	int		is_allocated;
+	char	*value;
 
-	len = 1;
-	while (!ft_isquote(str[i + len]) && str[i + len] != ' ' \
-		&& str[i + len] != '\0' && str[i + len] != '$')
-		len++;
+	i = 0;
+	quote = 0;
+	len = 0;
+	is_allocated = 0;
+	value = NULL;
+	while (str[i] != '\0')
+	{
+		if (quote == 0 && ft_isquote(str[i]))
+			quote = str[i];
+		else if (quote == str[i])
+			quote = 0;
+		if (quote != '\'' && str[i] == '$' && (ft_isalnum(str[i + 1]) \
+			|| str[i + 1] == '_' || str[i + 1] == '?'))
+		{
+			value = ft_get_value(str + i, data);
+			if (!value && str[i + 1] == '?')
+			{
+				value = ft_itoa(data->last_exit_status);
+				if (!value)
+					return (perror("ft_strlen_expanded_var"), -1);
+				is_allocated = 1;
+			}
+			if (value)
+			{
+				len += ft_strlen(value);
+				if (is_allocated)
+				{
+					free (value);
+					is_allocated = 0;
+				}
+			}
+			i += ft_strlen_varname(str + i);
+		}
+		else
+		{
+			len++;
+			i++;
+		}
+	}
 	return (len);
 }
 
-//copy the value from the node returned by ft_get_value or itoa the last
-//exit status in case of $?
-char	*ft_cpy_value(char *str, t_data *data, int i, int var_name_len)
+char	*ft_get_value(char *start, t_data *data)
 {
-	t_env	*temp;
-	char	*value;
-	int		value_len;
+	t_env	*env;
 
-	temp = NULL;
-	value = NULL;
-	if (ft_strncmp(str + i, "$?", 2) == 0 && var_name_len == 2)
-		return (ft_itoa(data->last_exit_status));
-	temp = ft_get_value(str, data->env, i, var_name_len);
-	if (!temp)
-		return (NULL);
-	value_len = ft_strlen(temp->value);
-	value = ft_calloc(sizeof(char), value_len + 1);
-	if (!value)
-		return (perror("ft_cpy_value: "), NULL);
-	ft_strlcpy(value, temp->value, value_len + 1);
-	return (value);
+	env = data->env;
+	while (env != NULL)
+	{
+		if (ft_strncmp(start + 1, env->key, \
+			ft_strlen_varname(start) - 1) == 0 && \
+				env->key[ft_strlen_varname(start) - 1] == '\0')
+			return (env->value);
+		env = env->next;
+	}
+	return (NULL);
 }
 
-//check if a variable of var $NAME exist in env
-//return a pointer to the node, NULL otherwise
-t_env	*ft_get_value(char *str, t_env *env, int i, int var_name_len)
-{
-	t_env	*temp;
-	char	*var_name;
+//ft_strlen_varname: return the len of the variable name with the $: eg $USER -> 5
 
-	temp = NULL;
-	temp = env;
-	var_name = str + i + 1;
-	while (temp != NULL)
+int	ft_strlen_varname(char *start)
+{
+	int	i;
+
+	i = 1;
+	if (start[i] == '?')
+		return (i + 1);
+	while (ft_isalnum(start[i]) || start[i] == '_')
+		i++;
+	return (i);
+}
+
+int	ft_strcpy_expanded_var(char *res, char *str, t_data *data)
+{
+	int		i;
+	int		j;
+	int		quote;
+	int		is_allocated;
+	char	*value;
+
+	i = 0;
+	j = 0;
+	quote = 0;
+	is_allocated = 0;
+	value = NULL;
+	while (str[i] != '\0')
 	{
-		if (ft_strncmp(var_name, temp->key, var_name_len - 1) == 0 \
-		&& ft_strlen(temp->key) == (size_t)(var_name_len - 1))
-			break;
-		temp = temp->next;
+		if (quote == 0 && ft_isquote(str[i]))
+			quote = str[i];
+		else if (quote == str[i])
+			quote = 0;
+		if (quote != '\'' && str[i] == '$' && (ft_isalnum(str[i + 1]) \
+			|| str[i + 1] == '_' || str[i + 1] == '?'))
+		{
+			value = ft_get_value(str + i, data);
+			if (!value && str[i + 1] == '?')
+			{
+				value = ft_itoa(data->last_exit_status); //penser à free
+				if (!value)
+					return (perror("ft_strlen_expanded_var"), 1);
+				is_allocated = 1;
+			}
+			if (value)
+			{
+				ft_strlcpy(res + j, value, ft_strlen(value) + 1);
+				j += ft_strlen(value);
+				if (is_allocated)
+				{
+					free(value);
+					is_allocated = 0;
+				}
+
+			}
+			i += ft_strlen_varname(str + i);
+		}
+		else
+		{
+			res[j] = str[i];
+			j++;
+			i++;
+		}
 	}
-	return (temp);
+	res[j] = '\0';
+	return (0);
 }

@@ -25,7 +25,7 @@ int		ft_check_syntax(t_list *tokens);
 t_list	*ft_lex_and_parse(char *str, t_data *data);
 
 t_list	*ft_parse(t_list *tokens, t_data *data);
-int		ft_fill_redir(t_cmd *cmd, t_list **temp);
+int		ft_fill_redir(t_cmd *cmd, t_list **temp, t_data *data);
 int		ft_fill_word(t_cmd *cmd, char **word, t_data *data);
 int		ft_fill_cmd(t_cmd *cmd, char **word, t_env *env);
 
