@@ -32,7 +32,7 @@ int	ft_fill_arg(t_cmd *cmd, char *word, t_data *data)
 	arg = ft_expand_var(arg, data);
 	if (!arg)
 		return (1);
-	arg = ft_trim_quotes(arg);
+	arg = ft_rm_quotes(arg);
 	if (!arg)
 		return (1);
 	cmd->args = ft_arrayadd_back(cmd->args, arg);

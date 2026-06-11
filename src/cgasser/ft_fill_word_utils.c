@@ -12,7 +12,7 @@ int	ft_fill_cmd(t_cmd *cmd, char **word, t_env *env)
 	char	*name;
 
 	name = NULL;
-	*word = ft_trim_quotes(*word);
+	*word = ft_rm_quotes(*word);
 	if (ft_check_cmd(cmd, *word, env) == 0)
 		cmd->is_valid = 1;
 	if (cmd->is_valid == 0 && (*word)[ft_strlen(*word) - 1] != '/')

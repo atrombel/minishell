@@ -41,7 +41,7 @@ int	ft_syntax_error(char *word)
 	s2 = NULL;
 	if (!word)
 		return (ft_putstr_fd(\
-		       "syntax error near unexpected token`newline'\n", 2), 1);
+		       "syntax error near unexpected token `newline'\n", 2), 1);
 	s1 = ft_strjoin(word, "'\n");
 	if (!s1)
 		return (perror("ft_syntax_error"), 1);

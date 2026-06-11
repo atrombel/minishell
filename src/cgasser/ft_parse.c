@@ -38,7 +38,7 @@ int	ft_make_and_fill_cmd(t_list *cmds, t_list **temp, t_data *data)
 	token = (t_token *)(*temp)->content;
 	cmd = (t_cmd *)(ft_lstlast(cmds)->content);
 	if (token->type == REDIR)
-		status = ft_fill_redir(cmd, temp);
+		status = ft_fill_redir(cmd, temp, data);
 	else if (token->type == PIPE)
 	{
 		cmd = ft_new_cmd();
