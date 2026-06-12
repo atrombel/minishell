@@ -29,9 +29,9 @@ char	**ft_split(char const *s, char c)
 	j = 0;
 	if (!s)
 		return (NULL);
-	res = malloc(sizeof(char *) * (ft_count(s, c) + 1));
+	res = ft_calloc(sizeof(char *), ft_count(s, c) + 1);
 	if (!res)
-		return (NULL);
+		return (perror("ft_split"), NULL);
 	s = ft_reset(s, c);
 	while (*s != '\0')
 	{

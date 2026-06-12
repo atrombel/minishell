@@ -12,7 +12,6 @@
 
 #include "libft.h"
 
-
 void	ft_free_gnl(char **ptr)
 {
 	if (ptr && *ptr)

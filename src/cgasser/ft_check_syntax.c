@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_check_syntax.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cgasser <cgasser@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/11 14:43:21 by cgasser           #+#    #+#             */
+/*   Updated: 2026/06/11 14:43:40 by cgasser          ###   ####lausanne.ch   */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cgasser.h"
 
@@ -7,8 +18,8 @@ int	ft_check_pairs(t_token *current, t_token *next);
 int	ft_check_syntax(t_list *tokens)
 {
 	t_list	*temp;
-	t_token *current;
-	t_token *next;
+	t_token	*current;
+	t_token	*next;
 
 	current = NULL;
 	next = NULL;
@@ -40,8 +51,9 @@ int	ft_syntax_error(char *word)
 	s1 = NULL;
 	s2 = NULL;
 	if (!word)
-		return (ft_putstr_fd(\
-		       "syntax error near unexpected token `newline'\n", 2), 1);
+		return (ft_putstr_fd(
+				"syntax error near unexpected token `newline'\n", 2),
+			1);
 	s1 = ft_strjoin(word, "'\n");
 	if (!s1)
 		return (perror("ft_syntax_error"), 1);

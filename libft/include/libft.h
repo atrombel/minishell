@@ -19,6 +19,9 @@
 # include <unistd.h>
 # include <string.h>
 # include <limits.h>
+// get_next_line.h
+# include <stdio.h>
+# include <fcntl.h>
 
 typedef struct s_list
 {
@@ -80,10 +83,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_arraysize(char **array);
 char	**ft_arrayadd_back(char **array, char *str);
 void	ft_free_array(char **array);
-
-// get_next_line.h
-# include <stdio.h>
-# include <fcntl.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10

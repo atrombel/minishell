@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_cmd_list.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cgasser <cgasser@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/12 10:02:43 by cgasser           #+#    #+#             */
+/*   Updated: 2026/06/12 10:03:20 by cgasser          ###   ####lausanne.ch   */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cgasser.h"
 #include "ft_printf.h"
@@ -57,7 +67,9 @@ void	ft_print_redir(t_cmd *cmd)
 	ft_printf("\nredirections:");
 	while (temp != NULL)
 	{
-		ft_printf("\ntype: %d, filename: %s", ((t_redir *)temp->content)->type, ((t_redir *)temp->content)->arg);
+		ft_printf("\ntype: %d, filename: %s,",
+			((t_redir *)temp->content)->type,
+			((t_redir *)temp->content)->arg);
 		if (((t_redir *)temp->content)->type == IN_DELIM)
 		{
 			ft_printf("\tmust be expanded: ");

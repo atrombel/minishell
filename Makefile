@@ -35,8 +35,8 @@ ATROMBEL_OBJS = $(addprefix $(ATROMBEL_OBJ_DIR)/, $(ATROMBEL_CFILES:.c=.o))
 ATROMBEL_NAME = atrombel
 
 
-CGASSER_CFILES = ft_parse.c ft_parse_utils.c ft_split_quoted.c ft_fill_word.c\
-		 ft_fill_word_utils.c ft_lex_and_parse.c ft_print_cmd_list.c \
+CGASSER_CFILES = ft_parse.c ft_parse_utils.c ft_split_quoted.c ft_fill_path.c\
+		 ft_fill_cmd.c ft_lex_and_parse.c ft_print_cmd_list.c \
 		 ft_expand_var.c ft_clear_cmds.c ft_clear_tokens.c \
 		 ft_is_redir.c ft_signals.c ft_history.c ft_rm_quotes.c \
 		 ft_check_quotes.c ft_check_syntax.c

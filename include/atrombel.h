@@ -8,7 +8,6 @@
 /* env */
 t_env	*node_env_creation(void);
 void	add_back_env(t_env **head, t_env *new);
-char	*ft_get_value_env(t_env *env, char *str);
 void	ft_change_value_env(t_env *env, char *key, char *str);
 void	ft_env_clean(t_env *env);
 int		new_value_storing(char *envp_i, t_env *new);
