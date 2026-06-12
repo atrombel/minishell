@@ -6,7 +6,7 @@
 /*   By: cgasser <cgasser@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 08:38:52 by cgasser           #+#    #+#             */
-/*   Updated: 2026/06/12 09:50:04 by cgasser          ###   ####lausanne.ch   */
+/*   Updated: 2026/06/12 14:17:56 by cgasser          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,7 @@ int	ft_select_and_cpy_path(t_cmd *cmd, t_env *env)
 		return (1);
 	while (paths[i] != NULL)
 	{
-		cmd->path = ft_strjoin("/", cmd->args[0]);
-		if (!cmd->path)
-			return (ft_free_array(paths), 1);
-		cmd->path = ft_strjoin(paths[i], cmd->path);
+		cmd->path = ft_make_path_name(cmd->args[0], paths[i]);
 		if (!cmd->path)
 			return (ft_free_array(paths), 1);
 		if (access(cmd->path, X_OK) == 0)

@@ -6,7 +6,7 @@
 /*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 20:00:21 by atrombel          #+#    #+#             */
-/*   Updated: 2026/06/11 20:06:17 by atrombel         ###   ########.fr       */
+/*   Updated: 2026/06/12 14:10:10 by cgasser          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,23 @@ typedef struct s_redir
 	char	*hd_filename;
 }	t_redir;
 
+//struct used in ft_expand_var
+typedef struct s_expand
+{
+	int		i;
+	int		j;
+	int		quote;
+	int		is_alloc;
+	char	*value;
+}	t_expand;
+
 char	*ft_expand_var(char *str, t_data *data);
+void	ft_init_exp(t_expand *exp);
+void	ft_update_quote(t_expand *exp, char c);
+char	*ft_get_value(char *start, t_data *data);
+int		ft_strlen_varname(char *start);
+void	ft_incr_indexes(t_expand *exp);
+
 char	*ft_get_value_env(t_env *env, char *str);
 
 #endif
