@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_rm_quotes.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cgasser <cgasser@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/11 16:29:41 by cgasser           #+#    #+#             */
+/*   Updated: 2026/06/11 16:31:19 by cgasser          ###   ####lausanne.ch   */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_strlen_unquoted(char *str);
+int		ft_strlen_unquoted(char *str);
 void	ft_strcpy_unquoted(char *res, char *str);
 
 char	*ft_rm_quotes(char *str)
@@ -43,9 +54,9 @@ int	ft_strlen_unquoted(char *str)
 
 void	ft_strcpy_unquoted(char *res, char *str)
 {
-	int		i;
-	int		j;
-	int		quote;
+	int	i;
+	int	j;
+	int	quote;
 
 	i = 0;
 	j = 0;

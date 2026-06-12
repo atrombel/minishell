@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_parse_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cgasser <cgasser@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/11 16:20:18 by cgasser           #+#    #+#             */
+/*   Updated: 2026/06/11 16:25:46 by cgasser          ###   ####lausanne.ch   */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cgasser.h"
 
-t_redir	*ft_new_redir();
-int	ft_fill_redir_arg(t_redir *redir, t_token *token, t_data *data);
-int	ft_scan_for_quote(char *str);
+t_redir	*ft_new_redir(void);
+int		ft_fill_redir_arg(t_redir *redir, t_token *token, t_data *data);
+int		ft_scan_for_quote(char *str);
 
 int	ft_fill_redir(t_cmd *cmd, t_list **temp, t_data *data)
 {
@@ -29,7 +40,7 @@ int	ft_fill_redir(t_cmd *cmd, t_list **temp, t_data *data)
 	return (0);
 }
 
-t_redir	*ft_new_redir()
+t_redir	*ft_new_redir(void)
 {
 	t_redir	*new_redir;
 
@@ -55,6 +66,8 @@ int	ft_fill_redir_arg(t_redir *redir, t_token *token, t_data *data)
 		redir->arg = ft_expand_var(redir->arg, data);
 		if (!redir->arg)
 			return (1);
+		if (redir->arg[0] == '\0')
+			redir->is_ambiguous = 1;
 	}
 	redir->arg = ft_rm_quotes(redir->arg);
 	if (!redir->arg)

@@ -20,6 +20,9 @@
 # include <unistd.h>
 # include <string.h>
 # include <limits.h>
+// get_next_line.h
+# include <stdio.h>
+# include <fcntl.h>
 
 typedef struct s_list
 {
@@ -92,5 +95,3 @@ char	*get_next_line(int fd);
 void	ft_free_gnl(char **ptr);
 void	gnl_reset_static(char **holder);
 #endif
-
-//merci Matias

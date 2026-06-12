@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split_quoted.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cgasser <cgasser@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/11 13:54:37 by cgasser           #+#    #+#             */
+/*   Updated: 2026/06/11 13:54:42 by cgasser          ###   ####lausanne.ch   */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cgasser.h"
 #include "ft_printf.h"
 
-int	ft_find_next_word(char  *s, char c, int index);
-int	ft_count_word_quoted(char  *s, char c);
+int	ft_find_next_word(char *s, char c, int index);
+int	ft_count_word_quoted(char *s, char c);
 int	ft_len_word_quoted(char *s, char c, int index);
 int	ft_len_oper(char *start);
 
@@ -78,8 +89,9 @@ int	ft_len_word_quoted(char *s, char c, int index)
 	quote = 0;
 	if (start[len] == '<' || start[len] == '>' || start[len] == '|')
 		return (ft_len_oper(start));
-	while (start[len] != '\0' && (quote != 0 || (start[len] != '<'\
-		&& start[len] != '>' && start[len] != '|' && start[len] != c)))
+	while (start[len] != '\0' && (quote != 0 || (start[len] != '<'
+				&& start[len] != '>' && start[len] != '|'
+				&& start[len] != c)))
 	{
 		if (quote == 0 && ft_isquote(start[len]))
 			quote = start[len];
@@ -93,32 +105,8 @@ int	ft_len_word_quoted(char *s, char c, int index)
 int	ft_len_oper(char *start)
 {
 	if (ft_strncmp(start, ">>", 2) == 0 || ft_strncmp(start, "<<", 2) == 0)
-			return (2);
+		return (2);
 	if (start[0] == '<' || start[0] == '>' || start[0] == '|')
-			return (1);
+		return (1);
 	return (0);
 }
-
-/*
-#include "libft.h"
-
-int	main()
-{
-	char	*s = "hello!";
-	char	c = 0;
-	char	**res;
-	int	i;
-
-	res = ft_split(s, c);
-
-	i = 0;
-	while (res[i] != NULL)
-	{
-		printf("'%s' ", res[i]);
-		free(res[i]);
-		res[i] = NULL;
-		i++;
-	}
-	free(res);
-	res = NULL;
-}*/

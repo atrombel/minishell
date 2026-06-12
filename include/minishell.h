@@ -33,8 +33,6 @@
 # define OUT 5
 # define IN_DELIM 6
 # define OUT_APPN 7
-//error types
-# define ALLOC_ERR "Error\nMemory allocation failed\n"
 
 //global variable to store signals
 extern volatile sig_atomic_t	g_sig;
@@ -82,8 +80,9 @@ typedef struct s_cmd
 //redirection
 //---------------------------------------------------
 // type; type of redirection (cf macro above)
-// hd_tmp_fd;  le fd du heredoc associe
+// hd_tmp_fd;  fd of the associated heredoc
 // is_expanded; 1 if the heredoc must expand its variables
+// is_ambiguous; 1 if the redirection is ambiguous
 // arg; filename or delimitor
 // hd_filename; heredoc temporary file created to store the
 // input of the user associated to a command MALLOC
@@ -95,10 +94,12 @@ typedef struct s_redir
 	int		type;
 	int		hd_tmp_fd;
 	int		is_expanded;
+	int		is_ambiguous; 
 	char	*arg;
 	char	*hd_filename;
 }	t_redir;
 
 char	*ft_expand_var(char *str, t_data *data);
+char	*ft_get_value_env(t_env *env, char *str);
 
 #endif

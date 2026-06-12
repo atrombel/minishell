@@ -21,9 +21,11 @@ char	**ft_arrayadd_back(char **array, char *str)
 	res = NULL;
 	i = 0;
 	if (!str)
-		return (NULL);
+		return (array);
 	size = 2 + ft_arraysize(array);
-	res = malloc(sizeof(char *) * size);
+	res = ft_calloc(sizeof(char *), size);
+	if (!res)
+		return (perror("ft_arrayadd_back"), NULL);
 	if (array)
 	{
 		while (array[i] != NULL)
