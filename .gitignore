@@ -5,4 +5,6 @@ minishell
 obj/
 libft/obj/
 libft/lib/
-
+test
+test.txt
+test.c
