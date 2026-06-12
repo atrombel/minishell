@@ -6,7 +6,7 @@
 /*   By: cgasser <cgasser@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 10:06:04 by cgasser           #+#    #+#             */
-/*   Updated: 2026/06/12 10:06:07 by cgasser          ###   ####lausanne.ch   */
+/*   Updated: 2026/06/12 14:17:54 by cgasser          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_list	*ft_parse(t_list *tokens, t_data *data);
 int		ft_fill_redir(t_cmd *cmd, t_list **temp, t_data *data);
 int		ft_fill_cmd(t_cmd *cmd, char **word, t_data *data);
 int		ft_fill_path(t_cmd *cmd, t_env *env);
+char	*ft_make_path_name(char *cmd, char *path);
 
 int		ft_is_redir(char *str);
 

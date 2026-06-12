@@ -39,7 +39,8 @@ CGASSER_CFILES = ft_parse.c ft_parse_utils.c ft_split_quoted.c ft_fill_path.c\
 		 ft_fill_cmd.c ft_lex_and_parse.c ft_print_cmd_list.c \
 		 ft_expand_var.c ft_clear_cmds.c ft_clear_tokens.c \
 		 ft_is_redir.c ft_signals.c ft_history.c ft_rm_quotes.c \
-		 ft_check_quotes.c ft_check_syntax.c
+		 ft_check_quotes.c ft_check_syntax.c ft_fill_path_utils.c \
+		 ft_expand_var_utils.c
 
 CGASSER_SRCS = $(addprefix $(CGASSER_SRC_DIR)/, $(CGASSER_CFILES))
 CGASSER_OBJS = $(addprefix $(CGASSER_OBJ_DIR)/, $(CGASSER_CFILES:.c=.o))

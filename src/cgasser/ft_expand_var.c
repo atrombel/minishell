@@ -1,28 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_expand_var.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cgasser <cgasser@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/12 10:30:56 by cgasser           #+#    #+#             */
+/*   Updated: 2026/06/12 14:11:09 by cgasser          ###   ####lausanne.ch   */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cgasser.h"
 #include "ft_printf.h"
 #include <stdlib.h>
 
 int	ft_strlen_expanded_var(char *str, t_data *data);
-char	*ft_get_value(char *start, t_data *data);
-int	ft_strlen_varname(char *start);
+int	ft_update_indexes(t_expand *exp, char *str, t_data *data);
 int	ft_strcpy_expanded_var(char *res, char *str, t_data *data);
+int	ft_cpy_value(t_expand *exp, char *res, char *str, t_data *data);
 
 //take a string as parameter and expand variables starting with $
 //return a string allocated with ft_calloc, and free original str
 char	*ft_expand_var(char *str, t_data *data)
 {
 	char	*res;
-	int		expanded_len;
+	int		len;
 
 	res = NULL;
-	expanded_len = 0;
+	len = 0;
 	if (!str)
 		return (NULL);
-	expanded_len = ft_strlen_expanded_var(str, data);
-	if (expanded_len < 0)
+	len = ft_strlen_expanded_var(str, data);
+	if (len < 0)
 		return (free(str), NULL);
-	res = ft_calloc(sizeof(char), expanded_len + 1);
+	res = ft_calloc(sizeof(char), len + 1);
 	if (!res)
 		return (free(str), perror("ft_expand_var"), NULL);
 	if (ft_strcpy_expanded_var(res, str, data))
@@ -33,134 +44,90 @@ char	*ft_expand_var(char *str, t_data *data)
 
 int	ft_strlen_expanded_var(char *str, t_data *data)
 {
-	int		i;
-	int		quote;
-	int		len;
-	int		is_allocated;
-	char	*value;
+	t_expand	exp;
 
-	i = 0;
-	quote = 0;
-	len = 0;
-	is_allocated = 0;
-	value = NULL;
-	while (str[i] != '\0')
+	ft_init_exp(&exp);
+	while (str[exp.i] != '\0')
 	{
-		if (quote == 0 && ft_isquote(str[i]))
-			quote = str[i];
-		else if (quote == str[i])
-			quote = 0;
-		if (quote != '\'' && str[i] == '$' && (ft_isalnum(str[i + 1]) \
-			|| str[i + 1] == '_' || str[i + 1] == '?'))
-		{
-			value = ft_get_value(str + i, data);
-			if (!value && str[i + 1] == '?')
-			{
-				value = ft_itoa(data->last_exit_status);
-				if (!value)
-					return (perror("ft_strlen_expanded_var"), -1);
-				is_allocated = 1;
-			}
-			if (value)
-			{
-				len += ft_strlen(value);
-				if (is_allocated)
-				{
-					free (value);
-					is_allocated = 0;
-				}
-			}
-			i += ft_strlen_varname(str + i);
-		}
-		else
-		{
-			len++;
-			i++;
-		}
+		ft_update_quote(&exp, str[exp.i]);
+		if (ft_update_indexes(&exp, str, data) != 0)
+			return (-1);
 	}
-	return (len);
+	return (exp.j);
 }
 
-char	*ft_get_value(char *start, t_data *data)
+int	ft_update_indexes(t_expand *exp, char *str, t_data *data)
 {
-	t_env	*env;
-
-	env = data->env;
-	while (env != NULL)
+	if (exp->quote != '\'' && str[exp->i] == '$')
 	{
-		if (ft_strncmp(start + 1, env->key, \
-			ft_strlen_varname(start) - 1) == 0 && \
-				env->key[ft_strlen_varname(start) - 1] == '\0')
-			return (env->value);
-		env = env->next;
+		if (ft_isalnum(str[exp->i + 1]) || str[exp->i + 1] == '_')
+		{
+			exp->value = ft_get_value(str + exp->i, data);
+			if (exp->value)
+				exp->j += ft_strlen(exp->value);
+		}
+		else if (str[exp->i + 1] == '?')
+		{
+			exp->value = ft_itoa(data->last_exit_status);
+			if (!exp->value)
+				return (perror("ft_strlen_expanded_var"), 1);
+			exp->j += ft_strlen(exp->value);
+			free (exp->value);
+			exp->value = NULL;
+		}
+		exp->i += ft_strlen_varname(str + exp->i);
 	}
-	return (NULL);
-}
-
-//ft_strlen_varname: return the len of the variable name with the $: eg $USER -> 5
-
-int	ft_strlen_varname(char *start)
-{
-	int	i;
-
-	i = 1;
-	if (start[i] == '?')
-		return (i + 1);
-	while (ft_isalnum(start[i]) || start[i] == '_')
-		i++;
-	return (i);
+	else
+		ft_incr_indexes(exp);
+	return (0);
 }
 
 int	ft_strcpy_expanded_var(char *res, char *str, t_data *data)
 {
-	int		i;
-	int		j;
-	int		quote;
-	int		is_allocated;
-	char	*value;
+	t_expand	exp;
 
-	i = 0;
-	j = 0;
-	quote = 0;
-	is_allocated = 0;
-	value = NULL;
-	while (str[i] != '\0')
+	ft_init_exp(&exp);
+	while (str[exp.i] != '\0')
 	{
-		if (quote == 0 && ft_isquote(str[i]))
-			quote = str[i];
-		else if (quote == str[i])
-			quote = 0;
-		if (quote != '\'' && str[i] == '$' && (ft_isalnum(str[i + 1]) \
-			|| str[i + 1] == '_' || str[i + 1] == '?'))
+		ft_update_quote(&exp, str[exp.i]);
+		if (exp.quote != '\'' && str[exp.i] == '$')
 		{
-			value = ft_get_value(str + i, data);
-			if (!value && str[i + 1] == '?')
-			{
-				value = ft_itoa(data->last_exit_status); //penser à free
-				if (!value)
-					return (perror("ft_strlen_expanded_var"), 1);
-				is_allocated = 1;
-			}
-			if (value)
-			{
-				ft_strlcpy(res + j, value, ft_strlen(value) + 1);
-				j += ft_strlen(value);
-				if (is_allocated)
-				{
-					free(value);
-					is_allocated = 0;
-				}
-
-			}
-			i += ft_strlen_varname(str + i);
+			if (ft_cpy_value(&exp, res, str, data) != 0)
+				return (1);
 		}
 		else
 		{
-			res[j] = str[i];
-			j++;
-			i++;
+			res[exp.j] = str[exp.i];
+			ft_incr_indexes(&exp);
 		}
 	}
-	res[j] = '\0';
+	res[exp.j] = '\0';
+	return (0);
+}
+
+int	ft_cpy_value(t_expand *exp, char *res, char *str, t_data *data)
+{
+	if (ft_isalnum(str[exp->i + 1]) || str[exp->i + 1] == '_')
+	{
+		exp->value = ft_get_value(str + exp->i, data);
+		if (exp->value)
+		{
+			ft_strlcpy(res + exp->j, exp->value,
+				ft_strlen(exp->value) + 1);
+			exp->j += ft_strlen(exp->value);
+		}
+	}
+	else if (str[exp->i + 1] == '?')
+	{
+		exp->value = ft_itoa(data->last_exit_status);
+		if (!exp->value)
+			return (perror("ft_strlen_expanded_var"), 1);
+		ft_strlcpy(res + exp->j, exp->value,
+			ft_strlen(exp->value) + 1);
+		exp->j += ft_strlen(exp->value);
+		free(exp->value);
+		exp->value = NULL;
+	}
+	exp->i += ft_strlen_varname(str + exp->i);
 	return (0);
 }
