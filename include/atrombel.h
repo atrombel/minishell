@@ -6,15 +6,13 @@
 /*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 19:58:20 by atrombel          #+#    #+#             */
-/*   Updated: 2026/06/11 19:59:42 by atrombel         ###   ########.fr       */
+/*   Updated: 2026/06/12 11:39:23 by atrombel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ATROMBEL_H
 # define ATROMBEL_H
-# include <limits.h> //verifier si jai le droit dutiliser
-// sinon remove it if not used
-// struct that contain usefull data to see if really that usefull long term
+
 
 /* env */
 t_env	*node_env_creation(void);

@@ -19,9 +19,9 @@ void	stdin_redir(t_redir *redir, t_data *data, int *error)
 	data->infile = open(redir->arg, O_RDONLY);
 	if (data->infile < 0)
 	{
-		// if (redir->is_ambigous == 1)
-		// 	error_msg("", "ambiguous redirect");
-		// else
+		if (redir->is_ambiguous == 1)
+			error_msg("", "ambiguous redirect");
+		else
 			error_print(redir->arg);
 		data->last_exit_status = 1;
 		*error = 1;
@@ -41,7 +41,10 @@ void	stdout_redir(t_redir *redir, t_data *data, int *error)
 	data->outfile = open(redir->arg, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (data->outfile < 0)
 	{
-		error_print(redir->arg);
+		if (redir->is_ambiguous == 1)
+			error_msg("", "ambiguous redirect");
+		else
+			error_print(redir->arg);
 		data->last_exit_status = 1;
 		*error = 1;
 		return ;
@@ -60,7 +63,10 @@ void	stdout_appnd(t_redir *redir, t_data *data, int *error)
 	data->outfile = open(redir->arg, O_CREAT | O_RDWR | O_APPEND, 0644);
 	if (data->outfile < 0)
 	{
-		error_print(redir->arg);
+		if (redir->is_ambiguous == 1)
+			error_msg("", "ambiguous redirect");
+		else
+			error_print(redir->arg);
 		data->last_exit_status = 1;
 		*error = 1;
 		return ;
@@ -78,7 +84,10 @@ void	heredoc_reddir_apply(t_redir *redir, t_data *data, int *error)
 {
 	if (redir->hd_tmp_fd == -1)
 	{
-		data->last_exit_status = 1;
+		if (redir->is_ambiguous == 1)
+			error_msg("", "ambiguous redirect");
+		else
+			data->last_exit_status = 1;
 		*error = 1;
 		return ;
 	}

@@ -85,7 +85,7 @@ int	check_if_herdoc(t_cmd	*cmd, t_data *data)
 	while (redirs)
 	{
 		redir = (t_redir *)redirs->content;
-		if (redir->type == IN_DELIM)
+		if (redir->type == HEREDOC)
 		{
 			if (open_heredoc(redir, data) == -1)
 				return (-1);

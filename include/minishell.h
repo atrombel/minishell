@@ -6,7 +6,7 @@
 /*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 20:00:21 by atrombel          #+#    #+#             */
-/*   Updated: 2026/06/11 20:06:17 by atrombel         ###   ########.fr       */
+/*   Updated: 2026/06/12 11:44:32 by atrombel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 // OUT_APPN 7 //">>"
 # define IN 4
 # define OUT 5
-# define IN_DELIM 6
-# define OUT_APPN 7
+# define HEREDOC 6
+# define APPEND 7
 
 //global variable to store signals
 extern volatile sig_atomic_t	g_sig;

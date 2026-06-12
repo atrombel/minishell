@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgasser <cgasser@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 16:20:18 by cgasser           #+#    #+#             */
-/*   Updated: 2026/06/11 16:25:46 by cgasser          ###   ####lausanne.ch   */
+/*   Updated: 2026/06/12 11:18:05 by atrombel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ int	ft_fill_redir_arg(t_redir *redir, t_token *token, t_data *data)
 	if (!redir->arg)
 		return (perror("ft_fill_redir"), 1);
 	ft_strlcpy(redir->arg, token->word, ft_strlen(token->word) + 1);
-	if (redir->type == IN_DELIM && ft_scan_for_quote(redir->arg))
+	if (redir->type == HEREDOC && ft_scan_for_quote(redir->arg))
 		redir->is_expanded = 0;
-	if (redir->type != IN_DELIM)
+	if (redir->type != HEREDOC)
 	{
 		redir->arg = ft_expand_var(redir->arg, data);
 		if (!redir->arg)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_cmd_list.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgasser <cgasser@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 10:02:43 by cgasser           #+#    #+#             */
-/*   Updated: 2026/06/12 10:03:20 by cgasser          ###   ####lausanne.ch   */
+/*   Updated: 2026/06/12 11:18:05 by atrombel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_print_redir(t_cmd *cmd)
 		ft_printf("\ntype: %d, filename: %s,",
 			((t_redir *)temp->content)->type,
 			((t_redir *)temp->content)->arg);
-		if (((t_redir *)temp->content)->type == IN_DELIM)
+		if (((t_redir *)temp->content)->type == HEREDOC)
 		{
 			ft_printf("\tmust be expanded: ");
 			if (((t_redir *)temp->content)->is_expanded == 1)

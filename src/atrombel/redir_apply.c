@@ -32,9 +32,9 @@ int	ft_redir_apply(t_list *cmd_head, t_data *data)
 			stdin_redir(redir, data, &error);
 		else if (redir->type == OUT)
 			stdout_redir(redir, data, &error);
-		else if (redir->type == IN_DELIM)
+		else if (redir->type == HEREDOC)
 			heredoc_reddir_apply(redir, data, &error);
-		else if (redir->type == OUT_APPN)
+		else if (redir->type == APPEND)
 			stdout_appnd(redir, data, &error);
 		if (error == 1)
 			break ;

@@ -69,13 +69,10 @@ void	ft_execute_cmd_redir(t_cmd	*cmd, t_data *data,
 	}
 	else if (pid == 0)
 	{
-		if (cmd->redirs)
-		{
-			if (ft_redir_apply(cmd_head, data) == 0)
-				ft_execute_cmd(cmd, env);
-		}
-		else
-			ft_execute_cmd(cmd, env);
+		if (cmd->redirs && ft_redir_apply(cmd_head, data) != 0)
+			exit(1);
+		ft_execute_cmd(cmd, env);
+		exit(127);
 	}
 	else if (pid > 0)
 		waitpid_operations(data);
