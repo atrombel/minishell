@@ -94,7 +94,7 @@ typedef struct s_redir
 	int		type;
 	int		hd_tmp_fd;
 	int		is_expanded;
-	int		is_ambiguous; 
+	int		is_ambiguous;
 	char	*arg;
 	char	*hd_filename;
 }	t_redir;
