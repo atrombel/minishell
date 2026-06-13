@@ -105,7 +105,6 @@ typedef struct s_expand
 	int		i;
 	int		j;
 	int		quote;
-	int		is_alloc;
 	char	*value;
 }	t_expand;
 

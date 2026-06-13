@@ -17,7 +17,6 @@ void	ft_init_exp(t_expand *exp)
 	exp->i = 0;
 	exp->j = 0;
 	exp->quote = 0;
-	exp->is_alloc = 0;
 	exp->value = NULL;
 }
 
