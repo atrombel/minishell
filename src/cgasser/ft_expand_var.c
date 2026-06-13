@@ -58,7 +58,7 @@ int	ft_strlen_expanded_var(char *str, t_data *data)
 
 int	ft_update_indexes(t_expand *exp, char *str, t_data *data)
 {
-	if (exp->quote != '\'' && str[exp->i] == '$')
+	if (exp->quote != '\'' && str[exp->i] == '$' && str[exp->i + 1] != '\0')
 	{
 		if (ft_isalnum(str[exp->i + 1]) || str[exp->i + 1] == '_')
 		{
@@ -90,7 +90,7 @@ int	ft_strcpy_expanded_var(char *res, char *str, t_data *data)
 	while (str[exp.i] != '\0')
 	{
 		ft_update_quote(&exp, str[exp.i]);
-		if (exp.quote != '\'' && str[exp.i] == '$')
+		if (exp.quote != '\'' && str[exp.i] == '$' && str[exp.i + 1] != '\0')
 		{
 			if (ft_cpy_value(&exp, res, str, data) != 0)
 				return (1);
