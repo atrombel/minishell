@@ -6,7 +6,7 @@
 /*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 20:00:21 by atrombel          #+#    #+#             */
-/*   Updated: 2026/06/15 08:55:57 by atrombel         ###   ########.fr       */
+/*   Updated: 2026/06/15 09:00:49 by atrombel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ typedef struct s_data
 	int		stdout_save;
 	int		tmp_fd;
 	int		last_hd_nbr;
-	pid_t   last_pid;
- 	t_env	*env;
+	pid_t	last_pid;
+	t_env	*env;
 }	t_data;
 
 //cmds

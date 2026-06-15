@@ -21,10 +21,12 @@ void	waitpid_operations(t_data *data)
 	pid_t	result;
 
 	last_status = 0;
-	while ((result = waitpid(-1, &status, 0)) > 0)
+	result = waitpid(-1, &status, 0);
+	while (result > 0)
 	{
 		if (result == data->last_pid)
 			last_status = status;
+		result = waitpid(-1, &status, 0);
 	}
 	if (WIFEXITED(last_status))
 		data->last_exit_status = WEXITSTATUS(last_status);

@@ -6,13 +6,12 @@
 /*   By: atrombel <atrombel@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 19:58:20 by atrombel          #+#    #+#             */
-/*   Updated: 2026/06/12 11:39:23 by atrombel         ###   ########.fr       */
+/*   Updated: 2026/06/15 09:01:00 by atrombel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ATROMBEL_H
 # define ATROMBEL_H
-
 
 /* env */
 t_env	*node_env_creation(void);
