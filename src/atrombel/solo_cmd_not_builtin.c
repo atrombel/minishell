@@ -55,7 +55,7 @@ void	ft_execute_cmd(t_cmd *cmd, t_env **env)
 	execve(cmd->path, cmd->args, envp);
 	charstar_env_clean(envp);
 	error_print("execve failed");
-	if (errno == EACCES)
+	if (errno == EACCES || errno == EISDIR)
 		exit(126);
 	exit(127);
 }
@@ -81,7 +81,10 @@ void	ft_execute_cmd_redir(t_cmd	*cmd, t_data *data,
 		exit(127);
 	}
 	else if (pid > 0)
+	{
+		data->last_pid = pid;
 		waitpid_operations(data);
+	}
 }
 
 void	solo_cmd_not_builtin(t_list *cmd_head, t_data *data, t_env **env)
