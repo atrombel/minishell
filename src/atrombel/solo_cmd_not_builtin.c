@@ -16,12 +16,16 @@
 
 void	waitpid_operations(t_data *data)
 {
-	int	status;
-	int	last_status;
+	int		status;
+	int		last_status;
+	pid_t	result;
 
 	last_status = 0;
-	while (waitpid(-1, &status, 0) > 0)
-		last_status = status;
+	while ((result = waitpid(-1, &status, 0)) > 0)
+	{
+		if (result == data->last_pid)
+			last_status = status;
+	}
 	if (WIFEXITED(last_status))
 		data->last_exit_status = WEXITSTATUS(last_status);
 	else if (WIFSIGNALED(last_status))

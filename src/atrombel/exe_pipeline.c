@@ -78,6 +78,7 @@ void	exe_pipeline(t_list *cmd_head, t_data *data, pid_t pid, t_env **env)
 		child_exe(cmd_head, data, env);
 	if (pid > 0)
 	{
+		data->last_pid = pid;
 		if (cmd_head->next)
 		{
 			data->tmp_fd = data->pipe_fd[0];

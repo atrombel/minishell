@@ -25,7 +25,8 @@ char	*ft_get_value_env(t_env *env, char *str)
 	dest = NULL;
 	if (!env || !str)
 		return (NULL);
-	while (env && (!env->key || ft_strncmp(env->key, str, ft_strlen(str) + 1) != 0))
+	while (env && (!env->key
+			|| ft_strncmp(env->key, str, ft_strlen(str) + 1) != 0))
 		env = env->next;
 	if (env)
 	{
