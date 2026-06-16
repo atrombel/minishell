@@ -14,7 +14,7 @@
 
 int	ft_isspace(char c)
 {
-	if (c >= 9 || c <= 13)
+	if (c >= 9 && c <= 13)
 		return (c);
 	if (c == 32)
 		return (c);
