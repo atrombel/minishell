@@ -59,7 +59,7 @@ int	ft_strlen_expanded_var(char *str, t_data *data)
 int	ft_update_indexes(t_expand *exp, char *str, t_data *data)
 {
 	if (exp->quote != '\'' && str[exp->i] == '$' && str[exp->i + 1] != '\0'
-		&& !ft_isspace(str[exp->i + 1])
+		&& !ft_isspace(str[exp->i + 1]) && str[exp->i + 1] != '/'
 		&& !(exp->quote == '"' && str[exp->i + 1] == '"'))
 	{
 		if (ft_isalnum(str[exp->i + 1]) || str[exp->i + 1] == '_')
@@ -93,6 +93,7 @@ int	ft_strcpy_expanded_var(char *res, char *str, t_data *data)
 	{
 		ft_update_quote(&exp, str[exp.i]);
 		if (exp.quote != '\'' && str[exp.i] == '$'
+			&& str[exp.i + 1] != '/'
 			&& str[exp.i + 1] != '\0' && !ft_isspace(str[exp.i + 1])
 			&& !(exp.quote == '"' && str[exp.i + 1] == '"'))
 		{
