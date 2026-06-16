@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 #include "atrombel.h"
+#include "ft_printf.h"
 
 int	export_new_value_storing(t_env *env, t_env *new)
 {
@@ -52,7 +53,7 @@ static int	export_check_valid(char *arg, t_data *data)
 	{
 		if (ft_isalnum(arg[i]) == 0 && arg[i] != '_')
 		{
-			printf("-minishell: export: '%s': not a valid identifier\n",
+			ft_printr("-minishell: export: '%s': not a valid identifier\n",
 				arg);
 			data->last_exit_status = 1;
 			return (-1);
