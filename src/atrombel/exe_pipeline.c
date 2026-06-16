@@ -24,18 +24,18 @@ void	cmd_pipe_exe(t_list *cmd_head, t_data *data, t_env **env)
 	cmd = (t_cmd *)cmd_head->content;
 	update_underscore_env(env, cmd, data);
 	if (redir_but_cmd_invalid(cmd_head, data, cmd) == 1)
-		exit(data->last_exit_status);
+		exit_clean(*env, cmd_head, data->last_exit_status, 0);
 	if (ft_builtin_verif(cmd_head->content) == 1)
 	{
 		solo_builtin(cmd_head, data, env);
-		exit(data->last_exit_status);
+		exit_clean(*env, cmd_head, data->last_exit_status, 0);
 	}
 	else
 	{
 		set_signals_default();
 		ft_execute_cmd(cmd, env);
 	}
-	exit(0);
+	exit_clean(*env, cmd_head, 0, 0);
 }
 
 void	reset_pipe(t_data *data, int mode)
@@ -59,7 +59,7 @@ void	child_exe(t_list *cmd_head, t_data *data, t_env **env)
 		secure_close(&data->pipe_fd[0]);
 	}
 	if (ft_redir_apply(cmd_head, data) != 0)
-		exit(1);
+		exit_clean(*env, cmd_head, 1, 0);
 	cmd_pipe_exe(cmd_head, data, env);
 }
 
