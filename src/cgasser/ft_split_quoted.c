@@ -13,9 +13,9 @@
 #include "cgasser.h"
 #include "ft_printf.h"
 
-int	ft_find_next_word(char *s, char c, int index);
-int	ft_count_word_quoted(char *s, char c);
-int	ft_len_word_quoted(char *s, char c, int index);
+int	ft_find_next_word(char *s, int index);
+int	ft_count_word_quoted(char *s);
+int	ft_len_word_quoted(char *s, int index);
 int	ft_len_oper(char *start);
 
 //regular split from the libft, that jump the quoted "" or '' sequences
@@ -23,7 +23,7 @@ int	ft_len_oper(char *start);
 //splitting 's' using the character 'c' as a delimiter. The array must end with
 //a NULL pointer.
 
-char	**ft_split_quoted(char *s, char c)
+char	**ft_split_quoted(char *s)
 {
 	int		i;
 	int		j;
@@ -34,32 +34,32 @@ char	**ft_split_quoted(char *s, char c)
 	i = 0;
 	if (!s || *s == '\0')
 		return (NULL);
-	res = ft_calloc(sizeof(char *), ft_count_word_quoted(s, c) + 1);
+	res = ft_calloc(sizeof(char *), ft_count_word_quoted(s) + 1);
 	if (!res)
 		return (perror("ft_split_quoted"), NULL);
-	i = ft_find_next_word(s, c, i);
+	i = ft_find_next_word(s, i);
 	while (s[i] != '\0')
 	{
-		len_word = ft_len_word_quoted(s, c, i);
+		len_word = ft_len_word_quoted(s, i);
 		res[j] = ft_calloc(sizeof(char), (len_word + 1));
 		if (!res[j])
 			return (perror("ft_split_quoted"), ft_free_array(res), NULL);
 		ft_strlcpy(res[j], s + i, len_word + 1);
 		i += len_word;
-		i = ft_find_next_word(s, c, i);
+		i = ft_find_next_word(s, i);
 		j++;
 	}
 	return (res);
 }
 
-int	ft_find_next_word(char *s, char c, int index)
+int	ft_find_next_word(char *s, int index)
 {
-	while (s[index] == c)
+	while (ft_isspace(s[index]))
 		index++;
 	return (index);
 }
 
-int	ft_count_word_quoted(char *s, char c)
+int	ft_count_word_quoted(char *s)
 {
 	int	count;
 	int	i;
@@ -70,15 +70,15 @@ int	ft_count_word_quoted(char *s, char c)
 		return (0);
 	while (s[i] != '\0')
 	{
-		i = ft_find_next_word(s, c, i);
+		i = ft_find_next_word(s, i);
 		if (s[i] != '\0')
 			count++;
-		i += ft_len_word_quoted(s, c, i);
+		i += ft_len_word_quoted(s, i);
 	}
 	return (count);
 }
 
-int	ft_len_word_quoted(char *s, char c, int index)
+int	ft_len_word_quoted(char *s, int index)
 {
 	char	*start;
 	int		len;
@@ -91,7 +91,7 @@ int	ft_len_word_quoted(char *s, char c, int index)
 		return (ft_len_oper(start));
 	while (start[len] != '\0' && (quote != 0 || (start[len] != '<'
 				&& start[len] != '>' && start[len] != '|'
-				&& start[len] != c)))
+				&& !ft_isspace(start[len]))))
 	{
 		if (quote == 0 && ft_isquote(start[len]))
 			quote = start[len];

@@ -30,7 +30,7 @@ void	ft_history(char *user_input);
 int		ft_signals(void);
 
 int		ft_check_quotes(char *str);
-char	**ft_split_quoted(char *s, char c);
+char	**ft_split_quoted(char *s);
 int		ft_check_syntax(t_list *tokens);
 
 t_list	*ft_lex_and_parse(char *str, t_data *data);

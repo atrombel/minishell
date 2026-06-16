@@ -26,7 +26,7 @@ t_list	*ft_lex_and_parse(char *str, t_data *data)
 	tokens = NULL;
 	if (ft_check_quotes(str) != 0)
 		return (free(str), NULL);
-	array = ft_split_quoted(str, ' ');
+	array = ft_split_quoted(str);
 	free(str);
 	if (!array)
 		return (NULL);
